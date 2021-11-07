@@ -36,3 +36,20 @@ filled out.
 ### Exceptions
 
 3E. The user has no default email client
+
+## Add a competition
+
+1. The user clicks on the add competition button
+2. The user is prompted to enter the name, date, and the information of the
+   students participating in the competition
+3. The user clicks OK
+4. The system adds the competition and all of its related information 
+5. The user clicks save
+6. The entered data is stored in the data file.
+
+### Alternative flows
+
+2. The system enters invalid or missing information.
+
+    a) The system informs the user about the missing information, and asks him or
+      her to try again.
