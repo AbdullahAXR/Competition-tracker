@@ -40,7 +40,7 @@ filled out.
 ## Browse competition website
 1. the user chooses a competition 
 2. the user clicks on browse website
-3. built in broweser should open up viewing the competion website
+3. built in browser should open up viewing the competition website
 
 
 ## Add a competition
