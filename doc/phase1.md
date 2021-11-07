@@ -33,8 +33,15 @@ List of non-functional requirements:
 3. The user's default email client is opened with the necessary information
 filled out.
 
+## 2.Browse competition website
+1. the user chooses a competition 
+2. the user clicks on browse website
+3. built in broweser should open up viewing the competion website
+
+
 ### Exceptions
 
+<<<<<<< HEAD
 3E. The user has no default email client
 
 ## Add a competition
@@ -53,3 +60,13 @@ filled out.
 
     a) The system informs the user about the missing information, and asks him or
       her to try again.
+=======
+1.3E. The user has no default email client
+
+
+
+
+
+
+
+>>>>>>> 1884fb28b27aadae9712e1a44e606411e0d96653
