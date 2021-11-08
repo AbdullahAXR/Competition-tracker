@@ -76,3 +76,7 @@ filled out.
 3. The user removes required information
     A) The system refuses to save the changes, unless the user enters valid
     infomration
+
+## Remove a competition
+
+1. The user clicks on the delete button
