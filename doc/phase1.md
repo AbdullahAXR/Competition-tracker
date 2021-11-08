@@ -86,3 +86,7 @@ filled out.
 ## Remove a competition
 
 1. The user clicks on the delete button
+
+## View competition
+
+1. The user clicks on a competition to view all of its associated information
