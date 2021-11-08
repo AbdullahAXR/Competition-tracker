@@ -35,9 +35,12 @@ filled out.
 
 ### Exceptions
 
-3E. The user has no default email client
+3. The user has no default email client
+    a) Inform the user that the system has failed to detect his or her default
+    email client.
 
 ## Browse competition website
+
 1. the user chooses a competition 
 2. the user clicks on browse website
 3. built in browser should open up viewing the competition website
