@@ -62,3 +62,17 @@ filled out.
 
     a) The system informs the user about the missing information, and asks him or
       her to try again.
+
+## Edit a competition
+
+1. The user clicks on the edit button
+2. All information regarding the competition is displayed for the user to edit
+3. The user makes his or her changes
+4. The system updates the competition
+5. Upon clicking save, the competition is stored within the data file
+
+### Alternative flows
+
+3. The user removes required information
+    A) The system refuses to save the changes, unless the user enters valid
+    infomration
