@@ -45,6 +45,12 @@ filled out.
 2. the user clicks on browse website
 3. built in browser should open up viewing the competition website
 
+### Alternative flow
+
+2. The competition has no available website
+    a) Inform the user that no website is associated with the selected
+    competition
+
 
 ## Add a competition
 
