@@ -106,3 +106,10 @@ filled out.
 1. The user clicks on the "edit competition" button.
 2. The user checks the "mark as completed" box
 
+### Alternative flow
+
+2. The user attempted to mark a competition that has not reached its due date
+    a) The system will refused to update the competition, and inform the user
+    with a message
+
+# Use case diagram
