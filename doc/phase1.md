@@ -86,6 +86,8 @@ filled out.
 ## Remove a competition
 
 1. The user clicks on the delete button
+2. The competition is removed from the system, and will no longer be stored once
+   the user clicks on save.
 
 ## View competition
 
