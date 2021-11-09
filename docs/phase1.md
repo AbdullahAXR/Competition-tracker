@@ -95,3 +95,8 @@ filled out.
    The information includes: The students / teams participating in the
    competition, the competition due date, and competition website, and the
    competition description.
+
+## View a list of due competitions
+
+1. The user clicks on "view due competitions" button to view a list of competition that
+   are due.
