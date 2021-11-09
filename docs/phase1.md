@@ -69,7 +69,7 @@ filled out.
     a) The system informs the user about the missing information, and asks him or
       her to try again.
 
-## Edit a competition
+## Edit competition information
 
 1. The user clicks on the edit button
 2. All information regarding the competition is displayed for the user to edit
