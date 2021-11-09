@@ -91,4 +91,7 @@ filled out.
 
 ## View competition
 
-1. The user clicks on a competition to view all of its associated information
+1. The user clicks on a competition to view all of its associated information.
+   The information includes: The students / teams participating in the
+   competition, the competition due date, and competition website, and the
+   competition description.
