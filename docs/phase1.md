@@ -100,3 +100,9 @@ filled out.
 
 1. The user clicks on "view due competitions" button to view a list of competition that
    are due.
+
+## Mark a competition as complete
+
+1. The user clicks on the "edit competition" button.
+2. The user checks the "mark as completed" box
+
