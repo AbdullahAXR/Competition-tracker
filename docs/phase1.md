@@ -64,30 +64,39 @@ filled out.
 
 ### Alternative flows
 
-2. The system enters invalid or missing information.
+2. The user enters invalid or missing information.
 
     a) The system informs the user about the missing information, and asks him or
       her to try again.
 
 ## Edit competition information
 
-1. The user clicks on the edit button
-2. All information regarding the competition is displayed for the user to edit
-3. The user makes his or her changes
-4. The system updates the competition
-5. Upon clicking save, the competition is stored within the data file
+1. The uesr chooses competition from the competitions list.
+2. The user clicks on the edit button
+3. All information regarding the competition is displayed for the user to edit
+4. The user makes his or her changes
+5. The system updates the competition
+6. Upon clicking save, the competition is stored within the data file
 
 ### Alternative flows
 
-3. The user removes required information
+3. The user removes required information or enters invalid information.
     A) The system refuses to save the changes, unless the user enters valid
     infomration
 
 ## Remove a competition
 
-1. The user clicks on the delete button
-2. The competition is removed from the system, and will no longer be stored once
+1. The user chooses a competition from the competitions list
+2. The user clicks on the delete button
+3. The system shows a confirmatin alert
+4. The user clicks yes to confirm
+5. The competition is removed from the system, and will no longer be stored once
    the user clicks on save.
+
+### Alternative flows
+
+4. the user clicks no instead of yes.
+    A) The system closes the alert and do nothing.
 
 ## View competition
 
@@ -101,16 +110,6 @@ filled out.
 1. The user clicks on "view due competitions" button to view a list of competition that
    are due.
 
-## Mark a competition as complete
-
-1. The user clicks on the "edit competition" button.
-2. The user checks the "mark as completed" box
-
-### Alternative flow
-
-2. The user attempted to mark a competition that has not reached its due date
-    a) The system will refused to update the competition, and inform the user
-    with a message
 
 # Use case diagram
 
