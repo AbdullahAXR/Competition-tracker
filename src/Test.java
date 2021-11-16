@@ -10,6 +10,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Test {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
+        testExcel();
+	}
+
+	public static void testExcel() throws FileNotFoundException, IOException {
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream("data.xlsx"));
 		XSSFSheet sheet = workbook.getSheetAt(0);
 		XSSFRow row = sheet.getRow(0);
