@@ -17,5 +17,5 @@ clean:
 	rm *.class
 
 test:
-	javac  -cp ".:/home/saher/uni/swe/swe-pro/lib/*:/home/saher/uni/swe/swe-pro/lib/ooxml-lib/*:/home/saher/uni/swe/swe-pro/lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test.java 
-	java -cp ".:/home/saher/uni/swe/swe-pro/lib/*:/home/saher/uni/swe/swe-pro/lib/ooxml-lib/*:/home/saher/uni/swe/swe-pro/lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test 
+	javac  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test.java 
+	java -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test 
