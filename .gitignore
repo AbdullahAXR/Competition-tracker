@@ -2,3 +2,4 @@
 *.~lock*
 .project
 .settings
+bin
