@@ -8,5 +8,6 @@ public class TeamCompetition extends Competition {
 
     TeamCompetition(){
         this.results = new HashMap<Team,String>();
+        this.type = CompetitionType.TEAM;
     }
 }

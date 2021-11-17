@@ -5,6 +5,11 @@ public abstract class Competition {
     String link;
     Date date;
     HashMap<Participant, String> results;
+    CompetitionType type;
+
+    enum CompetitionType {
+        INDIVISUAL, TEAM,
+    }
 
     public String getName(){
         return name;
@@ -24,10 +29,9 @@ public abstract class Competition {
         this.date = newdate;
     }
 
-    public String getRank(Participant participant){
-        return participant;
+    public void put(Participant participant, String rank){
+        results.put(participant, rank);
     }
 
-    public 
 
 }

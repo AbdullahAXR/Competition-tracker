@@ -4,10 +4,12 @@ TeamCompetition.class: TeamCompetition.java Competition.java Team.java
 StudentCompetition.class: StudentCompetition.java Competition.java Student.java
 	javac StudentCompetition.java
 
-Student.class: Student.java
+Student.class: Student.java Participant.java
 	javac Student.java
 
-Team.class: Team.java Student.java
+Participant.class: Participant.java
+
+Team.class: Team.java Student.java Participant.java
 	javac Team.java
 
 Competition.class: Competition.java

@@ -1,10 +1,11 @@
 import java.util.*;
-public class Team {
+public class Team extends Participant {
 
     // A team is just a number of students under one name
     private ArrayList<Student> members;
 
-    Team(){
+    Team(String name){
+        super(name);
         this.members = new ArrayList<Student>();
     }
 

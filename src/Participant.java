@@ -1,5 +1,9 @@
 public class Participant {
-    private String name;
+    protected String name;
     // empty class
+
+    Participant(String name){
+        this.name = name;
+    }
 }
 
