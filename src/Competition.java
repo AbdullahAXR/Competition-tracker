@@ -8,7 +8,7 @@ public abstract class Competition {
     CompetitionType type;
 
     enum CompetitionType {
-        INDIVISUAL, TEAM,
+        INDIVIDUAL, TEAM,
     }
 
     public String getName(){
