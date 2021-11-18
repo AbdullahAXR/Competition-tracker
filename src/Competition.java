@@ -5,9 +5,9 @@ public abstract class Competition {
     String link;
     Date date;
     HashMap<Participant, String> results;
-    CompetitionType type;
+    Type type;
 
-    enum CompetitionType {
+    public enum Type {
         INDIVIDUAL, TEAM,
     }
 
