@@ -14,7 +14,14 @@ public abstract class Competition {
     public String getName(){
         return name;
     }
+    // a Setters so we can edit the name and link
+    public void setName(String name){
+	 this.name = name;
+    }
 
+    public void setLink(String link){
+	 this.link = link;
+    }
     public String getLink(){
         return link;
     }
