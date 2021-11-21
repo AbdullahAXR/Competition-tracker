@@ -9,9 +9,9 @@ import org.apache.poi.xssf.usermodel.*;
 
 // TODO: make this static. It makes more sense as we really just need something
 // to parase a sheet.
-public class CompetitionSheet {
+public final class CompetitionSheet {
 
-    private final XSSFSheet SHEET;
+    // private final XSSFSheet SHEET;
 
     // basic info location
     final static int NAME_ROW = 0;
@@ -20,11 +20,14 @@ public class CompetitionSheet {
     final static int CELL = 1;
 
     // participant location
-    final int FIRST_PARTICIPANT_ROW = 5;
+    final static int FIRST_PARTICIPANT_ROW = 5;
 
-    CompetitionSheet(XSSFSheet sheet){
-        this.SHEET = sheet;
+    private CompetitionSheet(){
     }
+    
+    // private CompetitionSheet(XSSFSheet sheet){
+    //     this.SHEET = sheet;
+    // }
 
     // TODO: Delete later. This is for testing purposes
     public static void main(String[] args) throws Exception {
@@ -36,20 +39,17 @@ public class CompetitionSheet {
 		XSSFWorkbook workbook = new XSSFWorkbook(new File("data.xlsx"));
 		XSSFSheet sheet0 = workbook.getSheetAt(0);
 		XSSFSheet sheet1 = workbook.getSheetAt(1);
-        CompetitionSheet compSheet0 = new CompetitionSheet(sheet0); 
-        CompetitionSheet compSheet1 = new CompetitionSheet(sheet1); 
 
-        Competition.Type type0 = compSheet0.getType();
-        Competition.Type type1 = compSheet1.getType();
+        System.out.println(CompetitionSheet.getType(sheet0));
 
-        ArrayList<Student> students0 = compSheet0.getStudents();
-        ArrayList<Student> students1 = compSheet1.getStudents();
+        ArrayList<Student> students0 = CompetitionSheet.getStudents(sheet0);
+        ArrayList<Student> students1 = CompetitionSheet.getStudents(sheet1);
         System.out.println(students1.get(0).getName());
     }
 
     // get type of the competition
-    public Competition.Type getType(){
-        String team = SHEET.getRow(4).getCell(4).getStringCellValue();
+    public static Competition.Type getType(XSSFSheet sheet){
+        String team = sheet.getRow(4).getCell(4).getStringCellValue();
 
         if(team.equals("team")){
             return Competition.Type.TEAM;
@@ -68,7 +68,7 @@ public class CompetitionSheet {
     // }
 
     // get a student from a row
-    private Student getStudent(XSSFRow row){
+    private static Student getStudent(XSSFRow row){
 
         // for some reason the id cell is numeric. I think this is a mistake
         // with the project files. Anyhow there's a bug with this one
@@ -81,16 +81,16 @@ public class CompetitionSheet {
     }
 
     // reuturn an array of all students in the SHEET
-    private ArrayList<Student> getStudents(){
+    private static ArrayList<Student> getStudents(XSSFSheet sheet){
         ArrayList<Student> results = new ArrayList<Student>();
 
         // For blank cells a 0 is returned
         int i = FIRST_PARTICIPANT_ROW;
-        XSSFRow row = SHEET.getRow(i);
+        XSSFRow row = sheet.getRow(i);
         while(row != null){ // if the first cell is non-blank
             results.add(getStudent(row));
             i++;
-            row = SHEET.getRow(i);
+            row = sheet.getRow(i);
         }
 
         return results;
