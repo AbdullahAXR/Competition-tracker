@@ -22,6 +22,7 @@ public abstract class Competition {
     public void setLink(String link){
 	 this.link = link;
     }
+
     public String getLink(){
         return link;
     }
