@@ -49,7 +49,7 @@ public abstract class Competition {
         return results.containsKey(p);
     }
 
-    public boolean containsResults(String rank){
+    public boolean containsResult(String rank){
         return results.containsValue(rank);
     }
 
