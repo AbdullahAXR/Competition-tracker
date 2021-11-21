@@ -12,10 +12,6 @@ public class Student extends Participant {
         return id;
     }
 
-    public String getName(){
-        return name;
-    }
-
     public String getMajor(){
         return major;
     }

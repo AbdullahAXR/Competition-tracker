@@ -5,5 +5,10 @@ public class Participant {
     Participant(String name){
         this.name = name;
     }
+
+    public String getName(){
+        return name;
+    }
+
 }
 
