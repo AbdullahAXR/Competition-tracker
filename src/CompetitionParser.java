@@ -9,7 +9,7 @@ import org.apache.poi.xssf.usermodel.*;
 
 // TODO: make this static. It makes more sense as we really just need something
 // to parase a sheet.
-public final class CompetitionSheet {
+public final class CompetitionParser {
 
     // private final XSSFSheet SHEET;
 
@@ -22,10 +22,10 @@ public final class CompetitionSheet {
     // participant location
     final static int FIRST_PARTICIPANT_ROW = 5;
 
-    private CompetitionSheet(){
+    private CompetitionParser(){
     }
     
-    // private CompetitionSheet(XSSFSheet sheet){
+    // private CompetitionParser(XSSFSheet sheet){
     //     this.SHEET = sheet;
     // }
 
@@ -40,10 +40,10 @@ public final class CompetitionSheet {
 		XSSFSheet sheet0 = workbook.getSheetAt(0);
 		XSSFSheet sheet1 = workbook.getSheetAt(1);
 
-        System.out.println(CompetitionSheet.getType(sheet0));
+        System.out.println(CompetitionParser.getType(sheet0));
 
-        ArrayList<Student> students0 = CompetitionSheet.getStudents(sheet0);
-        ArrayList<Student> students1 = CompetitionSheet.getStudents(sheet1);
+        ArrayList<Student> students0 = CompetitionParser.getStudents(sheet0);
+        ArrayList<Student> students1 = CompetitionParser.getStudents(sheet1);
         System.out.println(students1.get(0).getName());
     }
 
