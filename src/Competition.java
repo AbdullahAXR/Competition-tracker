@@ -41,9 +41,36 @@ public abstract class Competition {
         this.date = newdate;
     }
 
+    public String getResult(Participant p){
+        return results.get(p);
+    }
+
+    public boolean containsParticipant(Participant p){
+        return results.containsKey(p);
+    }
+
+    public boolean containsResults(String rank){
+        return results.containsValue(rank);
+    }
+
     public void put(Participant participant, String rank){
         results.put(participant, rank);
     }
 
+    public void putIfAbsent(Participant p, String rank){
+        results.putIfAbsent(p, rank);
+    }
+
+    public int size(){
+        return results.size();
+    }
+
+	public boolean isEmpty() {
+		return results.isEmpty();
+	}
+
+	public void remove(Participant p) {
+		results.remove(p);
+	}
 
 }
