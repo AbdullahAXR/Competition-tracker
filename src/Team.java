@@ -13,9 +13,4 @@ public class Team extends Participant {
         super(name);
         this.students = students;
     }
-
-    // i see it more convenent to have a setter for Team name
-    public void setName(String name){
-	this.name = name;
-    }
 }
