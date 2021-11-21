@@ -33,6 +33,10 @@ public abstract class Competition {
         return (Date) date.clone();
     }
 
+    public Competition.Type getType(){
+        return type;
+    }
+
     public void setDate(Date newdate){
         this.date = newdate;
     }
