@@ -7,6 +7,8 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
 
+// TODO: make this static. It makes more sense as we really just need something
+// to parase a sheet.
 public class CompetitionSheet {
 
     private final XSSFSheet SHEET;
