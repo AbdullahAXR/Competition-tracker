@@ -11,7 +11,7 @@ public class StudentCompetition extends Competition {
         this.name = name;
         this.link = link;
         this.date = date;
-        this.type = CompetitionType.INDIVISUAL;
+        this.type = Type.INDIVIDUAL;
     }
     
 }
