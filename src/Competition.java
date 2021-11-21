@@ -1,11 +1,11 @@
 import java.util.*;
 
 public abstract class Competition {
-    private String name;
-    private String link;
-    private Date date;
-    private HashMap<Participant, String> results;
-    private Type type;
+    protected String name;
+    protected String link;
+    protected Date date;
+    protected HashMap<Participant, String> results;
+    protected Type type;
 
     public enum Type {
         INDIVIDUAL, TEAM,
