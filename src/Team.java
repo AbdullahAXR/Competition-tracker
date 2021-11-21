@@ -13,4 +13,38 @@ public class Team extends Participant {
         super(name);
         this.students = students;
     }
+
+	// Replaces a question at index
+	public void set(int i, Student s) {
+		students.set(i, s);
+	}
+
+	// Adds a student to the list
+	public void add(Student s) {
+		students.add(s);
+	}
+
+	public boolean isEmpty() {
+		return students.isEmpty();
+	}
+
+	public int size() {
+		return students.size();
+	}
+
+	public Student get(int i) {
+		return students.get(i);
+	}
+
+	public void remove(int i) {
+		students.remove(i);
+	}
+
+	public void remove(Student s) {
+		students.remove(s);
+	}
+
+	public int indexOf(Student s) {
+		return students.indexOf(s);
+	}
 }
