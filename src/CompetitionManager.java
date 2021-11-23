@@ -6,6 +6,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
 
+// TODO: dont forget to set the sheet name 
 public class CompetitionManager {
 
     private ArrayList<Competition> competitions = new ArrayList<Competition>();
