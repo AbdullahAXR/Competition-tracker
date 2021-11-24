@@ -1,7 +1,7 @@
 # TODOs
 
 - [ ] (Saher) Sequence diagram
-    - View
+    - [x] View
     - email
 
 - [ ] (Mohammad) Sequence diagram
