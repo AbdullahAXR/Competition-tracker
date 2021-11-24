@@ -6,8 +6,8 @@ public class TeamCompetition extends Competition {
     // competition might use Strings like "gold" or "silver".
     HashMap<Team, String> results;
 
-    TeamCompetition(){
+    TeamCompetition() {
         this.results = new HashMap<Team,String>();
-        this.type = CompetitionType.TEAM;
+        this.type = Type.TEAM;
     }
 }

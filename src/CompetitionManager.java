@@ -6,6 +6,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
 
+// TODO: dont forget to set the sheet name 
 public class CompetitionManager {
 
     private ArrayList<Competition> competitions = new ArrayList<Competition>();
@@ -19,7 +20,7 @@ public class CompetitionManager {
 
     private void intitilizeData() throws InvalidFormatException, IOException {
 
-        if (!dataFile.exists()){
+        if (!dataFile.exists()) {
             dataFile.createNewFile(); // create an empty file
             dataWorkbook = new XSSFWorkbook(); // create an empty workbook
         } else {
@@ -31,7 +32,7 @@ public class CompetitionManager {
     /* 2021-11-18 Thu 15:04: Saher
     /* TODO: Not complete. This can be completed by nesting method (through
      * inner classes), but that's not readable, so I will create a new class
-    private Competition readCompetitionFromSheet(XSSFSheet sheet){
+    private Competition readCompetitionFromSheet(XSSFSheet sheet) {
 
         //   This is how the basic info of a competition in the  excel sheet looks like
         //
@@ -60,12 +61,12 @@ public class CompetitionManager {
     */
 
     // TODO: incomplete
-    private void readCompetitions(){
+    private void readCompetitions() {
 
         int numberOfCompetitions = dataWorkbook.getNumberOfSheets();
 
         // extract the basic info
-        for(int i = 0; i < numberOfCompetitions; i++){
+        for(int i = 0; i < numberOfCompetitions; i++) {
             XSSFSheet competitionSheet = dataWorkbook.getSheetAt(i);
 
         }
