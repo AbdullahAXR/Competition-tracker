@@ -1,12 +1,12 @@
 # TODOs
 
-- [ ] (Saher) Sequence diagram
+- [x] (Saher) Sequence diagram
     - [x] class diagram
     - [x] View
-    - email
+    - [x] email
 
 - [ ] (Mohammad) Sequence diagram
-    - Browse
+    - [x] Browse
     - Add
     - Edit
 
@@ -25,4 +25,8 @@
 
 ## Class diagram
 
-![](./docs/phase2/class-diagram.jpg)
+![Class diagram](./docs/phase2/class-diagram.jpg)
+
+![View sequence diagram](./docs/phase2/sequence-diagram-view.jpg)
+
+![Email sequence diagram](./docs/phase2/sequence-diagram-email.jpg)
