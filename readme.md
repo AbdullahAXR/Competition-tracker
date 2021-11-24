@@ -6,7 +6,7 @@
 
 - [ ] Sequence diagram
     - [x] Read
-    - [ ] Write
+    - [x] Write
 
 - [x] (Saher) Sequence diagram
     - [x] class diagram
@@ -39,8 +39,16 @@ phase 3!
 
 ## Phase 2
 
+**Please add your diagrams to this list by editing the markdown file with your
+favorite text editor**
+
 ![Class diagram](./docs/phase2/class-diagram.jpg)
 
 ![View sequence diagram](./docs/phase2/sequence-diagram-view.jpg)
 
 ![Email sequence diagram](./docs/phase2/sequence-diagram-email.jpg)
+
+![Read Sequence diagram](./docs/phase2/sequence-diagram-read.jpg)
+
+![write Sequence diagram](./docs/phase2/sequence-diagram-write.jpg)
+
