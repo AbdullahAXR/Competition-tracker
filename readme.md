@@ -1,6 +1,7 @@
 # TODOs
 
 - [ ] (Saher) Sequence diagram
+    - [x] class diagram
     - [x] View
     - email
 
