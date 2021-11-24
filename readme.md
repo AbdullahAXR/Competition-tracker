@@ -15,9 +15,9 @@
     - Email
     - Browse
 
-- [ ] (Nwar) Activity diagram
-    - Add
-    - Edit
+- [ ] (Nawar) Activity diagram
+    - [x] Add
+    - [x] Edit
 
 # Project Summary
 
