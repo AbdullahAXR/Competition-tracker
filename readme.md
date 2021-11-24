@@ -5,7 +5,7 @@
     - [ ] Write
 
 - [ ] Sequence diagram
-    - [ ] Read
+    - [x] Read
     - [ ] Write
 
 - [x] (Saher) Sequence diagram
@@ -32,7 +32,7 @@
 
 ## Phase 1
 
->I was disappointed, I had high exceptions from this group.
+>I was disappointed... I had high exceptions from this group, and I still do.
 
 We're better than that guys, lets create the best project ever in phase 2 and
 phase 3!
