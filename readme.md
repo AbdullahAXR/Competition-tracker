@@ -4,7 +4,7 @@
     - [ ] Read
     - [ ] Write
 
-- [ ] Sequence diagram
+- [x] (Saher) Sequence diagram
     - [x] Read
     - [x] Write
 
