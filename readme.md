@@ -1,5 +1,13 @@
 # TODOs
 
+- [ ] Activity diagram
+    - [ ] Read
+    - [ ] Write
+
+- [ ] Sequence diagram
+    - [ ] Read
+    - [ ] Write
+
 - [x] (Saher) Sequence diagram
     - [x] class diagram
     - [x] View
@@ -11,19 +19,25 @@
     - Edit
 
 - [ ] (Mod) Activity diagram
-    - View
-    - Email
-    - Browse
+    - [ ] View
+    - [ ] Email
+    - [ ] Browse
 
 - [ ] (Nawar) Activity diagram
     - [x] Add
     - [x] Edit
 
+
 # Project Summary
 
-## Phase 2
+## Phase 1
 
-## Class diagram
+>I was disappointed, I had high exceptions from this group.
+
+We're better than that guys, lets create the best project ever in phase 2 and
+phase 3!
+
+## Phase 2
 
 ![Class diagram](./docs/phase2/class-diagram.jpg)
 
