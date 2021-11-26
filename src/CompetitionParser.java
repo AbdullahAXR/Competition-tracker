@@ -127,49 +127,61 @@ public final class CompetitionParser {
         return new StudentCompetition(name, link, date, results);
     }
 
+    private static LinkedHashMap<Team, String> getTeamCompetitionResults(XSSFSheet sheet){
+        LinkedHashMap<Team, String> results = new LinkedHashMap<Team, String>();
 
-    // get the basic info for the competition
-    // public static void getCompetition(XSSFSheet sheet) throws Exception {
-    //     String name = sheet.getRow(NAME_ROW).getCell(CELL).getStringCellValue();
-    //     String link = sheet.getRow(LINK_ROW).getCell(CELL).getStringCellValue();
-    //     Date date = sheet.getRow(DATE_ROW).getCell(CELL).getDateCellValue();
-    //         // SimpleDateFormat("dd-MMM-yyyy").parse(sheet.getRow(DATE_ROW).getCell(CELL).getDateCellValue());
+        int i = FIRST_PARTICIPANT_ROW;
+        XSSFRow row = sheet.getRow(i);
 
-    //     Competition.Type type = getType(sheet);
+        while(row != null){
+            String name = row.getCell(TEAM_CELL).toString();
 
-    //     System.out.println("name: " + name);
-    //     System.out.println("link: " + link);
-    //     System.out.println("date: " + date);
-    //     System.out.println("type: " + type);
+            Set<Team> teams = results.keySet();
 
-    //     if(type == Competition.Type.INDIVIDUAL){
-    //         StudentCompetition result = new StudentCompetition(name, link, date);
+            Team team = teams.stream()
+                    .filter(t -> t.getName() == name)
+                    .findFirst()
+                    .orElse(null);
 
-    //     }
-    //     else {
-    //         TeamCompetition result = new TeamCompetition();
-    //     }
+            if(team == null){
+                team = new Team(name);
+                String rank = row.getCell(TEAM_RANK).toString();
+                results.put(team, rank);
+            }
 
-    //     // return result;
-    // }
+            team.add(getStudent(row));
 
-    // // reuturn an array of all students in the SHEET
-    // private static ArrayList<Student> getStudents(XSSFSheet sheet) {
-    //     ArrayList<Student> students = new ArrayList<Student>();
+            i++;
+            row = sheet.getRow(i);
+        }
 
-    //     int i = FIRST_PARTICIPANT_ROW;
-    //     XSSFRow row = sheet.getRow(i);
-    //     while(row != null) { // if the first cell is non-blank
-    //         students.add(getStudent(row));
-    //         i++;
-    //         row = sheet.getRow(i);
-    //     }
+        return results;
+    }
 
-    //     return students;
-    // }
 
-    // private LinkedHashMap<Participant, String> getCompetitionResults() {
-    // }
+    // notice that some code is shared with getStudentCompetition. Maybe write a
+    // general getcompetition() method?
+    private static TeamCompetition getTeamCompetition(XSSFSheet sheet){
+        String name = getName(sheet);
+        Date   date = getDate(sheet);
+        String link = getLink(sheet);
+
+        LinkedHashMap<Team, String> results = getTeamCompetitionResults(sheet);
+
+        return new TeamCompetition(name, link, date, results);
+    }
+
+    public static Competition getCompetition(XSSFSheet sheet){
+        Competition c;
+        Competition.Type type =  getType(sheet);
+
+        if(type == Competition.Type.INDIVIDUAL)
+            c = getStudentCompetition(sheet);
+        else
+            c = getTeamCompetition(sheet);
+
+        return c;
+    }
 
 }
 
