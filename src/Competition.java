@@ -4,7 +4,7 @@ public abstract class Competition {
     protected String name;
     protected String link;
     protected Date date;
-    public HashMap<Participant, String> results;
+    public LinkedHashMap<Participant, String> results;
 
     protected Type type; // TODO: Is this really necessary? You can always just use the instanceof keywrod
 

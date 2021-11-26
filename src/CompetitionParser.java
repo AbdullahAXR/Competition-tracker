@@ -5,7 +5,7 @@ import java.util.Date;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public final class CompetitionParser {
 
@@ -81,8 +81,8 @@ public final class CompetitionParser {
         return new Student(id, name, major); // everytime, we create a new student...
     }
 
-    private static HashMap<Student, String> getStudentCompetitionResults(XSSFSheet sheet){
-        HashMap<Student, String> results = new HashMap<Student, String>();
+    private static LinkedHashMap<Student, String> getStudentCompetitionResults(XSSFSheet sheet){
+        LinkedHashMap<Student, String> results = new LinkedHashMap<Student, String>();
 
         int i = FIRST_PARTICIPANT_ROW;
         XSSFRow row = sheet.getRow(i);
@@ -111,7 +111,7 @@ public final class CompetitionParser {
         Date   date = getDate(sheet);
         String link = getLink(sheet);
 
-        HashMap<Student, String> results = getStudentCompetitionResults(sheet);
+        LinkedHashMap<Student, String> results = getStudentCompetitionResults(sheet);
 
         return new StudentCompetition(name, link, date, results);
     }
@@ -156,7 +156,7 @@ public final class CompetitionParser {
     //     return students;
     // }
 
-    // private HashMap<Participant, String> getCompetitionResults() {
+    // private LinkedHashMap<Participant, String> getCompetitionResults() {
     // }
 
 }
