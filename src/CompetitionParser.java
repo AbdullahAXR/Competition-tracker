@@ -1,11 +1,9 @@
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 public final class CompetitionParser {
 
@@ -17,14 +15,24 @@ public final class CompetitionParser {
     final static int DATE_ROW = 2;
     final static int CELL = 1;
 
+    // competition type information
     final static int TYPE_ROW = 4;
     final static int TYPE_CELL = 4;
+
+    // team name
+    final static int TEAM_CELL = 5;
 
     // participant location
     final static int FIRST_PARTICIPANT_ROW = 5;
 
     // rank location
-    final static int RANK_CELL = 4;
+    final static int INDIVIDUAL_RANK = 4;
+    final static int TEAM_RANK = 6;
+
+    // student location
+    final static int ID_CELL = 1;
+    final static int NAME_CELL = 2;
+    final static int MAJOR_CELL = 3;
 
     // TODO: Delete later. This is for testing purposes
     public static void main(String[] args) throws Exception {
@@ -80,9 +88,9 @@ public final class CompetitionParser {
     private static Student getStudent(XSSFRow row) {
         // for some reason the id cell is numeric. I think this is a mistake
         // with the project files. We can workaround it by using toString()
-        String id    =   row.getCell(1).toString();
-        String name  =   row.getCell(2).toString();
-        String major =   row.getCell(3).toString();
+        String id    = row.getCell(ID_CELL).toString();
+        String name  = row.getCell(NAME_CELL).toString();
+        String major = row.getCell(MAJOR_CELL).toString();
 
         return new Student(id, name, major); // everytime, we create a new student...
     }
@@ -99,10 +107,8 @@ public final class CompetitionParser {
             // issue with the provided excel file. However, we can overcome it
             // by querying the cell type and converting it accordingly using the
             // getCellType() method. Another appraoch is to use toString().
-            // However I'm not sure how that behaves and I have yet to check the
-            // documeneation
-            // String rank = row.getCell(RANK_CELL).getStringCellValue();
-            String rank = row.getCell(RANK_CELL).toString();
+            // However I'm not sure how that behaves
+            String rank = row.getCell(INDIVIDUAL_RANK).toString();
             results.put(student, rank);
             i++;
             row = sheet.getRow(i);
