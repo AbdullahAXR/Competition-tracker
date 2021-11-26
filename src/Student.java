@@ -16,4 +16,11 @@ public class Student extends Participant {
         return major;
     }
 
+    @Override
+    public String toString(){
+        return "ID: "+this.getId()+"\n"+
+               "Name: "+this.getName()+"\n"+
+               "Major: "+this.getMajor()+"\n";
+    }
+
 }

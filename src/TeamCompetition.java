@@ -7,7 +7,12 @@ public class TeamCompetition extends Competition {
     LinkedHashMap<Team, String> results;
 
     TeamCompetition() {
-        this.results = new LinkedHashMap<Team,String>();
-        this.type = Type.TEAM;
+    }
+
+    TeamCompetition(String name, String link, Date date, LinkedHashMap<Team, String> results){
+        this.name = name;
+        this.date = date;
+        this.link = link;
+        this.results = results;
     }
 }

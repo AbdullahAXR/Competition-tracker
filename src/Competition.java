@@ -74,4 +74,17 @@ public abstract class Competition {
 		results.remove(p);
 	}
 
+    @Override
+    public String toString(){
+        String s = "Name: "+this.getName()+"\n"+
+                   "Link: "+this.getLink()+"\n"+
+                   "Date: "+this.getDate()+"\n"; // you probably want to change the date format
+
+        for(Participant p : results.keySet()){
+            s += p.toString()+"\n";
+        }
+
+        return s;
+    }
+
 }

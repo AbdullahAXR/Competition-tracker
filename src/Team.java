@@ -47,4 +47,15 @@ public class Team extends Participant {
 	public int indexOf(Student s) {
 		return students.indexOf(s);
 	}
+
+    @Override
+    public String toString(){
+        String string;
+        string = "Team: "+this.getName()+"\n";
+
+        for(Student s: students)
+            string += s.toString();
+
+        return string;
+    }
 }
