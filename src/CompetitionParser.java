@@ -45,13 +45,19 @@ public final class CompetitionParser {
 		XSSFSheet sheet0 = workbook.getSheetAt(0);
 		XSSFSheet sheet1 = workbook.getSheetAt(1);
 
-        TeamCompetition c0 = getTeamCompetition(sheet0);
-        StudentCompetition c1 = getStudentCompetition(sheet1);
+        TeamCompetition c0 = (TeamCompetition) getCompetition(sheet0);
+        StudentCompetition c1 = (StudentCompetition) getCompetition(sheet1);
 
         System.out.println(c0.getName());
         System.out.println(c0.getLink());
         System.out.println(c0.getDate());
         System.out.println(c0.results);
+
+        System.out.println(c1.getName());
+        System.out.println(c1.getLink());
+        System.out.println(c1.getDate());
+        System.out.println(c1.results);
+
 
         // for(Student s : c.results.keySet()){
         //     System.out.println(s.getId());
