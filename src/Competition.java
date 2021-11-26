@@ -73,4 +73,5 @@ public abstract class Competition {
 	public void remove(Participant p) {
 		results.remove(p);
 	}
+
 }

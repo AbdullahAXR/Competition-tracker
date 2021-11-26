@@ -41,11 +41,17 @@ public final class CompetitionParser {
         System.out.println(c.getName());
         System.out.println(c.getLink());
         System.out.println(c.getDate());
+        System.out.println(c.results);
+
+        for(Student s : c.results.keySet()){
+            System.out.println(s.getId());
+        }
+
     }
 
     ///// TODO: I bet there's a more elegant way to do this.
     private static String getName(XSSFSheet sheet){
-        return sheet.getRow(NAME_ROW).getCell(CELL).getStringCellValue();
+        return sheet.getRow(NAME_ROW).getCell(CELL).toString();
     }
 
     private static Date getDate(XSSFSheet sheet){
@@ -53,13 +59,13 @@ public final class CompetitionParser {
     }
 
     private static String getLink(XSSFSheet sheet){
-        return sheet.getRow(LINK_ROW).getCell(CELL).getStringCellValue();
+        return sheet.getRow(LINK_ROW).getCell(CELL).toString();
     }
     /////
 
     // get type of the competition
     public static Competition.Type getType(XSSFSheet sheet) {
-        String team = sheet.getRow(TYPE_ROW).getCell(TYPE_CELL).getStringCellValue();
+        String team = sheet.getRow(TYPE_ROW).getCell(TYPE_CELL).toString();
 
        Competition.Type type;
         if(team.equals("team")) {
@@ -73,10 +79,10 @@ public final class CompetitionParser {
     // get a student from a row
     private static Student getStudent(XSSFRow row) {
         // for some reason the id cell is numeric. I think this is a mistake
-        // with the project files. Anyhow there's a bug with this one
-        String id = "" + row.getCell(1).getNumericCellValue(); // should be string value
-        String name =    row.getCell(2).getStringCellValue();
-        String major =   row.getCell(3).getStringCellValue();
+        // with the project files. We can workaround it by using toString()
+        String id    =   row.getCell(1).toString();
+        String name  =   row.getCell(2).toString();
+        String major =   row.getCell(3).toString();
 
         return new Student(id, name, major); // everytime, we create a new student...
     }
@@ -105,7 +111,6 @@ public final class CompetitionParser {
         return results;
     }
 
-
     private static StudentCompetition getStudentCompetition(XSSFSheet sheet){
         String name = getName(sheet);
         Date   date = getDate(sheet);
@@ -115,6 +120,7 @@ public final class CompetitionParser {
 
         return new StudentCompetition(name, link, date, results);
     }
+
 
     // get the basic info for the competition
     // public static void getCompetition(XSSFSheet sheet) throws Exception {
