@@ -1,17 +1,15 @@
 # TODOs
 
-- [ ] Activity diagram
+- [ ] (???) Activity diagram
     - [ ] Read
     - [ ] Write
-
-- [x] (Saher) Sequence diagram
-    - [x] Read
-    - [x] Write
 
 - [x] (Saher) Sequence diagram
     - [x] class diagram
     - [x] View
     - [x] email
+    - [x] Read
+    - [x] Write
 
 - [ ] (Mohammad) Sequence diagram
     - [x] Browse
@@ -20,8 +18,8 @@
 
 - [ ] (Mod) Activity diagram
     - [ ] View
-    - [ ] Email
-    - [ ] Browse
+    - [x] Email
+    - [x] Browse
 
 - [ ] (Nawar) Activity diagram
     - [x] Add
