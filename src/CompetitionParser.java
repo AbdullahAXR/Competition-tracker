@@ -4,6 +4,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
 import java.util.LinkedHashMap;
 import java.util.Set;
+import java.io.IOException;
 
 public final class CompetitionParser {
 
@@ -189,6 +190,24 @@ public final class CompetitionParser {
             c = getTeamCompetition(sheet);
 
         return c;
+    }
+
+    public static XSSFSheet getCompetitionSheet(Competition c) throws IOException {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet();
+        workbook.setSheetName(0, c.getName());
+        workbook.close();
+
+        sheet.createRow(0);
+        sheet.getRow(0).getCell(0).setCellValue(c.getName());
+
+        sheet.createRow(1);
+        sheet.getRow(1).getCell(1).setCellValue(c.getLink());
+
+        sheet.createRow(2);
+        sheet.getRow(2).getCell(2).setCellValue(c.getDate());
+
+        return sheet;
     }
 
 }
