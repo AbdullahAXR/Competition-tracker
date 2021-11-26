@@ -6,14 +6,20 @@ public class StudentCompetition extends Competition {
     // competition might use Strings like "gold" or "silver".
     HashMap<Student, String> results;
 
-    StudentCompetition(String name, String link, Date date) {
-        this.results = new HashMap<Student,String>();
+    StudentCompetition(String name, String link, Date date, HashMap<Student,String> results) {
         this.name = name;
         this.link = link;
         this.date = date;
+        this.results = results;
         this.type = Type.INDIVIDUAL;
     }
     
+
+    StudentCompetition(String name, String link, Date date) {
+        this(name, link, date, new HashMap<Student, String>());
+    }
+
+
     StudentCompetition() {
     }
 
