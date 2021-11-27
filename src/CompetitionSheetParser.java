@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 import java.io.IOException;
 
-public final class CompetitionParser {
+public final class CompetitionSheetParser {
 
     enum Type {
         TEAM,
@@ -254,7 +254,7 @@ public final class CompetitionParser {
 
     }
 
-    }
+}
 
     // public static void addStudents(XSSFSheet sheet, Competition competition){
     // }
