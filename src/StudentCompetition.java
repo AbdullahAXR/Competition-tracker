@@ -1,20 +1,20 @@
 import java.util.*;
-public class StudentCompetition extends Competition {
 
-    // The results of the competition.
-    // We use <Student, String> instead of <Student, Integer> because the
-    // competition might use Strings like "gold" or "silver".
-    HashMap<Student, String> results;
+// the only good reason we define this class is just to be able to use the
+// isinstanceof keyword (instead of enums)
+public class StudentCompetition extends Competition<Student> {
 
-    StudentCompetition(String name, String link, Date date) {
-        this.results = new HashMap<Student,String>();
-        this.name = name;
-        this.link = link;
-        this.date = date;
-        this.type = Type.INDIVIDUAL;
+    StudentCompetition(String name, String link, Date date, LinkedHashMap<Student,String> results) {
+        super(name, link, date, results);
     }
     
-    StudentCompetition() {
+
+    StudentCompetition(String name, String link, Date date) {
+        this(name, link, date, new LinkedHashMap<Student, String>());
     }
 
+    // just an alias
+    public Set<Student> getStudents(){
+        return this.getParticipants();
+    }
 }

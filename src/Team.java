@@ -1,5 +1,5 @@
 import java.util.*;
-public class Team extends Participant {
+public class Team extends Participant implements Iterable<Student> {
 
     // A team is just a number of students under one name
     private ArrayList<Student> students;
@@ -47,4 +47,21 @@ public class Team extends Participant {
 	public int indexOf(Student s) {
 		return students.indexOf(s);
 	}
+
+    @Override
+    public String toString(){
+        String string;
+        string = "Team: "+this.getName()+"\n";
+
+        for(Student s: students)
+            string += s.toString();
+
+        return string;
+    }
+
+    @Override
+    public Iterator<Student> iterator() {
+        return students.iterator();
+    }
+
 }
