@@ -2,7 +2,7 @@ CompetitionParser.class: CompetitionParser.java TeamCompetition.java StudentComp
 	javac  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionParser.java 
 	java  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionParser
 
-CompetitionManager.class: CompetitionManager.java
+CompetitionManager.class: CompetitionManager.java CompetitionParser.java
 	javac  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionManager.java 
 
 TeamCompetition.class: TeamCompetition.java Competition.java Team.java 
@@ -28,4 +28,3 @@ clean:
 test:
 	javac  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test.java 
 	java -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test 
-

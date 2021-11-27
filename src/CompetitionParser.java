@@ -195,8 +195,8 @@ public final class CompetitionParser {
         return new TeamCompetition(name, link, date, results);
     }
 
-    public static Competition getCompetition(XSSFSheet sheet){
-        Competition c;
+    public static Competition<?> getCompetition(XSSFSheet sheet){
+        Competition<?> c;
         Type type =  getType(sheet);
 
         if(type == Type.INDIVIDUAL)
@@ -207,7 +207,7 @@ public final class CompetitionParser {
         return c;
     }
 
-    public static XSSFSheet getCompetitionSheet(Competition c) throws IOException {
+    public static XSSFSheet getCompetitionSheet(Competition<?> c) throws IOException {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet();
         workbook.setSheetName(0, c.getName());
@@ -221,6 +221,7 @@ public final class CompetitionParser {
 
         sheet.createRow(2);
         sheet.getRow(2).getCell(2).setCellValue(c.getDate());
+
 
         return sheet;
     }
