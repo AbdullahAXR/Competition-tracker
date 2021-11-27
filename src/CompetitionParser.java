@@ -208,11 +208,19 @@ public final class CompetitionParser {
     }
 
     public static XSSFSheet getCompetitionSheet(Competition<?> c) throws IOException {
+
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet();
         workbook.setSheetName(0, c.getName());
         workbook.close();
 
+        addBasicInfo(sheet, c);
+        addPreRow(sheet, c);
+
+        return sheet;
+    }
+
+    public static void addBasicInfo(XSSFSheet sheet, Competition<?> c){
         sheet.createRow(0);
         sheet.getRow(0).getCell(0).setCellValue(c.getName());
 
@@ -221,15 +229,35 @@ public final class CompetitionParser {
 
         sheet.createRow(2);
         sheet.getRow(2).getCell(2).setCellValue(c.getDate());
+    }
 
+    public static void addPreRow(XSSFSheet sheet, Competition<?> competition){
+        final int PRE_ROW = FIRST_PARTICIPANT_ROW-1;
+        XSSFRow prerow = sheet.createRow(PRE_ROW);
 
-        return sheet;
+        // notice 0 is skipped
+
+        prerow.getCell(1).setCellValue("Student ID");
+        prerow.getCell(2).setCellValue("Student Name");
+        prerow.getCell(3).setCellValue("Major");
+        
+        int ranknum;
+        if( competition instanceof TeamCompetition){
+            prerow.getCell(4).setCellValue("team");
+            prerow.getCell(5).setCellValue("Team Name");
+            ranknum = TEAM_RANK;
+        } else {
+            ranknum = INDIVIDUAL_RANK;
+        }
+
+        prerow.getCell(ranknum).setCellValue("Rank");
+
+    }
+
     }
 
     // public static void addStudents(XSSFSheet sheet, Competition competition){
     // }
-
-}
 
 // random psuedo code (ignore)
 // 1. let r be row
