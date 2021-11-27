@@ -38,7 +38,7 @@
                     <mxGeometry y="130" width="340" height="240" as="geometry"/>
                 </mxCell>
                 <mxCell id="QGG74kZx5etVXOkYBk9g-6" value="CompetitionInfo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="460" y="250" width="250" height="430" as="geometry"/>
+                    <mxGeometry x="460" y="250" width="250" height="460" as="geometry"/>
                 </mxCell>
                 <mxCell id="QGG74kZx5etVXOkYBk9g-7" value="+ infoLabe: Label&#10;+ dateField: InfoViewLabeld&#10;+ linkField: InfoViewLable&#10;+ typeField: InfoViewField&#10;+ linkEditableLabel: editableLabel&#10;+ addParticipantButton : Button&#10;+ browseButton : Button&#10;+ participantsTableView: TableView&#10;+ infoPane : pane&#10;+ editTitleBtn: Button&#10;+ editTableBtn: Button&#10;+ sendEmailBtn: Button&#10;+ editDateBtn: Button&#10;+ exitBtn: Button&#10;+ submitBtn: Button&#10;&#10;&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="QGG74kZx5etVXOkYBk9g-6" vertex="1">
                     <mxGeometry y="26" width="250" height="224" as="geometry"/>
@@ -46,8 +46,8 @@
                 <mxCell id="QGG74kZx5etVXOkYBk9g-8" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="QGG74kZx5etVXOkYBk9g-6" vertex="1">
                     <mxGeometry y="250" width="250" height="10" as="geometry"/>
                 </mxCell>
-                <mxCell id="QGG74kZx5etVXOkYBk9g-9" value="+ addButtonClicked() : void&#10;+ deleteButtonClicked() : void&#10;+ competitionCellClicked() : void&#10;+ layoutUI() : void&#10;+ browse(): void&#10;+ displayCompetition(c: Competition): void&#10;+ sendEmail(c: Compettion): void&#10;- isValid(): boolean&#10;- displayError(msg: String)&#10;+ exitButtonClicked()&#10;+ submitButtonClicked()&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="QGG74kZx5etVXOkYBk9g-6" vertex="1">
-                    <mxGeometry y="260" width="250" height="170" as="geometry"/>
+                <mxCell id="QGG74kZx5etVXOkYBk9g-9" value="+ addButtonClicked() : void&#10;+ deleteButtonClicked() : void&#10;+ competitionCellClicked() : void&#10;+ layoutUI() : void&#10;+ browse(): void&#10;+ displayCompetition(c: Competition): void&#10;+ displayBlank(): void&#10;+ sendEmail(c: Compettion): void&#10;- isValid(): boolean&#10;- displayError(msg: String)&#10;- displaySuccess(msg: String)&#10;+ exitButtonClicked()&#10;+ submitButtonClicked()&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="QGG74kZx5etVXOkYBk9g-6" vertex="1">
+                    <mxGeometry y="260" width="250" height="200" as="geometry"/>
                 </mxCell>
                 <mxCell id="0c5YRF4WHMTncs785dVi-13" value="CompetitionManager" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
                     <mxGeometry x="-380" y="410" width="220" height="220" as="geometry"/>
@@ -226,7 +226,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="VfqzEj0OTGTTC5FNFpXB-13" value="CompetitionBrowser" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="460" y="731" width="230" height="60" as="geometry"/>
+                    <mxGeometry x="460" y="740" width="230" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="VfqzEj0OTGTTC5FNFpXB-15" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="VfqzEj0OTGTTC5FNFpXB-13" vertex="1">
                     <mxGeometry y="26" width="230" height="8" as="geometry"/>
@@ -242,7 +242,7 @@
                 </mxCell>
                 <mxCell id="VfqzEj0OTGTTC5FNFpXB-28" value="Browses using" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="VfqzEj0OTGTTC5FNFpXB-17" vertex="1" connectable="0">
                     <mxGeometry x="0.2516" y="1" relative="1" as="geometry">
-                        <mxPoint as="offset"/>
+                        <mxPoint y="4" as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="VfqzEj0OTGTTC5FNFpXB-22" value="" style="endArrow=none;html=1;rounded=0;exitX=0.456;exitY=-0.005;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.419;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="QGG74kZx5etVXOkYBk9g-6" target="EJnaUkzqWR3YQyQ7dOgF-16" edge="1">
