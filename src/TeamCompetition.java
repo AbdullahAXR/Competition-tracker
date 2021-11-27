@@ -13,4 +13,18 @@ public class TeamCompetition extends Competition<Team> {
     public Set<Team> getTeams(){
         return this.getParticipants();
     }
+
+    public Set<Student> getStudents(){
+        Set<Student> students = new LinkedHashSet<Student>();
+        Set<Team> teams = results.keySet();
+
+        for(Team t: teams){
+            for(Student s : t){
+                students.add(s);
+            }
+        }
+
+        return students;
+
+    }
 }

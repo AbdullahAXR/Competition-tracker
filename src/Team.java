@@ -64,4 +64,7 @@ public class Team extends Participant implements Iterable<Student> {
         return students.iterator();
     }
 
+    public Set<Student> getStudents(){
+        return new LinkedHashSet<Student>(students);
+    }
 }
