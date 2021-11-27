@@ -11,10 +11,10 @@
     - [x] Read
     - [x] Write
 
-- [ ] (Mohammad) Sequence diagram
+- [x] (Mohammad) Sequence diagram
     - [x] Browse
-    - Add
-    - Edit
+    - [x] Add
+    - [x] Edit
 
 - [ ] (Mod) Activity diagram
     - [ ] View
@@ -50,3 +50,8 @@ favorite text editor**
 
 ![write Sequence diagram](./docs/phase2/sequence-diagram-write.jpg)
 
+![Browse Sequence diagram](./docs/phase2/Sequence-Diagram-Browse.jpg)
+
+![Add Sequence diagram](./docs/phase2/Sequence-Diagram-Add.jpg)
+
+![Edit Sequence diagram](./docs/phase2/Sequence-Diagram-Edit.jpg)

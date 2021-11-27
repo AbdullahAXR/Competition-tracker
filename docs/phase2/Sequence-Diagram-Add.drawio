@@ -123,7 +123,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="_CFHxgKOf0Js7Ksg64Oo-36" value="displayEmpty()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" parent="1" vertex="1">
+                <mxCell id="_CFHxgKOf0Js7Ksg64Oo-36" value="displayBlank()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" parent="1" vertex="1">
                     <mxGeometry x="390" y="250" width="60" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" style="edgeStyle=none;html=1;" edge="1" parent="1">
@@ -138,7 +138,7 @@
                 <mxCell id="2" value="CompetitionManager" style="shape=umlLifeline;participant=umlControl;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=bottom;spacingTop=36;outlineConnect=0;size=50;labelPosition=center;verticalLabelPosition=top;align=center;" vertex="1" parent="1">
                     <mxGeometry x="580" y="132" width="40" height="510" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="SubmitButtonClicked()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
+                <mxCell id="3" value="submitButtonClicked()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
                     <mxGeometry x="314.94" y="340" width="90" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="7" value="add(newCompetition)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
@@ -166,7 +166,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="18" value="DisplayError(msg)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
+                <mxCell id="18" value="displayError(msg)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
                     <mxGeometry x="530" y="380" width="80" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="21" value="return" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
@@ -185,7 +185,7 @@
                 <mxCell id="23" value="Fills Empty Filed" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
                     <mxGeometry x="160" y="420" width="60" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="24" value="SubmitButtonClicked()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
+                <mxCell id="24" value="submitButtonClicked()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
                     <mxGeometry x="315.07" y="430" width="90" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" edge="1" parent="1">
@@ -228,7 +228,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="30" value="displaySuccess()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
+                <mxCell id="30" value="displaySuccess(msg)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
                     <mxGeometry x="480.13" y="530" width="120" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="31" style="edgeStyle=none;html=1;dashed=1;endArrow=open;endFill=0;" edge="1" parent="1">
