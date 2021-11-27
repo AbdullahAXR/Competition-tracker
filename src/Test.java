@@ -8,22 +8,26 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.util.*;
 
-class p {}
-class c extends p {}
-class S {
-    public Set<? extends p> set = new HashSet<>();
-
-    public Set<? extends p> getSet(){
-        return this.getSet();
-    }
-
-
-}
-
 public class Test {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-        testExcel();
+        testTeam();
 	}
+
+    public static void testTeam(){
+        Team t = new Team("");
+
+        t.add(new Student());
+        t.add(new Student());
+        t.add(new Student());
+        t.add(new Student());
+
+        TeamCompetition tc = new TeamCompetition("","",new Date(), new LinkedHashMap<Team,String>());
+        
+        tc.put(t, "1");
+
+        tc.getStudents().forEach(System.out::println);
+
+    }
 
 	public static void testExcel() throws FileNotFoundException, IOException {
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream("data.xlsx"));
