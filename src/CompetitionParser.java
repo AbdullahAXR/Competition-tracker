@@ -8,6 +8,11 @@ import java.io.IOException;
 
 public final class CompetitionParser {
 
+    enum Type {
+        TEAM,
+        INDIVIDUAL
+    }
+
     // private final XSSFSheet SHEET;
 
     // basic info location
@@ -49,16 +54,15 @@ public final class CompetitionParser {
         TeamCompetition c0 = (TeamCompetition) getCompetition(sheet0);
         StudentCompetition c1 = (StudentCompetition) getCompetition(sheet1);
 
-        System.out.println(c0.getName());
-        System.out.println(c0.getLink());
-        System.out.println(c0.getDate());
-        System.out.println(c0.results);
+        // System.out.println(c0.getName());
+        // System.out.println(c0.getLink());
+        // System.out.println(c0.getDate());
+        // System.out.println(c0.results);
 
-        System.out.println(c1.getName());
-        System.out.println(c1.getLink());
-        System.out.println(c1.getDate());
-        System.out.println(c1.results);
-
+        // System.out.println(c1.getName());
+        // System.out.println(c1.getLink());
+        // System.out.println(c1.getDate());
+        // System.out.println(c1.results);
 
         // for(Student s : c.results.keySet()){
         //     System.out.println(s.getId());
@@ -81,14 +85,14 @@ public final class CompetitionParser {
     /////
 
     // get type of the competition
-    public static Competition.Type getType(XSSFSheet sheet) {
+    public static Type getType(XSSFSheet sheet) {
         String team = sheet.getRow(TYPE_ROW).getCell(TYPE_CELL).toString();
 
-       Competition.Type type;
+       Type type;
         if(team.equals("team")) {
-            type = Competition.Type.TEAM;
+            type = Type.TEAM;
         } else
-            type = Competition.Type.INDIVIDUAL;
+            type = Type.INDIVIDUAL;
 
         return type;
     }
@@ -193,9 +197,9 @@ public final class CompetitionParser {
 
     public static Competition getCompetition(XSSFSheet sheet){
         Competition c;
-        Competition.Type type =  getType(sheet);
+        Type type =  getType(sheet);
 
-        if(type == Competition.Type.INDIVIDUAL)
+        if(type == Type.INDIVIDUAL)
             c = getStudentCompetition(sheet);
         else
             c = getTeamCompetition(sheet);
@@ -220,6 +224,9 @@ public final class CompetitionParser {
 
         return sheet;
     }
+
+    // public static void addStudents(XSSFSheet sheet, Competition competition){
+    // }
 
 }
 
