@@ -22,7 +22,7 @@ class S {
 
 public class Test {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-        testGenerics();
+        testExcel();
 	}
 
 	public static void testExcel() throws FileNotFoundException, IOException {
