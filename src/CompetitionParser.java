@@ -147,6 +147,17 @@ public final class CompetitionParser {
 
             Set<Team> teams = results.keySet();
 
+            // if you dislike streams, then this is the imperative version
+            // (untested)
+
+            // Team team = null;
+            // for(Team t: teams){
+            //     if(t.getName() == name){
+            //         team = t;
+            //         break;
+            //     }
+            // }
+
             Team team = teams.stream()
                     .filter(t -> t.getName() == name)
                     .findFirst()
