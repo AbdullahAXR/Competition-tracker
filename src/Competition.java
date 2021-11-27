@@ -1,15 +1,24 @@
 import java.util.*;
 
-public abstract class Competition {
+public class Competition<T extends Participant> {
     protected String name;
     protected String link;
     protected Date date;
-    public LinkedHashMap<Participant, String> results;
 
-    protected Type type; // TODO: Is this really necessary? You can always just use the instanceof keywrod
+    // The results of the competition. We use <Student, String> instead of
+    // <Student, Integer> because the competition might use Strings like "gold"
+    // or "silver".
+    protected LinkedHashMap<T, String> results;
 
-    public enum Type {
-        INDIVIDUAL, TEAM,
+    Competition(String name, String link, Date date, LinkedHashMap<T,String> results) {
+        this.name = name;
+        this.link = link;
+        this.date = date;
+        this.results = results;
+    }
+
+    Competition(){
+        this("","",new Date(), new LinkedHashMap<T, String>());
     }
 
     public String getName() {
@@ -34,19 +43,15 @@ public abstract class Competition {
         return (Date) date.clone();
     }
 
-    public Competition.Type getType() {
-        return type;
-    }
-
     public void setDate(Date newdate) {
         this.date = newdate;
     }
 
-    public String getResult(Participant p) {
+    public String getResult(T p) {
         return results.get(p);
     }
 
-    public boolean containsParticipant(Participant p) {
+    public boolean containsParticipant(T p) {
         return results.containsKey(p);
     }
 
@@ -54,11 +59,11 @@ public abstract class Competition {
         return results.containsValue(rank);
     }
 
-    public void put(Participant participant, String rank) {
+    public void put(T participant, String rank) {
         results.put(participant, rank);
     }
 
-    public void putIfAbsent(Participant p, String rank) {
+    public void putIfAbsent(T p, String rank) {
         results.putIfAbsent(p, rank);
     }
 
@@ -70,9 +75,14 @@ public abstract class Competition {
 		return results.isEmpty();
 	}
 
-	public void remove(Participant p) {
+	public void remove(T p) {
 		results.remove(p);
 	}
+
+    public Set<T> getParticipants(){
+
+        return results.keySet();
+    }
 
     @Override
     public String toString(){
@@ -80,7 +90,7 @@ public abstract class Competition {
                    "Link: "+this.getLink()+"\n"+
                    "Date: "+this.getDate()+"\n"; // you probably want to change the date format
 
-        for(Participant p : results.keySet()){
+        for(T p : results.keySet()){
             s += p.toString()+"\n";
         }
 

@@ -1,18 +1,16 @@
 import java.util.*;
-public class TeamCompetition extends Competition {
+public class TeamCompetition extends Competition<Team> {
 
-    // The results of the competition.
-    // We use <Team, String> instead of <Team, Integer> because the
-    // competition might use Strings like "gold" or "silver".
-    LinkedHashMap<Team, String> results;
-
-    TeamCompetition() {
+    TeamCompetition(String name, String link, Date date, LinkedHashMap<Team,String> results) {
+        super(name, link, date, results);
     }
 
-    TeamCompetition(String name, String link, Date date, LinkedHashMap<Team, String> results){
-        this.name = name;
-        this.date = date;
-        this.link = link;
-        this.results = results;
+    TeamCompetition(String name, String link, Date date) {
+        this(name, link, date, new LinkedHashMap<Team, String>());
+    }
+
+    // just an alias
+    public Set<Team> getTeams(){
+        return this.getParticipants();
     }
 }
