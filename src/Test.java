@@ -6,10 +6,23 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.util.*;
+
+class p {}
+class c extends p {}
+class S {
+    public Set<? extends p> set = new HashSet<>();
+
+    public Set<? extends p> getSet(){
+        return this.getSet();
+    }
+
+
+}
 
 public class Test {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-        testExcel();
+        testGenerics();
 	}
 
 	public static void testExcel() throws FileNotFoundException, IOException {
