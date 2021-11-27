@@ -1,4 +1,4 @@
-CompetitionParser.class: CompetitionParser.java;
+CompetitionParser.class: CompetitionParser.java TeamCompetition.java StudentCompetition.java;
 	javac  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionParser.java 
 	java  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionParser
 
