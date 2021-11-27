@@ -6,6 +6,11 @@ public class Participant {
         this.name = name;
     }
 
+    Participant() {
+        super();
+    }
+
+
     public String getName() {
         return name;
     }

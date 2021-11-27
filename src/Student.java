@@ -8,6 +8,11 @@ public class Student extends Participant {
         this.major = major;
     }
 
+    Student() {
+        super();
+    }
+
+
     public String getId() {
         return id;
     }
