@@ -43,9 +43,9 @@ public final class CompetitionSheetParser {
     final static int MAJOR_CELL = 3;
 
     // TODO: Delete later. This is for testing purposes
-    public static void main(String[] args) throws Exception {
-        test();
-    }
+    // public static void main(String[] args) throws Exception {
+    //     test();
+    // }
 
     // TODO: Delete later. This is for testing purposes
     public static void test() throws Exception {
