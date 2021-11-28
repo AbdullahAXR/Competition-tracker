@@ -14,6 +14,7 @@ public class StudentCompetition extends Competition<Student> {
     }
 
     // just an alias
+    @Override
     public Set<Student> getStudents(){
         return this.getParticipants();
     }

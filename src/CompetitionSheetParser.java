@@ -25,8 +25,10 @@ public final class CompetitionSheetParser {
     final static int TYPE_ROW = 4;
     final static int TYPE_CELL = 4;
 
+    // team index
+    final static int TEAM_INDEX = 4;
     // team name
-    final static int TEAM_CELL = 5;
+    final static int TEAM_NAME = 5;
 
     // participant location
     final static int FIRST_PARTICIPANT_ROW = 5;
@@ -147,7 +149,7 @@ public final class CompetitionSheetParser {
         XSSFRow row = sheet.getRow(i);
 
         while(row != null){
-            String name = row.getCell(TEAM_CELL).toString();
+            String name = row.getCell(TEAM_NAME).toString();
 
             Set<Team> teams = results.keySet();
 
