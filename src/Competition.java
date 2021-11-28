@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Competition<T extends Participant> {
+public abstract class Competition<T extends Participant> {
     protected String name;
     protected String link;
     protected Date date;
@@ -96,5 +96,7 @@ public class Competition<T extends Participant> {
 
         return s;
     }
+
+    public abstract Set<Student> getStudents();
 
 }
