@@ -5,7 +5,8 @@ import org.apache.poi.xssf.usermodel.*;
 import java.util.LinkedHashMap;
 import java.util.Set;
 import java.io.IOException;
-
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 public final class CompetitionSheetParser {
 
     enum Type {
@@ -56,9 +57,12 @@ public final class CompetitionSheetParser {
     // get a student from a row
     private static Student getStudent(XSSFRow row) {
         // for some reason the id Specs.cell is numeric. I think this is a mistake
-        // with the project files. We can workaround it by using toString()
-        // System.out.println(row.getCell(Specs.ID_CELL));
-        String id    = row.getCell(Specs.ID_CELL).toString();
+        // with the project files. We can workaround it by changing it to String
+
+        XSSFCell idCell = row.getCell(Specs.ID_CELL);
+        idCell.setCellType(CellType.STRING); //turn this into a method
+        String id = row.getCell(Specs.ID_CELL).toString();
+
         String name  = row.getCell(Specs.NAME_CELL).toString();
         String major = row.getCell(Specs.MAJOR_CELL).toString();
 
@@ -78,7 +82,11 @@ public final class CompetitionSheetParser {
             // by querying the Specs.cell type and converting it accordingly using the
             // getCellType() method. Another appraoch is to use toString().
             // However I'm not sure how that behaves
+
+            XSSFCell rankCell = row.getCell(Specs.INDIVIDUAL_RANK_CELL);
+            rankCell.setCellType(CellType.STRING); //turn this into a method
             String rank = row.getCell(Specs.INDIVIDUAL_RANK_CELL).toString();
+            // System.out.println(rank); looks fine
             results.put(student, rank);
             i++;
             row = sheet.getRow(i);
@@ -126,6 +134,9 @@ public final class CompetitionSheetParser {
 
             if(team == null){
                 team = new Team(name);
+
+                XSSFCell rankCell = row.getCell(Specs.TEAM_RANK_CELL);
+                rankCell.setCellType(CellType.STRING); // put this in a method
                 String rank = row.getCell(Specs.TEAM_RANK_CELL).toString();
                 results.put(team, rank);
             }

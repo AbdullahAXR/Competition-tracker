@@ -31,12 +31,13 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
         TeamCompetition c0 = (TeamCompetition) CompetitionSheetParser.getCompetition(sheet0);
         StudentCompetition c1 = (StudentCompetition) CompetitionSheetParser.getCompetition(sheet1);
         XSSFSheet newSheet = workbook.createSheet();
+        // System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(sheet0));
 
-        CompetitionSheetBuilder<StudentCompetition> cb = new CompetitionSheetBuilder<StudentCompetition>(newSheet, c1);
+        CompetitionSheetBuilder<TeamCompetition> cb = new CompetitionSheetBuilder<TeamCompetition>(newSheet, c0);
         newSheet = cb.buildSheet();
         workbook.write(new FileOutputStream("temp.xlsx"));
         // StudentCompetition sc = (StudentCompetition) CompetitionSheetParser.getCompetition(newSheet);
-        System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(newSheet));
+        // System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(newSheet));
 
     }
 
@@ -115,7 +116,7 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
             index = i-Specs.FIRST_PARTICIPANT_ROW+1;
             insertStudent(r, s, index);
             rank = ((StudentCompetition) c).getResult(s);
-            r.createCell(Specs.INDIVIDUAL_RANK_CELL).setCellValue(rank);
+            r.createCell(Specs.INDIVIDUAL_RANK_CELL, CellType.STRING).setCellValue(rank);
             i++;
 
         }
@@ -140,7 +141,7 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
                 r = sheet.createRow(i);
                 r.createCell(Specs.TEAM_INDEX_CELL).setCellValue(teamIndex);
                 r.createCell(Specs.TEAM_NAME_CELL).setCellValue(teamName);
-                r.createCell(Specs.TEAM_RANK_CELL).setCellValue(teamRank);
+                r.createCell(Specs.TEAM_RANK_CELL, CellType.STRING).setCellValue(teamRank);
                 insertStudent(r, s, studentIndex++);
                 i++;
             }
