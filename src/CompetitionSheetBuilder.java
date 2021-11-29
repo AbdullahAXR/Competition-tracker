@@ -33,6 +33,7 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
         newSheet = cb.buildSheet();
         workbook.write(new FileOutputStream("temp.xlsx"));
         // StudentCompetition sc = (StudentCompetition) CompetitionSheetParser.getCompetition(newSheet);
+        System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(newSheet));
 
     }
 
@@ -93,19 +94,19 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
     // with rank
     public void insertStudents(){
         int i = CompetitionSheetParser.FIRST_PARTICIPANT_ROW;
-        sheet.createRow(i);
-        XSSFRow r = sheet.getRow(i);
+        // sheet.createRow(i);
+        XSSFRow r;
 
         int index;
         String rank;
         for(Student s : students){
+            sheet.createRow(i);
+            r = sheet.getRow(i);
             index = i-CompetitionSheetParser.FIRST_PARTICIPANT_ROW+1;
             insertStudent(r, s, index);
             rank = ((StudentCompetition) c).getResult(s);
             r.createCell(CompetitionSheetParser.INDIVIDUAL_RANK).setCellValue(rank);
             i++;
-            sheet.createRow(i);
-            r = sheet.getRow(i);
 
         }
     }

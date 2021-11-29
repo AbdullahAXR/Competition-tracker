@@ -103,6 +103,7 @@ public final class CompetitionSheetParser {
     private static Student getStudent(XSSFRow row) {
         // for some reason the id cell is numeric. I think this is a mistake
         // with the project files. We can workaround it by using toString()
+        // System.out.println(row.getCell(ID_CELL));
         String id    = row.getCell(ID_CELL).toString();
         String name  = row.getCell(NAME_CELL).toString();
         String major = row.getCell(MAJOR_CELL).toString();
