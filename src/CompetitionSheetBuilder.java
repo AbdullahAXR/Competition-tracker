@@ -11,12 +11,10 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
 
     private XSSFSheet sheet;
     private T c; 
-    private Set<Student> students;
 
     CompetitionSheetBuilder(XSSFSheet sheet, T c){
         this.sheet = sheet;
         this.c = c;
-        this.students = c.getStudents();
     }
 
     public static void main(String[] args) throws Exception {
@@ -96,6 +94,7 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
         int i = CompetitionSheetParser.FIRST_PARTICIPANT_ROW;
         // sheet.createRow(i);
         XSSFRow r;
+        Set<Student> students = c.getStudents();
 
         int index;
         String rank;
