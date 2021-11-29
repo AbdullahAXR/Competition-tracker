@@ -13,35 +13,6 @@ public final class CompetitionSheetParser {
         INDIVIDUAL
     }
 
-    // private final XSSFSheet SHEET;
-
-    // basic info location
-    final static int NAME_ROW = 0;
-    final static int LINK_ROW = 1;
-    final static int DATE_ROW = 2;
-    final static int CELL = 1;
-
-    // competition type information
-    final static int TYPE_ROW = 4;
-    final static int TYPE_CELL = 4;
-
-    // team index
-    final static int TEAM_INDEX = 4;
-    // team name
-    final static int TEAM_NAME = 5;
-
-    // participant location
-    final static int FIRST_PARTICIPANT_ROW = 5;
-
-    // rank location
-    final static int INDIVIDUAL_RANK = 4;
-    final static int TEAM_RANK = 6;
-
-    // student location
-    final static int ID_CELL = 1;
-    final static int NAME_CELL = 2;
-    final static int MAJOR_CELL = 3;
-
     // TODO: Delete later. This is for testing purposes
     // public static void main(String[] args) throws Exception {
     //     test();
@@ -74,21 +45,21 @@ public final class CompetitionSheetParser {
 
     ///// TODO: I bet there's a more elegant way to do this.
     private static String getName(XSSFSheet sheet){
-        return sheet.getRow(NAME_ROW).getCell(CELL).toString();
+        return sheet.getRow(CompetitionSheetSpecs.NAME_ROW).getCell(CompetitionSheetSpecs.CELL).toString();
     }
 
     private static Date getDate(XSSFSheet sheet){
-        return sheet.getRow(DATE_ROW).getCell(CELL).getDateCellValue();
+        return sheet.getRow(CompetitionSheetSpecs.DATE_ROW).getCell(CompetitionSheetSpecs.CELL).getDateCellValue();
     }
 
     private static String getLink(XSSFSheet sheet){
-        return sheet.getRow(LINK_ROW).getCell(CELL).toString();
+        return sheet.getRow(CompetitionSheetSpecs.LINK_ROW).getCell(CompetitionSheetSpecs.CELL).toString();
     }
     /////
 
     // get type of the competition
     public static Type getType(XSSFSheet sheet) {
-        String team = sheet.getRow(TYPE_ROW).getCell(TYPE_CELL).toString();
+        String team = sheet.getRow(CompetitionSheetSpecs.TYPE_ROW).getCell(CompetitionSheetSpecs.TYPE_CELL).toString();
 
        Type type;
         if(team.equals("team")) {
@@ -101,12 +72,12 @@ public final class CompetitionSheetParser {
 
     // get a student from a row
     private static Student getStudent(XSSFRow row) {
-        // for some reason the id cell is numeric. I think this is a mistake
+        // for some reason the id CompetitionSheetSpecs.cell is numeric. I think this is a mistake
         // with the project files. We can workaround it by using toString()
-        // System.out.println(row.getCell(ID_CELL));
-        String id    = row.getCell(ID_CELL).toString();
-        String name  = row.getCell(NAME_CELL).toString();
-        String major = row.getCell(MAJOR_CELL).toString();
+        // System.out.println(row.getCell(CompetitionSheetSpecs.ID_CELL));
+        String id    = row.getCell(CompetitionSheetSpecs.ID_CELL).toString();
+        String name  = row.getCell(CompetitionSheetSpecs.NAME_CELL).toString();
+        String major = row.getCell(CompetitionSheetSpecs.MAJOR_CELL).toString();
 
         return new Student(id, name, major); // everytime, we create a new student...
     }
@@ -114,17 +85,17 @@ public final class CompetitionSheetParser {
     private static LinkedHashMap<Student, String> getStudentCompetitionResults(XSSFSheet sheet){
         LinkedHashMap<Student, String> results = new LinkedHashMap<Student, String>();
 
-        int i = FIRST_PARTICIPANT_ROW;
+        int i = CompetitionSheetSpecs.FIRST_PARTICIPANT_ROW;
         XSSFRow row = sheet.getRow(i);
         while(row != null){
             Student student = getStudent(row);
 
-            // a rank cell can either numeric or string. This is most likely an
+            // a rank CompetitionSheetSpecs.cell can either numeric or string. This is most likely an
             // issue with the provided excel file. However, we can overcome it
-            // by querying the cell type and converting it accordingly using the
+            // by querying the CompetitionSheetSpecs.cell type and converting it accordingly using the
             // getCellType() method. Another appraoch is to use toString().
             // However I'm not sure how that behaves
-            String rank = row.getCell(INDIVIDUAL_RANK).toString();
+            String rank = row.getCell(CompetitionSheetSpecs.INDIVIDUAL_RANK).toString();
             results.put(student, rank);
             i++;
             row = sheet.getRow(i);
@@ -146,11 +117,11 @@ public final class CompetitionSheetParser {
     private static LinkedHashMap<Team, String> getTeamCompetitionResults(XSSFSheet sheet){
         LinkedHashMap<Team, String> results = new LinkedHashMap<Team, String>();
 
-        int i = FIRST_PARTICIPANT_ROW;
+        int i = CompetitionSheetSpecs.FIRST_PARTICIPANT_ROW;
         XSSFRow row = sheet.getRow(i);
 
         while(row != null){
-            String name = row.getCell(TEAM_NAME).toString();
+            String name = row.getCell(CompetitionSheetSpecs.TEAM_NAME).toString();
 
             Set<Team> teams = results.keySet();
 
@@ -172,7 +143,7 @@ public final class CompetitionSheetParser {
 
             if(team == null){
                 team = new Team(name);
-                String rank = row.getCell(TEAM_RANK).toString();
+                String rank = row.getCell(CompetitionSheetSpecs.TEAM_RANK).toString();
                 results.put(team, rank);
             }
 
@@ -235,7 +206,7 @@ public final class CompetitionSheetParser {
     }
 
     public static void addPreRow(XSSFSheet sheet, Competition<?> competition){
-        final int PRE_ROW = FIRST_PARTICIPANT_ROW-1;
+        final int PRE_ROW = CompetitionSheetSpecs.FIRST_PARTICIPANT_ROW-1;
         XSSFRow prerow = sheet.createRow(PRE_ROW);
 
         // notice 0 is skipped
@@ -248,9 +219,9 @@ public final class CompetitionSheetParser {
         if( competition instanceof TeamCompetition){
             prerow.getCell(4).setCellValue("team");
             prerow.getCell(5).setCellValue("Team Name");
-            ranknum = TEAM_RANK;
+            ranknum = CompetitionSheetSpecs.TEAM_RANK;
         } else {
-            ranknum = INDIVIDUAL_RANK;
+            ranknum = CompetitionSheetSpecs.INDIVIDUAL_RANK;
         }
 
         prerow.getCell(ranknum).setCellValue("Rank");
