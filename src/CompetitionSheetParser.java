@@ -13,36 +13,6 @@ public final class CompetitionSheetParser {
         INDIVIDUAL
     }
 
-    // TODO: Delete later. This is for testing purposes
-    // public static void main(String[] args) throws Exception {
-    //     test();
-    // }
-
-    // TODO: Delete later. This is for testing purposes
-    public static void test() throws Exception {
-		XSSFWorkbook workbook = new XSSFWorkbook(new File("data.xlsx"));
-		XSSFSheet sheet0 = workbook.getSheetAt(0);
-		XSSFSheet sheet1 = workbook.getSheetAt(1);
-
-        TeamCompetition c0 = (TeamCompetition) getCompetition(sheet0);
-        StudentCompetition c1 = (StudentCompetition) getCompetition(sheet1);
-
-        // System.out.println(c0.getName());
-        // System.out.println(c0.getLink());
-        // System.out.println(c0.getDate());
-        // System.out.println(c0.results);
-
-        // System.out.println(c1.getName());
-        // System.out.println(c1.getLink());
-        // System.out.println(c1.getDate());
-        // System.out.println(c1.results);
-
-        // for(Student s : c.results.keySet()){
-        //     System.out.println(s.getId());
-        // }
-
-    }
-
     ///// TODO: I bet there's a more elegant way to do this.
     private static String getName(XSSFSheet sheet){
         return sheet.getRow(CompetitionSheetSpecs.NAME_ROW).getCell(CompetitionSheetSpecs.CELL).toString();
@@ -57,11 +27,24 @@ public final class CompetitionSheetParser {
     }
     /////
 
+    public static Competition<?> getCompetition(XSSFSheet sheet){
+        Competition<?> c;
+        Type type =  getType(sheet);
+
+        if(type == Type.INDIVIDUAL)
+            c = getStudentCompetition(sheet);
+        else
+            c = getTeamCompetition(sheet);
+
+        return c;
+    }
+
+
     // get type of the competition
     public static Type getType(XSSFSheet sheet) {
         String team = sheet.getRow(CompetitionSheetSpecs.TYPE_ROW).getCell(CompetitionSheetSpecs.TYPE_CELL).toString();
 
-       Type type;
+        Type type;
         if(team.equals("team")) {
             type = Type.TEAM;
         } else
@@ -128,10 +111,10 @@ public final class CompetitionSheetParser {
             // functional appraoch:
             /* 
                Team team = teams.stream()
-                     .filter(t -> t.getName() == name)
-                     .findFirst()
-                     .orElse(null);
-            */
+               .filter(t -> t.getName() == name)
+               .findFirst()
+               .orElse(null);
+               */
 
             Team team = null;
             for(Team t: teams){
@@ -169,18 +152,6 @@ public final class CompetitionSheetParser {
         return new TeamCompetition(name, link, date, results);
     }
 
-    public static Competition<?> getCompetition(XSSFSheet sheet){
-        Competition<?> c;
-        Type type =  getType(sheet);
-
-        if(type == Type.INDIVIDUAL)
-            c = getStudentCompetition(sheet);
-        else
-            c = getTeamCompetition(sheet);
-
-        return c;
-    }
-
     public static XSSFSheet getCompetitionSheet(Competition<?> c) throws IOException {
 
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -214,7 +185,7 @@ public final class CompetitionSheetParser {
         prerow.getCell(1).setCellValue("Student ID");
         prerow.getCell(2).setCellValue("Student Name");
         prerow.getCell(3).setCellValue("Major");
-        
+
         int ranknum;
         if( competition instanceof TeamCompetition){
             prerow.getCell(4).setCellValue("team");
@@ -230,8 +201,8 @@ public final class CompetitionSheetParser {
 
 }
 
-    // public static void addStudents(XSSFSheet sheet, Competition competition){
-    // }
+// public static void addStudents(XSSFSheet sheet, Competition competition){
+// }
 
 // random psuedo code (ignore)
 // 1. let r be row

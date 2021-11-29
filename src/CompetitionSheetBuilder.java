@@ -146,14 +146,4 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
         }
     }
 
-//     private static void insertCompetitionInfo(XSSFSheet sheet, Competition<?> c){
-//         sheet.createRow(0);
-//         sheet.getRow(0).createCell(0).setCellValue(c.getName());
-
-//         sheet.createRow(1);
-//         sheet.getRow(1).createCell(1).setCellValue(c.getLink());
-
-//         sheet.createRow(2);
-//         sheet.getRow(2).createCell(2).setCellValue(c.getDate());
-//     }
 }
