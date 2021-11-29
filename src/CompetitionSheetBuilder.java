@@ -26,14 +26,14 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
 
         TeamCompetition c0 = (TeamCompetition) CompetitionSheetParser.getCompetition(sheet0);
         StudentCompetition c1 = (StudentCompetition) CompetitionSheetParser.getCompetition(sheet1);
-        System.out.println(c0);
+        System.out.println(c1);
 
         XSSFSheet newSheet = workbook.createSheet();
-        CompetitionSheetBuilder<StudentCompetition> cb = new CompetitionSheetBuilder<StudentCompetition>(newSheet, c1);
+        CompetitionSheetBuilder<TeamCompetition> cb = new CompetitionSheetBuilder<TeamCompetition>(newSheet, c0);
         newSheet = cb.buildSheet();
         workbook.write(new FileOutputStream("temp.xlsx"));
-        // StudentCompetition sc = (StudentCompetition) CompetitionSheetParser.getCompetition(newSheet);
-        System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(newSheet));
+        // TeamCompetition sc = (TeamCompetition) CompetitionSheetParser.getCompetition(newSheet);
+        System.out.println((TeamCompetition)CompetitionSheetParser.getCompetition(newSheet));
 
     }
 
@@ -127,13 +127,15 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
             teamRank = tc.getResult(t);
 
             for(Student s : t){
+                r = sheet.createRow(i);
                 r.createCell(CompetitionSheetParser.TEAM_INDEX).setCellValue(teamIndex);
                 r.createCell(CompetitionSheetParser.TEAM_NAME).setCellValue(teamName);
                 r.createCell(CompetitionSheetParser.TEAM_RANK).setCellValue(teamRank);
                 insertStudent(r, s, studentIndex++);
+                i++;
             }
             teamIndex++;
-            r = sheet.getRow(++i);
+            // r = sheet.getRow(++i);
         }
     }
 

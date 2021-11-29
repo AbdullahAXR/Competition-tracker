@@ -27,4 +27,5 @@ public class TeamCompetition extends Competition<Team> {
         return students;
 
     }
+
 }
