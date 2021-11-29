@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 import java.io.IOException;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.CellStyle;
 
 public class CompetitionSheetBuilder<T extends Competition<? extends Participant>> {
 
@@ -16,6 +17,7 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
         this.sheet = sheet;
         this.c = c;
     }
+
 
     public static void main(String[] args) throws Exception {
 		XSSFWorkbook workbook = new XSSFWorkbook(new File("data.xlsx"));
@@ -56,7 +58,13 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
         sheet.getRow(1).createCell(1).setCellValue(c.getLink());
 
         sheet.createRow(2).createCell(0).setCellValue("Date");
-        sheet.getRow(2).createCell(1).setCellValue(c.getDate());
+
+        XSSFCell dateCell = sheet.getRow(2).createCell(1);
+        CellStyle style = dateCell.getCellStyle();
+        style.setDataFormat((short)0xf); // put this as a constant
+        dateCell.setCellStyle(style);
+        dateCell.setCellValue(c.getDate());
+
     }
 
 
