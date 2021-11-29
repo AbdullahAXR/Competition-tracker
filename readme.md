@@ -2,10 +2,6 @@
 
 - [ ] Report
 
-- [ ] (???) Activity diagram
-    - [ ] Read
-    - [ ] Write
-
 - [x] (Saher) Sequence diagram
     - [x] class diagram
     - [x] View
@@ -23,9 +19,11 @@
     - [x] Email
     - [x] Browse
 
-- [ ] (Nawar) Activity diagram
+- [x] (Nawar) Activity diagram
     - [x] Add
     - [x] Edit
+    - [x] Read
+    - [x] Write
 
 
 # Project Summary
