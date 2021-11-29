@@ -15,9 +15,11 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
     private XSSFRow prerow;
 
     CompetitionSheetBuilder(XSSFSheet sheet, T c){
+
+        // used globally
         this.sheet = sheet;
         this.c = c;
-        this.prerow = sheet.createRow(CompetitionSheetSpecs.FIRST_PARTICIPANT_ROW-1);
+        this.prerow = sheet.createRow(CompetitionSheetSpecs.FIRST_PARTICIPANT_ROW-1); // this is used two times, so we just create a variable for it.
     }
 
 
@@ -28,14 +30,13 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
 
         TeamCompetition c0 = (TeamCompetition) CompetitionSheetParser.getCompetition(sheet0);
         StudentCompetition c1 = (StudentCompetition) CompetitionSheetParser.getCompetition(sheet1);
-        System.out.println(c1);
-
         XSSFSheet newSheet = workbook.createSheet();
-        CompetitionSheetBuilder<TeamCompetition> cb = new CompetitionSheetBuilder<TeamCompetition>(newSheet, c0);
+
+        CompetitionSheetBuilder<StudentCompetition> cb = new CompetitionSheetBuilder<StudentCompetition>(newSheet, c1);
         newSheet = cb.buildSheet();
         workbook.write(new FileOutputStream("temp.xlsx"));
-        // TeamCompetition sc = (TeamCompetition) CompetitionSheetParser.getCompetition(newSheet);
-        System.out.println((TeamCompetition)CompetitionSheetParser.getCompetition(newSheet));
+        // StudentCompetition sc = (StudentCompetition) CompetitionSheetParser.getCompetition(newSheet);
+        System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(newSheet));
 
     }
 
