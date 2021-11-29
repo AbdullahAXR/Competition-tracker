@@ -12,10 +12,12 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
 
     private XSSFSheet sheet;
     private T c; 
+    private XSSFRow prerow;
 
     CompetitionSheetBuilder(XSSFSheet sheet, T c){
         this.sheet = sheet;
         this.c = c;
+        this.prerow = sheet.createRow(CompetitionSheetSpecs.FIRST_PARTICIPANT_ROW-1);
     }
 
 
@@ -39,12 +41,15 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
 
     public XSSFSheet buildSheet(){
         insertBasicInfo();
-        insertPreRow();
 
-        if(c instanceof TeamCompetition)
+        if(c instanceof TeamCompetition) {
+            insertTeamCompetitionPreRow();
             insertTeams();
-        else
+        }
+        else {
+            insertStudentCompetitionPreRow();
             insertStudents();
+        }
 
         return sheet;
     }
@@ -68,26 +73,23 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
     }
 
 
-    private void insertPreRow() {
-        final int PRE_ROW = CompetitionSheetSpecs.FIRST_PARTICIPANT_ROW-1;
-        XSSFRow prerow = sheet.createRow(PRE_ROW);
-
+    private void insertCommonPreRow() {
         // notice 0 is skipped
-
         prerow.createCell(1).setCellValue("Student ID");
         prerow.createCell(2).setCellValue("Student Name");
         prerow.createCell(3).setCellValue("Major");
+    }
 
-        int ranknum;
-        if(c instanceof TeamCompetition){
-            prerow.createCell(4).setCellValue("team");
-            prerow.createCell(5).setCellValue("Team Name");
-            ranknum = CompetitionSheetSpecs.TEAM_RANK;
-        } else {
-            ranknum = CompetitionSheetSpecs.INDIVIDUAL_RANK;
-        }
+    private void insertStudentCompetitionPreRow() {
+        insertCommonPreRow();
+        prerow.createCell(CompetitionSheetSpecs.INDIVIDUAL_RANK).setCellValue("Rank");
+    }
 
-        prerow.createCell(ranknum).setCellValue("Rank");
+    private void insertTeamCompetitionPreRow(){
+        insertCommonPreRow();
+        prerow.createCell(4).setCellValue("team");
+        prerow.createCell(5).setCellValue("Team Name");
+        prerow.createCell(CompetitionSheetSpecs.TEAM_RANK).setCellValue("Rank");
     }
 
     public void insertStudent(XSSFRow r, Student s, int index){
