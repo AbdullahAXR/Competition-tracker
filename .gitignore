@@ -6,3 +6,4 @@ bin
 *.orig
 *Zone*
 tags
+src/temp.xlsx
