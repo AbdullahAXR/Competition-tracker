@@ -31,8 +31,8 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
         XSSFSheet newSheet = workbook.createSheet();
         CompetitionSheetBuilder<StudentCompetition> cb = new CompetitionSheetBuilder<StudentCompetition>(newSheet, c1);
         newSheet = cb.buildSheet();
-        StudentCompetition sc = (StudentCompetition) CompetitionSheetParser.getCompetition(newSheet);
         workbook.write(new FileOutputStream("temp.xlsx"));
+        // StudentCompetition sc = (StudentCompetition) CompetitionSheetParser.getCompetition(newSheet);
 
     }
 
@@ -49,9 +49,6 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
     }
 
     public void insertBasicInfo(){
-        String name = c.getName();
-        String link = c.getLink();
-        Date date = c.getDate();
 
         sheet.createRow(0).createCell(0).setCellValue("Competition");
         sheet.getRow(0).createCell(1).setCellValue(c.getName());
@@ -86,22 +83,30 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
         prerow.createCell(ranknum).setCellValue("Rank");
     }
 
-    public void insertStudent(XSSFRow r, Student s){
-        r.createCell(0, CellType.STRING).setCellValue(s.getId());
-        r.createCell(1, CellType.STRING).setCellValue(s.getName());
-        r.createCell(2, CellType.STRING).setCellValue(s.getMajor());
+    public void insertStudent(XSSFRow r, Student s, int index){
+        r.createCell(0).setCellValue(index);
+        r.createCell(1, CellType.STRING).setCellValue(s.getId());
+        r.createCell(2).setCellValue(s.getName());
+        r.createCell(3).setCellValue(s.getMajor());
     }
 
+    // with rank
     public void insertStudents(){
         int i = CompetitionSheetParser.FIRST_PARTICIPANT_ROW;
         sheet.createRow(i);
         XSSFRow r = sheet.getRow(i);
 
+        int index;
+        String rank;
         for(Student s : students){
-            insertStudent(r, s);
+            index = i-CompetitionSheetParser.FIRST_PARTICIPANT_ROW+1;
+            insertStudent(r, s, index);
+            rank = ((StudentCompetition) c).getResult(s);
+            r.createCell(CompetitionSheetParser.INDIVIDUAL_RANK).setCellValue(rank);
             i++;
             sheet.createRow(i);
             r = sheet.getRow(i);
+
         }
     }
 
@@ -112,16 +117,21 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
 
         String teamName;
         String teamRank;
+
+        // we start from one
+        int studentIndex = 1;
+        int teamIndex = 1;
         for(Team t : tc.getTeams()){
             teamName = t.getName();
             teamRank = tc.getResult(t);
 
             for(Student s : t){
-                r.createCell(CompetitionSheetParser.TEAM_INDEX).setCellValue(i-CompetitionSheetParser.FIRST_PARTICIPANT_ROW);
+                r.createCell(CompetitionSheetParser.TEAM_INDEX).setCellValue(teamIndex);
                 r.createCell(CompetitionSheetParser.TEAM_NAME).setCellValue(teamName);
                 r.createCell(CompetitionSheetParser.TEAM_RANK).setCellValue(teamRank);
-                insertStudent(r, s);
+                insertStudent(r, s, studentIndex++);
             }
+            teamIndex++;
             r = sheet.getRow(++i);
         }
     }
