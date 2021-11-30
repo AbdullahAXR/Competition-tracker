@@ -14,44 +14,38 @@ public class CompetitionSheetBuilder {
     private Competition<? extends Participant> c; 
     private XSSFRow prerow;
 
-    // cel style of participants
-    static XSSFCellStyle style;
+    private XSSFCellStyle style;
 
-    CompetitionSheetBuilder(XSSFSheet sheet, Competition<? extends Participant> c) throws Exception {
+    CompetitionSheetBuilder(XSSFSheet sheet, Competition<? extends Participant> c, XSSFCellStyle style) throws Exception {
 
         // used globally
         this.sheet = sheet;
         this.c = c;
         this.prerow = sheet.createRow(Specs.FIRST_PARTICIPANT_ROW-1); // this is used two times, so we just create a variable for it.
+        this.style = style;
 
-        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream("data.xlsx"));
-        XSSFCellStyle sampleStyle = wb.getSheetAt(0).getRow(Specs.FIRST_PARTICIPANT_ROW).getCell(Specs.ID_CELL).getCellStyle();
-        wb.close();
-
-        this.style = sheet.getWorkbook().createCellStyle();
-        this.style.cloneStyleFrom(sampleStyle);
     }
 
     public static void main(String[] args) throws Exception {
-		XSSFWorkbook workbook = new XSSFWorkbook(new File("data.xlsx"));
-		XSSFSheet sheet0 = workbook.getSheetAt(0);
-		XSSFSheet sheet1 = workbook.getSheetAt(1);
+		// XSSFWorkbook workbook = new XSSFWorkbook(new File("data.xlsx"));
+		// XSSFSheet sheet0 = workbook.getSheetAt(0);
+		// XSSFSheet sheet1 = workbook.getSheetAt(1);
 
-        TeamCompetition c0 = (TeamCompetition) CompetitionSheetParser.getCompetition(sheet0);
-        StudentCompetition c1 = (StudentCompetition) CompetitionSheetParser.getCompetition(sheet1);
-        XSSFSheet newSheet0 = workbook.createSheet();
-        XSSFSheet newSheet1= workbook.createSheet();
-        // System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(sheet0));
+        // TeamCompetition c0 = (TeamCompetition) CompetitionSheetParser.getCompetition(sheet0);
+        // StudentCompetition c1 = (StudentCompetition) CompetitionSheetParser.getCompetition(sheet1);
+        // XSSFSheet newSheet0 = workbook.createSheet();
+        // XSSFSheet newSheet1= workbook.createSheet();
+        // // System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(sheet0));
 
-        CompetitionSheetBuilder cb0 = new CompetitionSheetBuilder(newSheet0, c0);
-        CompetitionSheetBuilder cb1 = new CompetitionSheetBuilder(newSheet1, c1);
+        // CompetitionSheetBuilder cb0 = new CompetitionSheetBuilder(newSheet0, c0);
+        // CompetitionSheetBuilder cb1 = new CompetitionSheetBuilder(newSheet1, c1);
 
-        newSheet0 = cb0.buildSheet();
-        newSheet1 = cb1.buildSheet();
-        workbook.write(new FileOutputStream("temp.xlsx"));
-        // StudentCompetition sc = (StudentCompetition) CompetitionSheetParser.getCompetition(newSheet);
-        // System.out.println((TeamCompetition)CompetitionSheetParser.getCompetition(newSheet0));
-        // System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(newSheet1));
+        // newSheet0 = cb0.buildSheet();
+        // newSheet1 = cb1.buildSheet();
+        // workbook.write(new FileOutputStream("temp.xlsx"));
+        // // StudentCompetition sc = (StudentCompetition) CompetitionSheetParser.getCompetition(newSheet);
+        // // System.out.println((TeamCompetition)CompetitionSheetParser.getCompetition(newSheet0));
+        // // System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(newSheet1));
 
     }
 

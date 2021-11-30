@@ -19,17 +19,18 @@ public class CompetitionManager {
         this.dataWorkbook = new XSSFWorkbook(dataFile);
         this.readCompetitions();
 	}
-    public static void main(String[] args) throws Exception {
-        // CompetitionManager cm = new CompetitionManager();
-        // System.out.println(cm.competitions.size());
 
-        // LinkedHashMap<Student, String> lhm =  new LinkedHashMap<Student, String>();
-        // lhm.put(new Student("20238531", "saher's friend", "MATH"), "1");
-        // lhm.put(new Student("20238531", "saher's other friend", "swe"), "2");
-        // lhm.put(new Student("20238531", "saher himself", "swe"), "-");
-        // cm.add(new StudentCompetition("saher's cool competition", "www.saher.com", new Date(), lhm));
-        // // TeamCompetition tc = (TeamCompetition) cm.competitions.get(0);
-        // cm.writeCompetitions();
+    public static void main(String[] args) throws Exception {
+        CompetitionManager cm = new CompetitionManager();
+        System.out.println(cm.competitions.size());
+
+        LinkedHashMap<Student, String> lhm =  new LinkedHashMap<Student, String>();
+        lhm.put(new Student("20238531", "saher's friend", "MATH"), "1");
+        lhm.put(new Student("20238531", "saher's other friend", "swe"), "2");
+        lhm.put(new Student("20238531", "saher himself", "swe"), "-");
+        cm.add(new StudentCompetition("saher's cool competition", "www.saher.com", new Date(), lhm));
+        // TeamCompetition tc = (TeamCompetition) cm.competitions.get(0);
+        cm.writeCompetitions();
 
     }
 
@@ -45,10 +46,16 @@ public class CompetitionManager {
     }
 
     public void writeCompetitions() throws Exception {
+
+        XSSFCellStyle sampleStyle = dataWorkbook.getSheetAt(0).getRow(Specs.FIRST_PARTICIPANT_ROW).getCell(Specs.ID_CELL).getCellStyle();
+
         dataWorkbook = new XSSFWorkbook();
+        XSSFCellStyle style;
+        style = dataWorkbook.createCellStyle();
+        style.cloneStyleFrom(sampleStyle);
+
         XSSFSheet sheet;
         Competition<?> c;
-
         for(int i = 0; i < this.size(); i++){
             c = competitions.get(i);
             String sheetName = c.getName();
@@ -56,7 +63,7 @@ public class CompetitionManager {
             try {
             sheet = dataWorkbook.createSheet(sheetName);
             dataWorkbook.setSheetName(i, sheetName);
-            CompetitionSheetBuilder csb = new CompetitionSheetBuilder(sheet, c);
+            CompetitionSheetBuilder csb = new CompetitionSheetBuilder(sheet, c, style);
             csb.buildSheet();
             }
             catch(IllegalArgumentException e) {
