@@ -11,7 +11,7 @@ public class StatusBar extends HBox {
 
     StatusBar(int spacing){
         super(spacing);
-        updateStatusBar();
+        updateStatusBar(); // we might tun this whenever there's a change
     }
 
     StatusBar(){
