@@ -15,9 +15,21 @@ public class CompetitionManager {
     private final File dataFile = new File("temp.xlsx");
     private XSSFWorkbook dataWorkbook; 
 
-    CompetitionManager() throws InvalidFormatException, IOException {
-        this.dataWorkbook = new XSSFWorkbook(dataFile);
-        this.readCompetitions();
+    CompetitionManager() {
+
+        try {
+            if(!dataFile.exists())
+                dataFile.createNewFile();
+
+            this.dataWorkbook = new XSSFWorkbook(dataFile);
+            this.readCompetitions(); 
+        }
+        catch(IOException e) {
+            System.exit(1);  // if file can not be created, or the workbook closed, then exit.
+        }
+        catch(InvalidFormatException e) {
+            this.dataWorkbook = new XSSFWorkbook(); // if the format is invalid, then create a new sheet
+        }
 	}
 
     public static void main(String[] args) throws Exception {
@@ -34,7 +46,7 @@ public class CompetitionManager {
 
     }
 
-    private void readCompetitions() throws IOException, InvalidFormatException {
+    private void readCompetitions() throws IOException {
         XSSFSheet sheet;
 
         for(int i = 0; i < dataWorkbook.getNumberOfSheets(); i++){
@@ -42,6 +54,7 @@ public class CompetitionManager {
             Competition<?> c = CompetitionSheetParser.getCompetition(sheet);
             competitions.add(c);
         }
+
         dataWorkbook.close();
     }
 
