@@ -16,6 +16,15 @@
 
 
 - [ ] Viewers: pretty much 0% complete... Just a quick status bar is completed
+    - status bar: partically completed
+    - email
+    - browse
+    - view
+    - sidebar
+    - edit
+        - title
+        - date
+        - students
 
 # Project Summary
 
