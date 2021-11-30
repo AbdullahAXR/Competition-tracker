@@ -7,6 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
 import java.util.LinkedHashMap;
 import java.util.Date;
+import java.lang.IllegalArgumentException;
 
 public class CompetitionManager {
 
@@ -51,10 +52,19 @@ public class CompetitionManager {
         for(int i = 0; i < this.size(); i++){
             c = competitions.get(i);
             String sheetName = c.getName();
+
+            try {
             sheet = dataWorkbook.createSheet(sheetName);
             dataWorkbook.setSheetName(i, sheetName);
             CompetitionSheetBuilder csb = new CompetitionSheetBuilder(sheet, c);
             csb.buildSheet();
+            }
+            catch(IllegalArgumentException e) {
+                // ignore competition with the same title 
+                // TODO: perhaps we should let the GUI classes handle duplicate
+                // competition entry
+            }
+
         }
 
         dataWorkbook.write(new FileOutputStream(dataFile));

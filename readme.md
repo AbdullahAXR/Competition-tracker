@@ -5,14 +5,21 @@
 - [ ] Managers
 
     - Competition Manager
-        - [ ] fix bug where you cant write two competitions that share the same name
+        - [ ] fix bug where you cant write two competitions that share the same
+          name. Right now, I made it so that the manager will ignore a
+          duplicate competition (a competition with the same name as another
+          competition).
 
     - Competition builder
-        - [ ] I dont think the code is very readable.
+        - [ ] I don't think the code is very readable. Tell me your opinion.
+
+        - [ ] find a better way to store the style. The current way is too dirty. Suggestions:
+                - Pass the cell style object to the competition builder
+                - 
 
     - Competition parser 100% complete
 
-- [ ] Viewers: 0% complet
+- [ ] Viewers: 0% complete
 
 
 # Project Summary
