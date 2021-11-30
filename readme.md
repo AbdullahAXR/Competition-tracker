@@ -14,8 +14,13 @@
         - [ ] I don't think the code is very readable. Tell me your opinion.
 
         - [ ] find a better way to store the style. The current way is too dirty. Suggestions:
-                - Pass the cell style object to the competition builder
-                - 
+                - Pass the cell style object to the constructor competition
+                  builder. This means that the competition manager will have to
+                  store the style of the cell as one of its data fields. We only
+                  have competition manager at a time. So it will not be as
+                  wasteful as the current implementation. (The current
+                  implementation is unacceptable because it reads the style
+                  everytime we try to create a sheet)
 
     - Competition parser 100% complete
 
