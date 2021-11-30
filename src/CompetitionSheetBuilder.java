@@ -77,7 +77,7 @@ public class CompetitionSheetBuilder {
 
         XSSFCell dateCell = sheet.getRow(2).createCell(1);
         CellStyle style = dateCell.getCellStyle();
-        style.setDataFormat((short)0xf); // put this as a constant
+        style.setDataFormat(Specs.DATE_FORMAT); // put this as a constant
         dateCell.setCellStyle(style);
         dateCell.setCellValue(c.getDate());
 

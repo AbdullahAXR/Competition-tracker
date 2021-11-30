@@ -29,10 +29,9 @@
                   whatever it finds on the ID cell. It's also probably more
                   efficient way to do it
 
+        - [x] Add date format to the competition specs.
 
-        - [ ] Add date format to the competition specs.
-
-    - Competition parser 100% complete
+        - Competition parser 100% complete
 
 - [ ] Viewers: 0% complete
 

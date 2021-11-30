@@ -26,4 +26,6 @@ public final class Specs {
     final static int ID_CELL = 1;
     final static int NAME_CELL = 2;
     final static int MAJOR_CELL = 3;
+
+    final static short DATE_FORMAT = 0xf;
 }
