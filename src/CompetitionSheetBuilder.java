@@ -62,7 +62,7 @@ public class CompetitionSheetBuilder {
         }
 
         autoSizeColumns();
-        return sheet;
+        return sheet; // there's no point in returning, is there?
     }
 
     public void insertBasicInfo(){
