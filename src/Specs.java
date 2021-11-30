@@ -27,4 +27,3 @@ public final class Specs {
     final static int NAME_CELL = 2;
     final static int MAJOR_CELL = 3;
 }
-
