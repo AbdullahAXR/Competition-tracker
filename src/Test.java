@@ -13,7 +13,7 @@ import org.apache.poi.ss.usermodel.BuiltinFormats;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
-        testId();
+        testStyle();
 	}
 
     public static void testStyle() throws Exception {
@@ -22,16 +22,23 @@ public class Test {
         // XSSFDataFormat format = workbook.createDataFormat();
 
 		XSSFSheet sheet = workbook.getSheetAt(1);
-
 		XSSFRow row = sheet.getRow(5);
-		XSSFCell cell = row.getCell(1);
-        XSSFCellStyle style = cell.getCellStyle();
-        System.out.println(BuiltinFormats.getBuiltinFormat(1));
-        // style.setDataFormat(BuiltinFormats.getBuiltinFormat(1));
-        cell.setCellStyle(style);
-        System.out.println(cell.toString());
+
+		XSSFCell sampleCell = row.getCell(1);
+        XSSFCellStyle sampleStyle = sampleCell.getCellStyle();
+
+        System.out.println("sample:");
+        showStyle(sampleCell.getCellStyle());
+
+        XSSFCell defaultCell = workbook.createSheet().createRow(19).createCell(20);
+        XSSFCellStyle defaultStyle = defaultCell.getCellStyle();
+        System.out.println("default:");
+        showStyle(defaultStyle);
+        // System.out.println(BuiltinFormats.getBuiltinFormat(1));
+        // sampleStyle.setDataFormat(BuiltinFormats.getBuiltinFormat(1));
+        // cell.setCellStyle(sampleStyle);
+        // System.out.println(cell.toString());
         // System.out.println(cs.getDataFormatString());
-        // showStyle(cell.getCellStyle());
         // System.out.println(cell.toString());
         // System.out.println(cell.getCellStyle().getShrinkToFit());
     }
