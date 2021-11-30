@@ -8,16 +8,16 @@ import java.io.IOException;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.CellStyle;
 
-public class CompetitionSheetBuilder<T extends Competition<? extends Participant>> {
+public class CompetitionSheetBuilder {
 
     private XSSFSheet sheet;
-    private T c; 
+    private Competition<? extends Participant> c; 
     private XSSFRow prerow;
 
     // cel style of participants
     static XSSFCellStyle style;
 
-    CompetitionSheetBuilder(XSSFSheet sheet, T c) throws Exception {
+    CompetitionSheetBuilder(XSSFSheet sheet, Competition<? extends Participant> c) throws Exception {
 
         // used globally
         this.sheet = sheet;
@@ -43,8 +43,8 @@ public class CompetitionSheetBuilder<T extends Competition<? extends Participant
         XSSFSheet newSheet1= workbook.createSheet();
         // System.out.println((StudentCompetition)CompetitionSheetParser.getCompetition(sheet0));
 
-        CompetitionSheetBuilder<TeamCompetition> cb0 = new CompetitionSheetBuilder<TeamCompetition>(newSheet0, c0);
-        CompetitionSheetBuilder<StudentCompetition> cb1 = new CompetitionSheetBuilder<StudentCompetition>(newSheet1, c1);
+        CompetitionSheetBuilder cb0 = new CompetitionSheetBuilder(newSheet0, c0);
+        CompetitionSheetBuilder cb1 = new CompetitionSheetBuilder(newSheet1, c1);
 
         newSheet0 = cb0.buildSheet();
         newSheet1 = cb1.buildSheet();
