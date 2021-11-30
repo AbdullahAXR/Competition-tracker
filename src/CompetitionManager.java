@@ -5,9 +5,9 @@ import java.io.FileOutputStream;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Date;
 
-// TODO: dont forget to set the sheet name 
 public class CompetitionManager {
 
     public ArrayList<Competition<?>> competitions = new ArrayList<>();
@@ -18,7 +18,6 @@ public class CompetitionManager {
         this.dataWorkbook = new XSSFWorkbook(dataFile);
         this.readCompetitions();
 	}
-
     public static void main(String[] args) throws Exception {
         // CompetitionManager cm = new CompetitionManager();
         // System.out.println(cm.competitions.size());
@@ -28,12 +27,9 @@ public class CompetitionManager {
         // lhm.put(new Student("20238531", "saher's other friend", "swe"), "2");
         // lhm.put(new Student("20238531", "saher himself", "swe"), "-");
         // cm.add(new StudentCompetition("saher's cool competition", "www.saher.com", new Date(), lhm));
-        // TeamCompetition tc = (TeamCompetition) cm.competitions.get(0);
+        // // TeamCompetition tc = (TeamCompetition) cm.competitions.get(0);
         // cm.writeCompetitions();
-    }
 
-    public void add(Competition<?> c){
-        competitions.add(c);
     }
 
     private void readCompetitions() throws IOException, InvalidFormatException {
@@ -52,8 +48,7 @@ public class CompetitionManager {
         XSSFSheet sheet;
         Competition<?> c;
 
-        // TODO change this to this.size()
-        for(int i = 0; i < competitions.size(); i++){
+        for(int i = 0; i < this.size(); i++){
             c = competitions.get(i);
             String sheetName = c.getName();
             sheet = dataWorkbook.createSheet(sheetName);
@@ -62,9 +57,41 @@ public class CompetitionManager {
             csb.buildSheet();
         }
 
-        dataFile.delete();
-        dataFile.createNewFile();
         dataWorkbook.write(new FileOutputStream(dataFile));
     }
 
+	// Replaces a question at index
+	public void set(int i, Competition<?> c) {
+		competitions.set(i, c);
+	}
+
+	// Adds a question to the list
+	public void add(Competition<?> c) {
+		competitions.add(c);
+	}
+
+	public boolean isEmpty() {
+		return competitions.isEmpty();
+	}
+
+	public int size() {
+		return competitions.size();
+	}
+
+	public Competition<?> get(int i) {
+		return competitions.get(i);
+	}
+
+	public void remove(int i) {
+		competitions.remove(i);
+	}
+
+	public void remove(Competition<?> c) {
+		competitions.remove(c);
+	}
+	
+	public int indexOf(Competition<?> c) {
+		return competitions.indexOf(c);
+	}
 }
+
