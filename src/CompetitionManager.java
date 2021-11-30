@@ -135,4 +135,9 @@ public class CompetitionManager {
             .count();
     }
 
+    public int getNumberOfDue(){
+        return (int) competitions.stream()
+            .filter(c -> Globals.NOW.compareTo(c.getDate()) >= 0)
+            .count();
+    }
 }
