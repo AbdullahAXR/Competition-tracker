@@ -129,5 +129,10 @@ public class CompetitionManager {
 		return competitions.indexOf(c);
 	}
 
-}
+    public int getNumberOfTeamCompetition(){
+        return (int) competitions.stream() // .count() returns a long
+            .filter(c -> c instanceof TeamCompetition)
+            .count();
+    }
 
+}
