@@ -1,4 +1,4 @@
 public class Globals {
-    public static CompetitionManager manager = new CompetitionManager();
+    public final static CompetitionManager MANAGER = new CompetitionManager();
 }
 
