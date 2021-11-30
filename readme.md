@@ -1,29 +1,18 @@
 # TODOs
 
-- [ ] Report
+- [x] Entities: 100% complete
 
-- [x] (Saher) Sequence diagram
-    - [x] class diagram
-    - [x] View
-    - [x] email
-    - [x] Read
-    - [x] Write
+- [ ] Managers
 
-- [x] (Mohammad) Sequence diagram
-    - [x] Browse
-    - [x] Add
-    - [x] Edit
+    - Competition Manager
+        - [ ] fix bug where you cant write two competitions that share the same name
 
-- [ ] (Mod) Activity diagram
-    - [ ] View
-    - [x] Email
-    - [x] Browse
+    - Competition builder
+        - [ ] I dont think the code is very readable.
 
-- [x] (Nawar) Activity diagram
-    - [x] Add
-    - [x] Edit
-    - [x] Read
-    - [x] Write
+    - Competition parser 100% complete
+
+- [ ] Viewers: 0% complet
 
 
 # Project Summary
