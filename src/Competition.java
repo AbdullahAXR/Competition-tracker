@@ -1,6 +1,6 @@
 import java.util.*;
 
-public abstract class Competition<T extends Participant> {
+public abstract class Competition<T extends Participant> implements Comparable<Competition<? extends Participant>>{
     protected String name;
     protected String link;
     protected Date date;
@@ -45,6 +45,14 @@ public abstract class Competition<T extends Participant> {
 
     public void setDate(Date newdate) {
         this.date = newdate;
+    }
+
+    @Override
+    public int compareTo(Competition<? extends Participant> anotherCompetition){
+        Date thisDate = this.getDate();
+        Date anotherDate = anotherCompetition.getDate();
+
+        return thisDate.compareTo(anotherDate);
     }
 
     public String getResult(T p) {
@@ -98,5 +106,6 @@ public abstract class Competition<T extends Participant> {
     }
 
     public abstract Set<Student> getStudents();
+
 
 }

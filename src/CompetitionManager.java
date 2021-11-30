@@ -8,6 +8,7 @@ import org.apache.poi.xssf.usermodel.*;
 import java.util.LinkedHashMap;
 import java.util.Date;
 import java.lang.IllegalArgumentException;
+import java.util.Collections;
 
 public class CompetitionManager {
 
@@ -30,6 +31,7 @@ public class CompetitionManager {
         catch(InvalidFormatException e) {
             this.dataWorkbook = new XSSFWorkbook(); // if the format is invalid, then create a new sheet
         }
+
 	}
 
     public static void main(String[] args) throws Exception {
@@ -66,6 +68,9 @@ public class CompetitionManager {
         XSSFCellStyle style;
         style = dataWorkbook.createCellStyle();
         style.cloneStyleFrom(sampleStyle);
+
+        // sort the competitions before writing 
+        Collections.sort(competitions);
 
         XSSFSheet sheet;
         Competition<?> c;
@@ -123,5 +128,6 @@ public class CompetitionManager {
 	public int indexOf(Competition<?> c) {
 		return competitions.indexOf(c);
 	}
+
 }
 
