@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
@@ -9,68 +8,36 @@ import org.apache.poi.xssf.usermodel.*;
 // TODO: dont forget to set the sheet name 
 public class CompetitionManager {
 
-    private ArrayList<Competition> competitions = new ArrayList<Competition>();
-    private final File dataFile = new File("data.xslx");
+    public ArrayList<Competition<?>> competitions = new ArrayList<>();
+    private final File dataFile = new File("data.xlsx");
     private XSSFWorkbook dataWorkbook; 
 
-    CompetitionManager(File dataFile) throws InvalidFormatException, IOException{
-        // TODO: basically we want to load the avaialbe competition from
-        // readCompetition().
+    CompetitionManager() throws InvalidFormatException, IOException {
+        this.dataWorkbook = new XSSFWorkbook(dataFile);
+        this.readCompetitions();
 	}
 
-    private void intitilizeData() throws InvalidFormatException, IOException {
+    public static void main(String[] args) throws Exception {
+        CompetitionManager cm = new CompetitionManager();
+        System.out.println(cm.competitions.size());
+        // TeamCompetition tc = (TeamCompetition) cm.competitions.get(0);
+    }
 
-        if (!dataFile.exists()) {
-            dataFile.createNewFile(); // create an empty file
-            dataWorkbook = new XSSFWorkbook(); // create an empty workbook
-        } else {
-            dataWorkbook = new XSSFWorkbook(dataFile); // intitilize the dataWorkbook by reading the dataFile
+    private void readCompetitions() throws IOException, InvalidFormatException {
+        XSSFSheet sheet;
+
+        for(int i = 0; i < dataWorkbook.getNumberOfSheets(); i++){
+            sheet = dataWorkbook.getSheetAt(i);
+            Competition<?> c = CompetitionSheetParser.getCompetition(sheet);
+            competitions.add(c);
         }
     }
 
+    // private void writeCompetitions() {
+    //     XSSFSheet sheet;
 
-    /* 2021-11-18 Thu 15:04: Saher
-    /* TODO: Not complete. This can be completed by nesting method (through
-     * inner classes), but that's not readable, so I will create a new class
-    private Competition readCompetitionFromSheet(XSSFSheet sheet) {
-
-        //   This is how the basic info of a competition in the  excel sheet looks like
-        //
-        //   |-----------------|--------------------------------------------------------------------
-        // 1 | Competition name: some name
-        //   |-----------------|--------------------------------------------------------------------
-        // 2 | Competition link: some link
-        //   |-----------------|--------------------------------------------------------------------
-        // 3 | Competition date: some date
-        //   |-----------------|--------------------------------------------------------------------
-
-
-        // Therefore, the index of the basic info is:
-        final int NAME_ROW = 0;
-        final int LINK_ROW = 1;
-        final int DATE_ROW = 2;
-        final int CELL = 1;
-
-        // and they can be extracted through:
-        String name = Sheet.getRow(NAME_ROW).getCell(CELL).getStringCellValue();
-        String link = Sheet.getRow(LINK_ROW).getCell(CELL).getStringCellValue();
-        String date = Sheet.getRow(DATE_ROW).getCell(CELL).getStringCellValue();
-
-        // now we need to determine the competition type
-    }
-    */
-
-    // TODO: incomplete
-    private void readCompetitions() {
-
-        int numberOfCompetitions = dataWorkbook.getNumberOfSheets();
-
-        // extract the basic info
-        for(int i = 0; i < numberOfCompetitions; i++) {
-            XSSFSheet competitionSheet = dataWorkbook.getSheetAt(i);
-
-        }
-
-    }
+    //     for(int i = 0; i < competitions.size(); i++){
+    //     }
+    // }
 
 }
