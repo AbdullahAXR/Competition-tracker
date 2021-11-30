@@ -13,14 +13,24 @@
     - Competition builder
         - [ ] I don't think the code is very readable. Tell me your opinion.
 
-        - [ ] find a better way to store the style. The current way is too dirty. Suggestions:
-                - Pass the cell style object to the constructor competition
+        - [x] find a better way to store the style. The current way is too
+          dirty. Suggestions:
+                - UPDATE: done
+                - ~~Pass the cell style object to the constructor competition
                   builder. This means that the competition manager will have to
                   store the style of the cell as one of its data fields. We only
                   have competition manager at a time. So it will not be as
                   wasteful as the current implementation. (The current
                   implementation is unacceptable because it reads the style
-                  everytime we try to create a sheet)
+                  ~~everytime we try to create a sheet)
+
+                - [x] Perhaps that competition manager should read the style from a
+                  file called cellStyle.dat instead of trying to replicate
+                  whatever it finds on the ID cell. It's also probably more
+                  efficient way to do it
+
+
+        - [ ] Add date format to the competition specs.
 
     - Competition parser 100% complete
 
