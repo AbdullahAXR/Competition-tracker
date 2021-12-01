@@ -107,5 +107,4 @@ public abstract class Competition<T extends Participant> implements Comparable<C
 
     public abstract Set<Student> getStudents();
 
-
 }

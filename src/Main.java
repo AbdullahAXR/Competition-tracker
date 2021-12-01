@@ -1,21 +1,37 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.util.*;
+import java.io.IOException;
+import java.net.URI;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage stage){
+        BorderPane bp = new BorderPane();
+
         StatusBar statusBar = new StatusBar(Globals.SPACING);
-        Scene scene = new Scene(statusBar);
+        bp.setBottom(statusBar);
+
+        CompetitionView view = new CompetitionView();
+        bp.setLeft(view);
+
+        Scene scene = new Scene(bp);
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
+        // try {
+        // Emailer.sendEmail(new URI("mailto:s201914330@kfupm.edu.sa"));
+        // }
+        // catch(Exception e){
+        //     System.out.println(e);
+        // }
         launch();
         // System.out.println(Globals.MANAGER.getNumberOfTeamCompetition());
     }
