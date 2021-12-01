@@ -67,4 +67,11 @@ public class Team extends Participant implements Iterable<Student> {
     public HashSet<Student> getStudents(){
         return new LinkedHashSet<Student>(students);
     }
+
+    public String[] getEmails(){
+        return students.stream()
+            .map(s -> s.getEmail())
+            .toArray(String[]::new);
+    }
+
 }

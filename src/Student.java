@@ -1,6 +1,7 @@
 public class Student extends Participant {
     private String id;
     private String major;
+    private final static String DOMAIN = "kfupm.edu.sa";
 
     Student(String id, String name, String major) {
         super(name);
@@ -28,4 +29,7 @@ public class Student extends Participant {
                "Major: "+this.getMajor()+"\n";
     }
 
+    public String getEmail(){
+        return "s"+this.getId()+DOMAIN;
+    }
 }

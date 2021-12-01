@@ -1,4 +1,4 @@
-public class Participant {
+public abstract class Participant {
     protected String name;
     // empty class
 
@@ -25,4 +25,3 @@ public class Participant {
     }
 
 }
-
