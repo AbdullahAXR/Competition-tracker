@@ -18,7 +18,7 @@ public class Main extends Application {
         bp.setBottom(statusBar);
 
         CompetitionView view = new CompetitionView();
-        bp.setLeft(view);
+        bp.setRight(view);
 
         Scene scene = new Scene(bp);
         stage.setScene(scene);

@@ -1,5 +1,7 @@
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.URI;
@@ -7,7 +9,16 @@ import java.net.URISyntaxException;
 
 public class CompetitionView extends Pane {
     Competition<?> currentCompetition;
-    Button emailBtn = new Button("Email");
+    private Button addParticipantButton;
+	private Button browseButton;
+	private Pane infoPane;
+	private Button emailBtn = new Button("Email");
+    private Button editButton;
+	private Button exitButton;
+	private Button sumbitButton;
+	private TableView particioantTableView;
+	
+	// We need to create a class of InfoViewLabeled & editableLabel
 
     CompetitionView(){
         super();
@@ -19,6 +30,40 @@ public class CompetitionView extends Pane {
         emailBtn.setOnAction(e -> sendEmail());
     }
 
+	public void infoPane() {
+		Pane infoPane = new Pane();
+		
+	}
+	public void homeScene(Pane pane) {
+		Scene homeScene = new Scene(pane);
+	}
+	public void browseBotton() {
+		Button browseButton = new Button("Browse");
+		
+		}
+	public void addButtonClicked() {
+		
+	}
+	public void removeButtonClicked() {
+		
+	}
+	public void CompetitionCellClicked() {
+	
+	}	
+	
+	public void displayCompetition() {
+		
+	}
+	
+	public void layoutUI() {
+		
+	}
+	public void displayCometitions(Competition competitions) {
+		
+	}
+	public void displayBlank() {
+		
+	}
     // public String[] getEmails(Participant p){
     //     String[] emails;
     //     Team t;
@@ -31,7 +76,6 @@ public class CompetitionView extends Pane {
 
     //     return emails;
     // }
-
     public void sendEmail(){
         new Thread(() -> {
             String[] emails;
@@ -44,8 +88,16 @@ public class CompetitionView extends Pane {
             }
         }).start();
     }
-
     // private URI getURI(){
     //     currentCompetition.getStudents().stream().filter(
     // }
+	private boolean isValid() {
+		return true;
+	}
+	private boolean displayError() {
+		return true;
+	}
+	private boolean displaySuccess() {
+		return false;
+	}
 }
