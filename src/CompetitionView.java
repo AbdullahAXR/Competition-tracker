@@ -1,17 +1,25 @@
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class CompetitionView extends Pane {
+public class CompetitionView extends VBox {
     Competition<?> currentCompetition;
+    Label CompetitionName = new Label(); // will be editableLabel  
+    Label infoLbl = new Label("Info:");
+    private Pane infoPane = new VBox();
+    Label linkLbl = new Label("Link: ");
+    Label dateLbl = new Label("Date: ");
+    Label typeLbl = new Label("Type: ");
     private Button addParticipantButton;
 	private Button browseButton;
-	private Pane infoPane;
 	private Button emailBtn = new Button("Email");
     private Button editButton;
 	private Button exitButton;
@@ -23,16 +31,25 @@ public class CompetitionView extends Pane {
     CompetitionView(){
         super();
         if(!Globals.MANAGER.isEmpty()){
-        this.getChildren().add(new Label(Globals.MANAGER.get(0).toString()));
-        this.getChildren().add(emailBtn);
+        	CompetitionName.setText(Globals.MANAGER.get(0).getName());
+        	CompetitionName.setPrefSize(325, 30);
+        	CompetitionName.setAlignment(Pos.CENTER);
+        	this.getChildren().add(CompetitionName);
+        	this.getChildren().add(infoLbl);
+        	infoPane();	
+        	this.getChildren().add(infoPane);
+	        this.getChildren().add(new Label(Globals.MANAGER.get(0).toString()));
+	        this.getChildren().add(emailBtn);
         }
 
         emailBtn.setOnAction(e -> sendEmail());
     }
 
 	public void infoPane() {
-		Pane infoPane = new Pane();
-		
+		infoPane.getChildren().add(linkLbl);
+		infoPane.getChildren().add(dateLbl);
+		infoPane.getChildren().add(typeLbl);
+		infoPane.setStyle("-fx-border-color: black");
 	}
 	public void homeScene(Pane pane) {
 		Scene homeScene = new Scene(pane);
