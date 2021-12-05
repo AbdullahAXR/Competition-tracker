@@ -11,9 +11,7 @@ public class CompetitionList extends ListView<Competition<?>> {
 
     CompetitionList(){
         this(null);
-
     }
-
 
     CompetitionList(ObservableList<Competition<?>> comps){
         super(comps);
@@ -22,6 +20,10 @@ public class CompetitionList extends ListView<Competition<?>> {
                     Globals.currentCompetition = newv;
                     System.out.println(Globals.currentCompetition);
                 });
+
+        // Should we select the first one automatically? What if the list is
+        // empty
+        // this.getSelectionModel().select(0);
     }
 
     public void addButtonClicked() {
