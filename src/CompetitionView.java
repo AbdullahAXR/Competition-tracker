@@ -9,9 +9,10 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javafx.scene.control.ListView;
 
 public class CompetitionView extends VBox {
-    Competition<?> currentCompetition;
+    // Competition<?> currentCompetition;
     Label CompetitionName = new Label(); // will be editableLabel  
     Label infoLbl = new Label("Info:");
     private Pane infoPane = new VBox();
@@ -28,21 +29,19 @@ public class CompetitionView extends VBox {
 	
 	// We need to create a class of InfoViewLabeled & editableLabel
 
-    CompetitionView(){
+    CompetitionView(ListView<Competition<?>> lv){
         super();
-        if(!Globals.MANAGER.isEmpty()){
-        	CompetitionName.setText(Globals.MANAGER.get(0).getName());
-        	CompetitionName.setPrefSize(325, 30);
-        	CompetitionName.setAlignment(Pos.CENTER);
-        	this.getChildren().add(CompetitionName);
-        	this.getChildren().add(infoLbl);
-        	infoPane();	
-        	this.getChildren().add(infoPane);
-	        this.getChildren().add(new Label(Globals.MANAGER.get(0).toString()));
-	        this.getChildren().add(emailBtn);
-        }
+        this.getChildren().add(CompetitionName);
+
+        update();
 
         emailBtn.setOnAction(e -> sendEmail());
+
+        lv.getSelectionModel().selectedItemProperty().addListener( (observable, oldv, newv) ->
+                {
+                    update();
+                });
+
     }
 
 	public void infoPane() {
@@ -97,7 +96,7 @@ public class CompetitionView extends VBox {
         new Thread(() -> {
             String[] emails;
             try {
-                Emailer.emailStudent(new Student("201914330", "saher", "cs"), (StudentCompetition) Globals.MANAGER.get(0));
+                Emailer.emailStudent(new Student("201914330", "saher", "cs"), (StudentCompetition) Globals.currentCompetition);
                 // Emailer.sendEmail(new URI("mailto:s201914330@kfupm.edu.sa"));
             }
             catch(Exception e){
@@ -117,4 +116,23 @@ public class CompetitionView extends VBox {
 	private boolean displaySuccess() {
 		return false;
 	}
+
+    // maybe you should fill this instad
+    private void setup(){
+    }
+
+
+    private void update(){
+        if(Globals.currentCompetition != null){
+        	CompetitionName.setText(Globals.currentCompetition.getName());
+        	CompetitionName.setPrefSize(325, 30);
+        	CompetitionName.setAlignment(Pos.CENTER);
+        	// this.getChildren().add(CompetitionName);
+        	// this.getChildren().add(infoLbl);
+        	// infoPane();	
+        	// this.getChildren().add(infoPane);
+	        // this.getChildren().add(new Label(Globals.currentCompetition.toString()));
+	        // this.getChildren().add(emailBtn);
+        }
+    }
 }
