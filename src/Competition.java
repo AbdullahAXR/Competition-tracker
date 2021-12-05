@@ -92,8 +92,7 @@ public abstract class Competition<T extends Participant> implements Comparable<C
         return results.keySet();
     }
 
-    @Override
-    public String toString(){
+    public String toStringFull(){
         String s = "Name: "+this.getName()+"\n"+
                    "Link: "+this.getLink()+"\n"+
                    "Date: "+this.getDate()+"\n"; // you probably want to change the date format
@@ -107,4 +106,8 @@ public abstract class Competition<T extends Participant> implements Comparable<C
 
     public abstract Set<Student> getStudents();
 
+    @Override
+    public String toString(){
+        return this.getName();
+    }
 }
