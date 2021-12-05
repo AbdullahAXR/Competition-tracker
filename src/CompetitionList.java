@@ -6,7 +6,7 @@ public class CompetitionList {
 	public Button addButton;
 	public Button deleteButton;
 	public Pane competitionView;
-	public Competition currentCompetition;
+	public Competition<?> currentCompetition;
 	
 	public void addButtonClicked() {
 		
