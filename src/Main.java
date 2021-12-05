@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -14,10 +16,14 @@ public class Main extends Application {
     public void start(Stage stage){
         BorderPane bp = new BorderPane();
 
-        StatusBar statusBar = new StatusBar(Globals.SPACING);
-        bp.setBottom(statusBar);
+        // StatusBar statusBar = new StatusBar(Globals.SPACING);
+        // bp.setBottom(statusBar);
 
-        CompetitionView view = new CompetitionView();
+        ObservableList<Competition<?>> ol = FXCollections.observableArrayList(Globals.MANAGER.readCompetitions());
+        CompetitionList cl = new CompetitionList(ol);
+        bp.setLeft(cl);
+
+        CompetitionView view = new CompetitionView(cl);
         bp.setRight(view);
 
         Scene scene = new Scene(bp);
