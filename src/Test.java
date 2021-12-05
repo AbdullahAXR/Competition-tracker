@@ -1,11 +1,12 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import java.util.*;
 import org.apache.poi.ss.usermodel.BuiltinFormats;
@@ -13,7 +14,9 @@ import org.apache.poi.ss.usermodel.BuiltinFormats;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
-        testStyle();
+        testCompetitionManger();
+        // testObservableList();
+        // launch();
 	}
 
     public static void testStyle() throws Exception {
@@ -122,5 +125,38 @@ public class Test {
         cell.setCellStyle(cs);
         System.out.println(cell.getNumericCellValue());
         // System.out.println((long)(cell.getNumericCellValue()));
+    }
+
+    public static void testObservableList(){
+        ArrayList<Competition<?>> comps = new ArrayList<>();
+        // comps.add(new StudentCompetition("my comp", "https;asd;fasd", new Date(), new LinkedHashMap<Student, String));
+        comps.add(exampleCompetition());
+        ObservableList<Competition<?>> l = FXCollections.observableArrayList(comps);
+
+        System.out.println(l.isEmpty());
+        comps.remove(0);
+        System.out.println(l.isEmpty());
+
+    }
+
+    public static void testListView(){
+
+    }
+
+    public static StudentCompetition exampleCompetition(){
+        LinkedHashMap <Student, String> lhm =  new LinkedHashMap<Student, String>();
+        lhm.put(new Student("30238531", "saher's friend", "MATH"), "1");
+        lhm.put(new Student("11218731", "saher's other friend", "swe"), "2");
+        lhm.put(new Student("50731591", "saher himself", "cs"), "-");
+        return new StudentCompetition("saher's cool competition", "www.saher.com", new Date(), lhm);
+    }
+
+    public static void testCompetitionManger() throws Exception {
+        CompetitionManager cm = new CompetitionManager();
+        ArrayList<Competition<?>> comps =  cm.readCompetitions();
+        System.out.println(comps);
+        System.out.println(comps.size());
+        comps.add(exampleCompetition());
+        cm.writeCompetitions(comps);
     }
 }
