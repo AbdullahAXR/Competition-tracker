@@ -116,7 +116,7 @@ public class Test {
 
     public static void testId() throws Exception {
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream("data.xlsx"));
-        System.out.println(workbook.createDataFormat().getFormat("0"));
+        // System.out.println(workbook.createDataFormat().getFormat("0"));
 		XSSFSheet sheet = workbook.getSheetAt(0);
 		XSSFRow row = sheet.getRow(5);
 		XSSFCell cell = row.getCell(1);
@@ -156,7 +156,7 @@ public class Test {
         ArrayList<Competition<?>> comps =  cm.readCompetitions();
         System.out.println(comps);
         System.out.println(comps.size());
-        comps.add(exampleCompetition());
+        // comps.add(exampleCompetition());
         cm.writeCompetitions(comps);
     }
 }
