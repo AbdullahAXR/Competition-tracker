@@ -16,15 +16,15 @@ public class Main extends Application {
     public void start(Stage stage){
         BorderPane bp = new BorderPane();
 
-        // StatusBar statusBar = new StatusBar(Globals.SPACING);
-        // bp.setBottom(statusBar);
+        //StatusBar statusBar = new StatusBar(Globals.SPACING);
+        //bp.setBottom(statusBar);
 
         ObservableList<Competition<?>> ol = FXCollections.observableArrayList(Globals.MANAGER.readCompetitions());
         CompetitionList cl = new CompetitionList(ol);
         bp.setLeft(cl);
 
         CompetitionView view = new CompetitionView(cl);
-        bp.setRight(view);
+        bp.setCenter(view);
 
         Scene scene = new Scene(bp);
         stage.setScene(scene);
