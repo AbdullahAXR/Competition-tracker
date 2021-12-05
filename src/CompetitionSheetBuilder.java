@@ -16,7 +16,7 @@ public class CompetitionSheetBuilder {
 
     private XSSFCellStyle style;
 
-    CompetitionSheetBuilder(XSSFSheet sheet, Competition<? extends Participant> c, XSSFCellStyle style) throws Exception {
+    CompetitionSheetBuilder(XSSFSheet sheet, Competition<? extends Participant> c, XSSFCellStyle style) {
 
         // used globally
         this.sheet = sheet;

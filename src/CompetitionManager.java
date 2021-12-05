@@ -34,11 +34,11 @@ public class CompetitionManager {
 
 	}
 
-    public static void main(String[] args) throws Exception {
-        CompetitionManager cm = new CompetitionManager();
-        ArrayList<Competition<?>> comps =  cm.readCompetitions();
-        System.out.println(comps);
-        System.out.println(comps.size());
+    // public static void main(String[] args) {
+    //     CompetitionManager cm = new CompetitionManager();
+    //     ArrayList<Competition<?>> comps =  cm.readCompetitions();
+    //     System.out.println(comps);
+    //     System.out.println(comps.size());
 
         // LinkedHashMap<Student, String> lhm =  new LinkedHashMap<Student, String>();
         // lhm.put(new Student("20238531", "saher's friend", "MATH"), "1");
@@ -48,9 +48,9 @@ public class CompetitionManager {
         // TeamCompetition tc = (TeamCompetition) cm.competitions.get(0);
         // cm.writeCompetitions();
 
-    }
+    // }
 
-    public ArrayList<Competition<?>> readCompetitions() throws IOException {
+    public ArrayList<Competition<?>> readCompetitions() {
         ArrayList<Competition<?>> competitions = new ArrayList<>();
         XSSFSheet sheet;
 
@@ -60,12 +60,19 @@ public class CompetitionManager {
             competitions.add(c);
         }
 
-        dataWorkbook.close();
+        try {
+            dataWorkbook.close();
+        }
+        catch(IOException e) {
+            // show what caused an error
+            // TODO: remove this later
+            System.out.println(e.toString()); // this is used for debugging
+        }
 
         return competitions;
     }
 
-    public void writeCompetitions(ArrayList<Competition<?>> competitions) throws Exception {
+    public void writeCompetitions(ArrayList<Competition<?>> competitions) {
 
         // TODO: the followiong will cause an error if the the previous excel
         // file is empty. You can work around it with a try catch block, but the
@@ -108,7 +115,14 @@ public class CompetitionManager {
 
         }
 
-        dataWorkbook.write(new FileOutputStream(dataFile));
+        try {
+            dataWorkbook.write(new FileOutputStream(dataFile));
+        }
+        catch(IOException e){
+            // show what caused an error
+            // TODO: remove this later
+            System.out.println(e.toString()); // this is used for debugging
+        }
     }
 
     //// why waste time remaking an arrayList? Bad idea
