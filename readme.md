@@ -20,7 +20,11 @@
     - email
     - browse
     - view
-    - sidebar
+    - list
+        - this should be implemented as subclass of listView. The listView takes
+          an observableList as argument. This means that the competition manager
+          should be modified such that it does not store the arraylist as a
+          datafield, but rather returns it as an arguement.
     - edit
         - title
         - date
