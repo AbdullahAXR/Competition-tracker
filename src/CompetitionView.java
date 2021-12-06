@@ -29,6 +29,7 @@ public class CompetitionView extends VBox {
     private Button editBtn = new Button("Edit");
 	private Button exitBtn;
 	private Button submitBtn;
+	private VBox particpantPane = new VBox(Globals.SPACING);
 	private TableView participantTableView = new TableView();
 	private TableColumn<String, String> ids = new TableColumn<>("Student ID");
 	private TableColumn<String, String> names = new TableColumn<>("Student Name");
@@ -141,9 +142,9 @@ public class CompetitionView extends VBox {
     	names.setPrefWidth(names.getWidth() * 2);
     	teamsNames.setPrefWidth(teamsNames.getPrefWidth()*2);
     	participantTableView.getColumns().addAll(ids, names, majors, teams, teamsNames,ranks);
-    	this.getChildren().add(participantTableView);
-    	
-  
+    	particpantPane.getChildren().add(participantTableView);
+    	particpantPane.setAlignment(Pos.CENTER);
+    	this.getChildren().add(particpantPane);  
     }
 
 
@@ -158,6 +159,7 @@ public class CompetitionView extends VBox {
         		teams.setVisible(false);
             	teamsNames.setVisible(false);
             	participantTableView.setMaxWidth(80 * 5);
+            	
         	}
         	// this.getChildren().add(CompetitionName);
         	// this.getChildren().add(infoLbl);
