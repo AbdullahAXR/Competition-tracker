@@ -30,6 +30,12 @@ public class CompetitionView extends VBox {
 	private Button exitBtn;
 	private Button submitBtn;
 	private TableView participantTableView = new TableView();
+	private TableColumn<String, String> ids = new TableColumn<>("Student ID");
+	private TableColumn<String, String> names = new TableColumn<>("Student Name");
+	private TableColumn<String, String> majors = new TableColumn<>("Majors");
+	private TableColumn<String, String> teams = new TableColumn<>("Team");
+	private TableColumn<String, String> teamsNames = new TableColumn<>("Team Name");
+	private TableColumn<String, String> ranks = new TableColumn<>("Rank");
 	
 	// We need to create a class of InfoViewLabeled & editableLabel
 
@@ -47,7 +53,7 @@ public class CompetitionView extends VBox {
 
     }
 
-	public void infoPane() {
+    private void infoPane() {
 		infoPane.getChildren().add(linkLbl);
 		infoPane.getChildren().add(dateLbl);
 		infoPane.getChildren().add(typeLbl);
@@ -132,19 +138,27 @@ public class CompetitionView extends VBox {
     	infoPane();
     	this.getChildren().add(infoPane);
     	VBox.setMargin(participantTableView, new Insets(10,50,10,50));
-    	TableColumn<String, String> ids = new TableColumn<>("Student ID");
-    	TableColumn<String, String> names = new TableColumn<>("Student Name");
-    	TableColumn<String, String> majors = new TableColumn<>("Majors");
-    	participantTableView.getColumns().addAll(ids, names, majors);
+    	names.setPrefWidth(names.getWidth() * 2);
+    	teamsNames.setPrefWidth(teamsNames.getPrefWidth()*2);
+    	participantTableView.getColumns().addAll(ids, names, majors, teams, teamsNames,ranks);
     	this.getChildren().add(participantTableView);
     	
-    	
+  
     }
 
 
     private void update(){
         if(Globals.currentCompetition != null){
         	CompetitionName.setText(Globals.currentCompetition.getName());
+        	if (Globals.currentCompetition instanceof TeamCompetition) {
+        		teams.setVisible(true);
+            	teamsNames.setVisible(true);
+            	participantTableView.setMaxWidth(80 * 8);
+        	} else {
+        		teams.setVisible(false);
+            	teamsNames.setVisible(false);
+            	participantTableView.setMaxWidth(80 * 5);
+        	}
         	// this.getChildren().add(CompetitionName);
         	// this.getChildren().add(infoLbl);
         	// infoPane();	
