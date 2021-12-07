@@ -1,17 +1,29 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 
 public class CompetitionView extends VBox {
@@ -31,12 +43,12 @@ public class CompetitionView extends VBox {
 	private Button submitBtn;
 	private VBox particpantPane = new VBox(Globals.SPACING);
 	private TableView participantTableView = new TableView();
-	private TableColumn<String, String> ids = new TableColumn<>("Student ID");
-	private TableColumn<String, String> names = new TableColumn<>("Student Name");
-	private TableColumn<String, String> majors = new TableColumn<>("Majors");
-	private TableColumn<String, String> teams = new TableColumn<>("Team");
-	private TableColumn<String, String> teamsNames = new TableColumn<>("Team Name");
-	private TableColumn<String, String> ranks = new TableColumn<>("Rank");
+	private TableColumn<Map, String> ids = new TableColumn<>("Student ID");
+	private TableColumn<Map, String> names = new TableColumn<>("Student Name");
+	private TableColumn<Map, String> majors = new TableColumn<>("Major");
+	private TableColumn<Map, String> teams = new TableColumn<>("Team");
+	private TableColumn<Map, String> teamsNames = new TableColumn<>("Team Name");
+	private TableColumn<Map, String> ranks = new TableColumn<>("Rank");
 	
 	// We need to create a class of InfoViewLabeled & editableLabel
 
@@ -124,7 +136,28 @@ public class CompetitionView extends VBox {
 	private boolean displaySuccess() {
 		return false;
 	}
-
+	private void particpantPane() {
+		VBox.setMargin(participantTableView, new Insets(10,50,10,50));
+		int cellWidth = 80;
+		ids.setMinWidth(cellWidth);
+    	names.setMinWidth(cellWidth * 2);
+    	majors.setMinWidth(cellWidth);
+    	teams.setMinWidth(cellWidth);
+    	teamsNames.setMinWidth(cellWidth*2);
+    	ranks.setMinWidth(cellWidth);
+    	
+    	ids.setCellValueFactory(new MapValueFactory<>(ids.getText()));
+    	names.setCellValueFactory(new MapValueFactory<>(names.getText()));
+    	majors.setCellValueFactory(new MapValueFactory<>(majors.getText()));
+    	teams.setCellValueFactory(new MapValueFactory<>(teams.getText()));
+    	teamsNames.setCellValueFactory(new MapValueFactory<>(teamsNames.getText()));
+    	ranks.setCellValueFactory(new MapValueFactory<>(ranks.getText()));
+    	
+    	participantTableView.setEditable(true);
+    	participantTableView.getColumns().addAll(ids, names, majors, teams, teamsNames,ranks);
+    	particpantPane.getChildren().add(participantTableView);
+    	particpantPane.setAlignment(Pos.CENTER);
+	}
     // maybe you should fill this instead
     private void setup(){
         this.setStyle("-fx-border-color: black");
@@ -138,17 +171,32 @@ public class CompetitionView extends VBox {
     	this.getChildren().add(infoLbl);
     	infoPane();
     	this.getChildren().add(infoPane);
-    	VBox.setMargin(participantTableView, new Insets(10,50,10,50));
-    	names.setPrefWidth(names.getWidth() * 2);
-    	teamsNames.setPrefWidth(teamsNames.getPrefWidth()*2);
-    	participantTableView.getColumns().addAll(ids, names, majors, teams, teamsNames,ranks);
-    	particpantPane.getChildren().add(participantTableView);
-    	particpantPane.setAlignment(Pos.CENTER);
+    	particpantPane();
     	this.getChildren().add(particpantPane);  
     }
 
 
     private void update(){
+    	participantTableView.setItems(generateDataInMap());
+    	Callback<TableColumn<Map, String>, TableCell<Map, String>>
+    	cellFactoryForMap = (TableColumn<Map, String> p) ->
+    	new TextFieldTableCell<>(new StringConverter() {
+    		@Override
+    		public String toString(Object t) {
+    			return t.toString();
+    		}
+    		@Override 
+    		public Object fromString(String string) {
+    			return string;
+    		}
+    	});
+    	ids.setCellFactory(cellFactoryForMap);
+    	names.setCellFactory(cellFactoryForMap);
+    	majors.setCellFactory(cellFactoryForMap);
+    	teams.setCellFactory(cellFactoryForMap);
+    	teamsNames.setCellFactory(cellFactoryForMap);
+    	ranks.setCellFactory(cellFactoryForMap);
+
         if(Globals.currentCompetition != null){
         	CompetitionName.setText(Globals.currentCompetition.getName());
         	if (Globals.currentCompetition instanceof TeamCompetition) {
@@ -161,12 +209,25 @@ public class CompetitionView extends VBox {
             	participantTableView.setMaxWidth(80 * 5);
             	
         	}
-        	// this.getChildren().add(CompetitionName);
-        	// this.getChildren().add(infoLbl);
-        	// infoPane();	
-        	// this.getChildren().add(infoPane);
-	        // this.getChildren().add(new Label(Globals.currentCompetition.toString()));
-	        // this.getChildren().add(emailBtn);
         }
+    }
+    private ObservableList<Map> generateDataInMap() {
+    	ObservableList<Map> alldata = FXCollections.observableArrayList();
+    	Iterator<Student> students = Globals.currentCompetition.getStudents().iterator();
+    	while (students.hasNext()) {
+    		Map<String,String> dataRow = new HashMap<>();
+    		Student currentStudent = students.next();
+    		dataRow.put(ids.getText(), currentStudent.getId());
+    		dataRow.put(names.getText(), currentStudent.getName());
+    		dataRow.put(majors.getText(), currentStudent.getMajor());
+    		// if statement needed for team type 
+    		dataRow.put(teams.getText(), "-");
+    		dataRow.put(teamsNames.getText(), "-");
+    		dataRow.put(ranks.getText(), "-");
+    		// 
+//    		dataRow.put(ranks.getText(), Globals.currentCompetition.getResult(currentStudent));
+    		alldata.add(dataRow);
+    	}
+    	return alldata;
     }
 }
