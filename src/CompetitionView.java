@@ -213,21 +213,41 @@ public class CompetitionView extends VBox {
     }
     private ObservableList<Map> generateDataInMap() {
     	ObservableList<Map> alldata = FXCollections.observableArrayList();
-    	Iterator<Student> students = Globals.currentCompetition.getStudents().iterator();
-    	while (students.hasNext()) {
+    	Iterator<?> particpants = Globals.currentCompetition.getParticipants().iterator();
+    	int teamNum = 1;
+    	while (particpants.hasNext()) {
     		Map<String,String> dataRow = new HashMap<>();
-    		Student currentStudent = students.next();
-    		dataRow.put(ids.getText(), currentStudent.getId());
-    		dataRow.put(names.getText(), currentStudent.getName());
-    		dataRow.put(majors.getText(), currentStudent.getMajor());
-    		// if statement needed for team type 
-    		dataRow.put(teams.getText(), "-");
-    		dataRow.put(teamsNames.getText(), "-");
-    		dataRow.put(ranks.getText(), "-");
-    		// 
-//    		dataRow.put(ranks.getText(), Globals.currentCompetition.getResult(currentStudent));
-    		alldata.add(dataRow);
+    		Student currentStudent;
+    		if (Globals.currentCompetition instanceof TeamCompetition) {
+    			Team currentTeam = (Team) particpants.next();
+    			Iterator<Student> students = currentTeam.getStudents().iterator();
+    			currentStudent = new Student();
+    			while (students.hasNext()) {
+    				dataRow = new HashMap<>();
+    				currentStudent = students.next();
+	    			dataRow.put(ids.getText(), currentStudent.getId());
+		    		dataRow.put(names.getText(), currentStudent.getName());
+		    		dataRow.put(majors.getText(), currentStudent.getMajor());
+	    			dataRow.put(teams.getText(), Integer.toString(teamNum));
+		    		dataRow.put(teamsNames.getText(), currentTeam.getName());
+		    		dataRow.put(ranks.getText(), ((Competition<Participant>) Globals.currentCompetition).getResult(currentTeam));
+		    		alldata.add(dataRow);
+    			}
+    			
+    		} 
+    		else {
+    			currentStudent = ((Student) particpants.next());
+	    		dataRow.put(ids.getText(), currentStudent.getId());
+	    		dataRow.put(names.getText(), currentStudent.getName());
+	    		dataRow.put(majors.getText(), currentStudent.getMajor());
+	    		dataRow.put(teams.getText(), "-");
+	    		dataRow.put(teamsNames.getText(), "-");
+	    		dataRow.put(ranks.getText(), ((Competition<Participant>) Globals.currentCompetition).getResult(currentStudent));
+	    		alldata.add(dataRow);
+    		}
+    		teamNum++;	
     	}
+
     	return alldata;
     }
 }
