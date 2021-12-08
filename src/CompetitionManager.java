@@ -13,7 +13,7 @@ import java.util.Collections;
 public class CompetitionManager {
 
     // public ArrayList<Competition<?>> competitions = new ArrayList<>();
-    private final File dataFile = new File("temp.xlsx");
+    private final File dataFile = new File("data.xlsx");
     private XSSFWorkbook dataWorkbook; 
 
     CompetitionManager() {
