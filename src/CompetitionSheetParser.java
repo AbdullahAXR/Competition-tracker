@@ -114,27 +114,21 @@ public final class CompetitionSheetParser {
         while(row != null){
             String name = row.getCell(Specs.TEAM_NAME_CELL).toString();
 
+            // its okay to run keyset() everytime here since its O(1) (I checked
+            // the source code)
             Set<Team> teams = results.keySet();
 
-            // functional appraoch:
-            /* 
-               Team team = teams.stream()
-               .filter(t -> t.getName() == name)
-               .findFirst()
-               .orElse(null);
-               */
-
-            Team team = null;
-            for(Team t: teams){
-                if(t.getName() == name){
-                    team = t;
-                    break;
-                }
-            }
+            // we can use a lambda expression via orElseGet() instead of returning null but
+            // we can't since we won't have access to the row varaible as java
+            // does not support lexical scoping. This costs an extra if
+            // statement, but it shouldn't be a big deal
+            Team team = teams.stream()
+                .filter(t -> t.getName() == name)
+                .findFirst()
+                .orElse(null);
 
             if(team == null){
                 team = new Team(name);
-
                 XSSFCell rankCell = row.getCell(Specs.TEAM_RANK_CELL);
                 rankCell.setCellType(CellType.STRING); // put this in a method
                 String rank = row.getCell(Specs.TEAM_RANK_CELL).toString();
