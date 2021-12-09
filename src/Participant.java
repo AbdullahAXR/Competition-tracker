@@ -1,6 +1,7 @@
 public abstract class Participant {
     protected String name;
     // empty class
+    protected final static String DOMAIN = "kfupm.edu.sa";
 
     Participant(String name) {
         this.name = name;
@@ -23,5 +24,7 @@ public abstract class Participant {
     public String toString(){
         return this.getName();
     }
+
+    public abstract String[] getEmails();
 
 }

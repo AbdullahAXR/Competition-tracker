@@ -68,10 +68,10 @@ public class Team extends Participant implements Iterable<Student> {
         return new LinkedHashSet<Student>(students);
     }
 
+    @Override
     public String[] getEmails(){
         return students.stream()
             .map(s -> s.getEmail())
             .toArray(String[]::new);
     }
-
 }
