@@ -14,7 +14,7 @@ import org.apache.poi.ss.usermodel.BuiltinFormats;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
-        testCompetitionManger();
+        testFormatter();
         // testObservableList();
         // launch();
 	}
@@ -158,5 +158,18 @@ public class Test {
         System.out.println(comps.size());
         // comps.add(exampleCompetition());
         cm.writeCompetitions(comps);
+    }
+
+    public static void testFormatter(){
+
+        final String SUBJECT = "Congratulation on achieving %s place in %s";
+        final String BODY = "Dear %s,\n\nConguratulation on your achievement in %s. This achievement is not deeply appreciated by the unversity and we will announce it in the approbrite medias.\n\nIn case you have Photos you want to share with the news post, reply to this email with the photos.\n\nRegards and Congrats,\nKFUPM News Team\n";
+
+        String subject = String.format(SUBJECT, "0th", "cyberhub");
+        String body = String.format(BODY, "saher", "cyberhub");
+
+        System.out.println("mailto:"+"2019139393"+subject+body.replace("\n","%0D%0A"));
+        // System.out.println(subject);
+        // System.out.println(body);
     }
 }
