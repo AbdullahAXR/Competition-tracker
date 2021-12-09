@@ -100,24 +100,22 @@ public class CompetitionView extends VBox {
 	public void displayBlank() {
 		
 	}
-    // public String[] getEmails(Participant p){
-    //     String[] emails;
-    //     Team t;
-    //     if(p instanceof Team)
-    //         Team t = (Team) p;
-    //         emails = new String[t.size()];
-    //         email = ((Team) p).getEmails();
-    //     else
-    //         emails[0] = ((Student) p).getEmail();
 
-    //     return emails;
-    // }
     public void sendEmail(){
         new Thread(() -> {
             String[] emails;
             try {
-                Emailer.emailStudent(new Student("201914330", "saher", "cs"), (StudentCompetition) Globals.currentCompetition);
-                // Emailer.sendEmail(new URI("mailto:s201914330@kfupm.edu.sa"));
+
+                // example 1
+                Team t = new Team("swe-group 5");
+                t.add(new Student("2010101", "saher", "cs"));
+                t.add(new Student("2020202", "mod", "cs"));
+                t.add(new Student("2030303", "abdullah", "swe"));
+                t.add(new Student("2030303", "mohammad", "swe"));
+                Emailer.email((TeamCompetition) Globals.currentCompetition, t);
+
+                // example 2
+                // Emailer.email((StudentCompetition) Globals.currentCompetition, new Student("201914330", "saher", "cs"));
             }
             catch(Exception e){
                 System.out.println(e);
@@ -173,6 +171,7 @@ public class CompetitionView extends VBox {
     	this.getChildren().add(infoPane);
     	particpantPane();
     	this.getChildren().add(particpantPane);  
+        this.getChildren().add(emailBtn);
     }
 
 
