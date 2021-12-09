@@ -6,7 +6,7 @@ CompetitionList.class: CompetitionList.java
 	javac --module-path /usr/lib/jvm/openjfx/ --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionList.java 
 
 
-CompetitionView.class : CompetitionView.java
+CompetitionView.class : CompetitionView.java Emailer.class
 	javac --module-path /usr/lib/jvm/openjfx/ --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionView.java 
 
 StatusBar.class : StatusBar.java
