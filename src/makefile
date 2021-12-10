@@ -1,13 +1,16 @@
 Main.class : Main.java StudentCompetition.class TeamCompetition.class CompetitionManager.class StatusBar.class Globals.class CompetitionView.class CompetitionList.class
-	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main.java 
-	java --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
+	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main.java 
+	java  --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
 
 CompetitionList.class: CompetitionList.java
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionList.java 
 
 
-CompetitionView.class : CompetitionView.java Emailer.class
+CompetitionView.class : CompetitionView.java Emailer.class CompetitionBrowser.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionView.java 
+
+CompetitionBrowser.class : CompetitionBrowser.java
+	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.web --add-modules javafx.controls CompetitionBrowser.java
 
 StatusBar.class : StatusBar.java
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" StatusBar.java 
@@ -52,3 +55,6 @@ clean:
 test:
 	javac --module-path /usr/lib/jvm/openjfx17/lib  --add-modules javafx.web --add-modules javafx.controls -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test.java
 	java --module-path /usr/lib/jvm/openjfx17/lib   --add-modules  javafx.web --add-modules  javafx.controls -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test
+
+run:
+	java --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
