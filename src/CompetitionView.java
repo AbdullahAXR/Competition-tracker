@@ -216,15 +216,18 @@ public class CompetitionView extends VBox {
 
         if(Globals.currentCompetition != null){
         	CompetitionName.setTextFieldText(Globals.currentCompetition.getName());
+        	dateLbl.setTextFieldText(Globals.currentCompetition.getDate());
+        	linkLbl.setTextFieldText(Globals.currentCompetition.getLink());
         	if (Globals.currentCompetition instanceof TeamCompetition) {
         		teams.setVisible(true);
             	teamsNames.setVisible(true);
             	participantTableView.setMaxWidth(80 * 8);
+            	typeLbl.setTextFieldText("Team base Competitiongit ");
         	} else {
         		teams.setVisible(false);
             	teamsNames.setVisible(false);
             	participantTableView.setMaxWidth(80 * 5);
-            	
+            	typeLbl.setTextFieldText("Indivitoal base Competition");
         	}
         }
     }

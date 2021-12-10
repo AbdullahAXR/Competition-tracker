@@ -1,3 +1,5 @@
+import java.sql.Date;
+
 import com.sun.source.tree.Tree;
 
 import javafx.application.Application;
@@ -29,6 +31,9 @@ public class EditableLabel extends HBox{
     }
     public void setTextFieldText(String text) {
     	textField.setText(text);
+    }
+    public void setTextFieldText(java.util.Date date) {
+    	textField.setText(date.toString());
     }
     public void setLabel(String text) {
     	label.setText(text);
@@ -64,6 +69,8 @@ public class EditableLabel extends HBox{
     public TextField getTextField() {
     	return textField;
     }
+	
+	
 }
 
 
