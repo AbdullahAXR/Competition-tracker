@@ -103,7 +103,6 @@ public class CompetitionView extends VBox {
 
     public void sendEmail(){
         new Thread(() -> {
-            String[] emails;
             try {
 
                 // example 1
