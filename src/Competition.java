@@ -110,4 +110,11 @@ public abstract class Competition<T extends Participant> implements Comparable<C
     public String toString(){
         return this.getName();
     }
+
+    public boolean isDue(){
+        if(date.compareTo(Globals.NOW) < 0){ // should we use Globals.NOW here?
+            return true;
+        } else
+            return false;
+    }
 }

@@ -14,7 +14,8 @@ import org.apache.poi.ss.usermodel.BuiltinFormats;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
-        testFormatter();
+        testDue();
+        // testFormatter();
         // testObservableList();
         // launch();
 	}
@@ -171,5 +172,15 @@ public class Test {
         System.out.println("mailto:"+"2019139393"+subject+body.replace("\n","%0D%0A"));
         // System.out.println(subject);
         // System.out.println(body);
+    }
+
+    public static void testDue(){
+        CompetitionManager cm = new CompetitionManager();
+        ArrayList<Competition<?>> cs = cm.readCompetitions();
+        cs.add(exampleCompetition());
+
+        cs.stream()
+            .map(Competition::isDue)
+            .forEach(System.out::println);
     }
 }
