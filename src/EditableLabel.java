@@ -12,18 +12,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class EditableLabel extends TextField{
+public class EditableLabel extends HBox{
     private Label label = new Label();
     private TextField textField = new TextField();
     private HBox hBox = new HBox(label,textField);
     
-    EditableLabel(String contacts) {
-    	textField.setText(contacts);
-    	textField.setPrefWidth(100);
-    	textField.setAlignment(Pos.CENTER);
-    	textField.setDisable(true);
-    	setDisableStyle();
-	}
     EditableLabel(String title,String contacts) {
         label.setText(title);
         textField.setText(contacts);

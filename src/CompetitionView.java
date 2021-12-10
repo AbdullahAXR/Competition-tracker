@@ -28,13 +28,13 @@ import javafx.scene.control.TableColumn;
 
 public class CompetitionView extends VBox {
     // Competition<?> currentCompetition;
-	private Label CompetitionName = new Label(); // will be editableLabel  
+	private EditableLabel CompetitionName = new EditableLabel(" ","Name"); // will be editableLabel  
 	private Label infoLbl = new Label("Info: ");
     private Pane infoPane = new VBox();
     private BorderPane topPane = new BorderPane();
-    private EditableLabel linkLbl = new EditableLabel("Link: ","www.google.com");
-    private EditableLabel dateLbl = new EditableLabel("Date: ","5/10/2019");
-    private EditableLabel typeLbl = new EditableLabel("Type: ","Team");
+    private EditableLabel linkLbl = new EditableLabel("Link:","www.google.com");
+    private EditableLabel dateLbl = new EditableLabel("Date:","5/10/2019");
+    private EditableLabel typeLbl = new EditableLabel("Type:","Team");
     private Button addParticipantBtn;
 	private Button browseBtn;
 	private Button emailBtn = new Button("Email");
@@ -87,10 +87,10 @@ public class CompetitionView extends VBox {
     
     public void editBtn() {
     	editBtn.setOnAction((e) -> {
+    		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
         	typeLbl.buttonClicked();
-
     	});
     }
 
@@ -175,9 +175,9 @@ public class CompetitionView extends VBox {
     // maybe you should fill this instead
     private void setup(){
         this.setStyle("-fx-border-color: black");
-        CompetitionName.setMinSize(325, 30);
-    	CompetitionName.setAlignment(Pos.CENTER);
-        topPane.setCenter(CompetitionName);
+        CompetitionName.getTextField().setMaxWidth(500);
+        CompetitionName.getTextField().setAlignment(Pos.CENTER);
+        topPane.setCenter(CompetitionName.getTextField());
         topPane.setPadding(new Insets(10));
         topPane.setRight(editBtn);
         this.getChildren().add(topPane);
@@ -215,7 +215,7 @@ public class CompetitionView extends VBox {
     	ranks.setCellFactory(cellFactoryForMap);
 
         if(Globals.currentCompetition != null){
-        	CompetitionName.setText(Globals.currentCompetition.getName());
+        	CompetitionName.setTextFieldText(Globals.currentCompetition.getName());
         	if (Globals.currentCompetition instanceof TeamCompetition) {
         		teams.setVisible(true);
             	teamsNames.setVisible(true);
