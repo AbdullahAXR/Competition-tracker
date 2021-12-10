@@ -5,16 +5,37 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.scene.web.WebView;
+
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import java.util.*;
 import org.apache.poi.ss.usermodel.BuiltinFormats;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
-public class Test {
-	public static void main(String[] args) throws Exception {
-        testDue();
+public class Test extends Application {
+
+    @Override
+    public void start(Stage stage){
+        WebView wv = new WebView();
+        wv.getEngine().setJavaScriptEnabled(false);
+
+        wv.getEngine().load("https://twitter.com/CyberhubSa"); // twitter sucks, it needs javascript
+        Pane p = new Pane(wv);
+        Scene scene = new Scene(p);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+	public static void main(String[] args) {
+        launch(args);
+        // testDue();
         // testFormatter();
         // testObservableList();
         // launch();
