@@ -77,10 +77,13 @@ public class CompetitionView extends VBox {
 	public void homeScene(Pane pane) {
 		Scene homeScene = new Scene(pane);
 	}
-	public void browseBtn() {
+
+    public void browseBtn() {
 		browseBtn = new Button("Browse");
-		
-		}
+        browseBtn.setOnAction((e) -> browseButtonClicked());
+        this.getChildren().add(browseBtn);
+    }
+
 	public void addButtonClicked() {
 		
 	}
@@ -90,6 +93,10 @@ public class CompetitionView extends VBox {
 	public void CompetitionCellClicked() {
 	
 	}	
+
+    public void browseButtonClicked() {
+        CompetitionBrowser.browse(Globals.currentCompetition);
+    }
 	
 	public void layoutUI() {
 		
@@ -171,6 +178,7 @@ public class CompetitionView extends VBox {
     	particpantPane();
     	this.getChildren().add(particpantPane);  
         this.getChildren().add(emailBtn);
+        browseBtn();
     }
 
 

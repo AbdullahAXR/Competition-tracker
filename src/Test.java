@@ -25,13 +25,16 @@ public class Test extends Application {
     public void start(Stage stage){
         WebView wv = new WebView();
         wv.getEngine().setJavaScriptEnabled(false);
-
         wv.getEngine().load("https://twitter.com/CyberhubSa"); // twitter sucks, it needs javascript
         Pane p = new Pane(wv);
         Scene scene = new Scene(p);
         stage.setScene(scene);
         stage.show();
     }
+
+    // public void start(Stage stage){
+    //     CompetitionBrowser.browse(exampleCompetition());
+    // }
 
 	public static void main(String[] args) {
         launch(args);
@@ -170,7 +173,7 @@ public class Test extends Application {
         lhm.put(new Student("30238531", "saher's friend", "MATH"), "1");
         lhm.put(new Student("11218731", "saher's other friend", "swe"), "2");
         lhm.put(new Student("50731591", "saher himself", "cs"), "-");
-        return new StudentCompetition("saher's cool competition", "www.saher.com", new Date(), lhm);
+        return new StudentCompetition("saher's cool competition", "https://www.google.com", new Date(), lhm);
     }
 
     public static void testCompetitionManger() throws Exception {
