@@ -12,20 +12,39 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class EditableLabel extends HBox{
-    Label label = new Label();
-    Button button = new Button();
-    TextField textField = new TextField();
-    HBox hBox = new HBox(label,textField);
+public class EditableLabel extends TextField{
+    private Label label = new Label();
+    private TextField textField = new TextField();
+    private HBox hBox = new HBox(label,textField);
+    
+    EditableLabel(String contacts) {
+    	textField.setText(contacts);
+    	textField.setPrefWidth(100);
+    	textField.setAlignment(Pos.CENTER);
+    	textField.setDisable(true);
+    	setDisableStyle();
+	}
     EditableLabel(String title,String contacts) {
         label.setText(title);
         textField.setText(contacts);
         textField.setDisable(true);
         textField.setPrefWidth(500);
         setDisableStyle();
-        HBox.setMargin(label, new Insets(10, 10, 10, 10));
-        HBox.setMargin(textField, new Insets(10, 10, 10, 10));
+        HBox.setMargin(label, new Insets(5, 2, 8, 5));
+        HBox.setMargin(textField, new Insets(0, 5, 0, 5));
 
+    }
+    public void setTextFieldText(String text) {
+    	textField.setText(text);
+    }
+    public void setLabel(String text) {
+    	label.setText(text);
+    }
+    public String getLabel() {
+    	return label.getText();
+    }
+    public String getTextFieldText() {
+    	return textField.getText();
     }
     public void buttonClicked() {
     	if(textField.isDisabled()) {
@@ -39,15 +58,18 @@ public class EditableLabel extends HBox{
     }
     public void setEnableStyle() {
     	textField.setStyle("-fx-font-color: BLACK");
-    	textField.setAlignment(Pos.CENTER_LEFT);
     }
     public void setDisableStyle() {
     	textField.setStyle("-fx-opacity: 1.0;"+"-fx-background-color: #F4F4F4;"+"-fx-border: gone;");
-    	textField.setAlignment(Pos.CENTER);
     	
     }
     public HBox getHBox() {
+    	if(label.getText().equals(""))
+    		return null;
     	return hBox;
+    }
+    public TextField getTextField() {
+    	return textField;
     }
 }
 
