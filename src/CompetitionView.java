@@ -32,9 +32,9 @@ public class CompetitionView extends VBox {
 	private Label infoLbl = new Label("Info: ");
     private Pane infoPane = new VBox();
     private BorderPane topPane = new BorderPane();
-    private Label linkLbl = new Label("Link: ");
-    private Label dateLbl = new Label("Date: ");
-    private Label typeLbl = new Label("Type: ");
+    private EditableLabel linkLbl = new EditableLabel("Link: ","www.google.com");
+    private EditableLabel dateLbl = new EditableLabel("Date: ","5/10/2019");
+    private EditableLabel typeLbl = new EditableLabel("Type: ","Team");
     private Button addParticipantBtn;
 	private Button browseBtn;
 	private Button emailBtn = new Button("Email");
@@ -67,9 +67,9 @@ public class CompetitionView extends VBox {
     }
 
     private void infoPane() {
-		infoPane.getChildren().add(linkLbl);
-		infoPane.getChildren().add(dateLbl);
-		infoPane.getChildren().add(typeLbl);
+		infoPane.getChildren().add(linkLbl.getHBox());
+		infoPane.getChildren().add(dateLbl.getHBox());
+		infoPane.getChildren().add(typeLbl.getHBox());
 		infoPane.setStyle("-fx-border-color: black");
 		infoPane.setPadding(new Insets(5,5,5,5));
 		VBox.setMargin(infoPane,new Insets(0,50,10,50));
@@ -79,9 +79,19 @@ public class CompetitionView extends VBox {
 	}
 
     public void browseBtn() {
+    	
 		browseBtn = new Button("Browse");
         browseBtn.setOnAction((e) -> browseButtonClicked());
         this.getChildren().add(browseBtn);
+    }
+    
+    public void editBtn() {
+    	editBtn.setOnAction((e) -> {
+    		linkLbl.buttonClicked();
+    		dateLbl.buttonClicked();
+        	typeLbl.buttonClicked();
+
+    	});
     }
 
 	public void addButtonClicked() {
@@ -179,6 +189,7 @@ public class CompetitionView extends VBox {
     	this.getChildren().add(particpantPane);  
         this.getChildren().add(emailBtn);
         browseBtn();
+        editBtn();
     }
 
 
