@@ -26,6 +26,9 @@ public class Main extends Application {
         CompetitionView view = new CompetitionView(cl);
         bp.setCenter(view);
 
+        StatusBar sb = new StatusBar();
+        bp.setBottom(sb);
+
         Scene scene = new Scene(bp);
         stage.setScene(scene);
         stage.show();
