@@ -1,10 +1,12 @@
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.util.*;
 import java.io.IOException;
@@ -21,8 +23,11 @@ public class Main extends Application {
 
         ObservableList<Competition<?>> ol = FXCollections.observableArrayList(Globals.MANAGER.readCompetitions());
         CompetitionList cl = new CompetitionList(ol);
-        bp.setLeft(cl);
-
+        BorderPane leftSide = new BorderPane();
+        leftSide.setBottom(cl.buttonHBox());
+        leftSide.setCenter(cl);
+        bp.setLeft(leftSide);
+        
         CompetitionView view = new CompetitionView(cl);
         bp.setCenter(view);
 

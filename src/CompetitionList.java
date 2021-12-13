@@ -1,11 +1,18 @@
-import java.awt.Button;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class CompetitionList extends ListView<Competition<?>> {
-    // public Button addButton;
-    // public Button deleteButton;
+     public Button addButton = new Button("Add");
+     public Button deleteButton = new Button("Delete");
     // public Pane competitionView;
     // public Competition<?> currentCompetition;
 
@@ -27,7 +34,7 @@ public class CompetitionList extends ListView<Competition<?>> {
     }
 
     public void addButtonClicked() {
-
+    	
     }
 
     public void deleteButtonClicked() {
@@ -42,7 +49,18 @@ public class CompetitionList extends ListView<Competition<?>> {
     }
 
     public void addCompetition() {
-
+    	
+    }
+    
+    public HBox buttonHBox() {
+    	HBox buttonsBox = new HBox();
+    	buttonsBox.getChildren().addAll(addButton,deleteButton);
+    	HBox.setMargin(addButton, new Insets(5, 2, 8, 5));
+        HBox.setMargin(deleteButton, new Insets(0, 5, 0, 5));
+        buttonsBox.setAlignment(Pos.BASELINE_CENTER);
+        buttonsBox.setMaxHeight(100);
+        buttonsBox.setSpacing(80);
+        return buttonsBox;
     }
 
     public void selectCompetition(Competition<Participant> competition) {
