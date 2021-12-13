@@ -90,7 +90,6 @@ public class CompetitionView extends VBox {
     		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
-        	typeLbl.buttonClicked();
     	});
     }
 
