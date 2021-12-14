@@ -26,11 +26,14 @@ public class EditableRadioButton extends HBox {
         this.getChildren().add(label);
         this.getChildren().add(leftRadioButton);
         this.getChildren().add(rightRadioButton);
+        setDisableStyle();// if we tring to create a competition we need to delete this method
+        disableButtons();// this one also
         HBox.setMargin(label, new Insets(5, 2, 8, 5));
         HBox.setMargin(leftRadioButton, new Insets(5, 5, 0, 5));
         HBox.setMargin(rightRadioButton, new Insets(5, 5, 0, 5));
        leftRadioButton.setToggleGroup(toggleGroup);
        rightRadioButton.setToggleGroup(toggleGroup);
+       leftRadioButton.setSelected(true);// i selected the first choice by default to check if the disable work or not
        value = Choise1;
 
        toggleGroup.selectedToggleProperty().addListener( (ov, t1, t2) -> changed(ov, t1, t2));
@@ -43,6 +46,24 @@ public class EditableRadioButton extends HBox {
        
        public String getValue() {
     	   return value;
+       }
+       public void disableButtons() {
+    	   leftRadioButton.setDisable(true);
+    	   rightRadioButton.setDisable(true);
+       }
+       public void enableButtons() {
+    	   leftRadioButton.setDisable(false);
+    	   rightRadioButton.setDisable(false);
+       }
+       public void setEnableStyle() {
+       	leftRadioButton.setStyle("-fx-font-color: BLACK");
+       	rightRadioButton.setStyle("-fx-font-color: BLACK");
+
+       }
+       public void setDisableStyle() {
+       	leftRadioButton.setStyle("-fx-opacity: 1.0;"+"-fx-background-color: #F4F4F4;"+"-fx-border: gone;");
+       	rightRadioButton.setStyle("-fx-opacity: 1.0;"+"-fx-background-color: #F4F4F4;"+"-fx-border: gone;");
+       	
        }
 	
 	
