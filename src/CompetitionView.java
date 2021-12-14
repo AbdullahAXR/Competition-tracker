@@ -87,9 +87,16 @@ public class CompetitionView extends VBox {
     
     public void editBtn() {
     	editBtn.setOnAction((e) -> {
+    		if (editBtn.getText().equals("Edit")) {
+	    		editBtn.setText("Save");
+    		}
+    		else if (editBtn.getText().equals("Save")) {
+    			editBtn.setText("Edit");
+    		}
     		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
+        	participantTableView.setEditable(!participantTableView.isEditable());
     	});
     }
 
@@ -166,7 +173,6 @@ public class CompetitionView extends VBox {
     	teamsNames.setCellValueFactory(new MapValueFactory<>(teamsNames.getText()));
     	ranks.setCellValueFactory(new MapValueFactory<>(ranks.getText()));
     	
-    	participantTableView.setEditable(true);
     	participantTableView.getColumns().addAll(ids, names, majors, teams, teamsNames,ranks);
     	particpantPane.getChildren().add(participantTableView);
     	particpantPane.setAlignment(Pos.CENTER);
@@ -221,12 +227,12 @@ public class CompetitionView extends VBox {
         		teams.setVisible(true);
             	teamsNames.setVisible(true);
             	participantTableView.setMaxWidth(80 * 8);
-            	typeLbl.setTextFieldText("Team base Competitiongit ");
+            	typeLbl.setTextFieldText("Team base Competition");
         	} else {
         		teams.setVisible(false);
             	teamsNames.setVisible(false);
             	participantTableView.setMaxWidth(80 * 5);
-            	typeLbl.setTextFieldText("Indivitoal base Competition");
+            	typeLbl.setTextFieldText("Individual base Competition");
         	}
         }
     }
