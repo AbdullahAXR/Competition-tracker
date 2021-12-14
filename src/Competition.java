@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public abstract class Competition<T extends Participant> implements Comparable<Competition<? extends Participant>>{
@@ -41,6 +42,11 @@ public abstract class Competition<T extends Participant> implements Comparable<C
     // If you want to change the actual date, then use setDate(Date newDate)
     public Date getDate() {
         return (Date) date.clone();
+    }
+    
+    public String getDateString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(date);
     }
 
     public void setDate(Date newdate) {

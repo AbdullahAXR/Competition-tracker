@@ -14,14 +14,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;  
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -91,6 +91,11 @@ public class CompetitionView extends VBox {
 	    		editBtn.setText("Save");
     		}
     		else if (editBtn.getText().equals("Save")) {
+				try {
+					saveModifications() ;
+				} catch (ParseException e1) {
+					System.out.println("Parse Exception");
+				}
     			editBtn.setText("Edit");
     		}
     		CompetitionName.buttonClicked();
@@ -99,7 +104,22 @@ public class CompetitionView extends VBox {
         	participantTableView.setEditable(!participantTableView.isEditable());
     	});
     }
-
+	
+	
+	private void saveModifications() throws ParseException {
+		System.out.println("Saving Modifications");
+		Globals.currentCompetition.setName(CompetitionName.getTextFieldText());
+		Globals.currentCompetition.setLink(linkLbl.getTextFieldText());
+		
+		// TODO: check date format
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Globals.currentCompetition.setDate(sdf.parse(dateLbl.getTextFieldText()));
+		
+			
+	}
+	
+	
 	public void addButtonClicked() {
 		
 	}
@@ -221,7 +241,7 @@ public class CompetitionView extends VBox {
 
         if(Globals.currentCompetition != null){
         	CompetitionName.setTextFieldText(Globals.currentCompetition.getName());
-        	dateLbl.setTextFieldText(Globals.currentCompetition.getDate());
+        	dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
         	linkLbl.setTextFieldText(Globals.currentCompetition.getLink());
         	if (Globals.currentCompetition instanceof TeamCompetition) {
         		teams.setVisible(true);

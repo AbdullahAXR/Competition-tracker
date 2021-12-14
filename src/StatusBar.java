@@ -10,6 +10,10 @@ import javafx.collections.*;
 
 
 public class StatusBar extends HBox {
+    
+    Label numberOfstudentsCompetitionsLabel = new Label("Student Competitions: ");
+    Label numberOfTeamComptitonsLabel = new Label("Team Competitions: ");
+    Label numberOfDueComptitionsLabel = new Label("Due Competitions: ");
 
     int numberOfTeamCompetitions;
     int numberOfStudentCompetitions;
@@ -25,6 +29,9 @@ public class StatusBar extends HBox {
 
     StatusBar(){
         super(Globals.SPACING);
+        this.getChildren().add(numberOfstudentsCompetitionsLabel) ;
+        this.getChildren().add(numberOfTeamComptitonsLabel) ;
+        this.getChildren().add(numberOfDueComptitionsLabel) ;
         this.setAlignment(Pos.CENTER); // should we really hardcode this?
 
         setupLabels();
@@ -38,14 +45,19 @@ public class StatusBar extends HBox {
                             //permutate
                         }
                     } else if (c.wasUpdated()) {
+                        for (Competition<?> competition : c.getList()) {
+                            System.out.println("updated");
+                            //update
+                        }
                         System.out.println("updated!"); //update item
                     } else {
                         for (Competition<?> remitem : c.getRemoved()) {
                             System.out.println("removed");
-                            // remitem.remove(Outer.this);
+                            setupLabels();
                         }
                         for (Competition<?> additem : c.getAddedSubList()) {
                             System.out.println("added");
+                            setupLabels();
                             // additem.add(Outer.this);
                         }
                     }
@@ -55,7 +67,10 @@ public class StatusBar extends HBox {
     }
 
     private void setupLabels(){
-
+        
+        numberOfTeamCompetitions = 0;
+        numberOfStudentCompetitions = 0;
+        numberOfDue = 0;
         for(Competition<?> c : Globals.competitions){
             if(c instanceof TeamCompetition)
                 numberOfTeamCompetitions++;
@@ -66,9 +81,9 @@ public class StatusBar extends HBox {
                 numberOfDue++;
         }
 
-        this.getChildren().add(new Label("Student Competitions: "+numberOfStudentCompetitions));
-        this.getChildren().add(new Label("Team Competitions: "+numberOfTeamCompetitions));
-        this.getChildren().add(new Label("Due Competitions: "+numberOfDue));
+        numberOfstudentsCompetitionsLabel.setText("Student Competitions: "+numberOfStudentCompetitions) ;
+        numberOfTeamComptitonsLabel.setText("Team Competitions: "+numberOfTeamCompetitions);
+        numberOfDueComptitionsLabel.setText("Due Competitions: "+numberOfDue);
     }
 
 }
