@@ -1,0 +1,21 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "/Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib/javafx-swt.jar",
+            "/Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib/javafx.base.jar",
+            "/Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib/javafx.controls.jar",
+            "/Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib/javafx.fxml.jar",
+            "/Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib/javafx.graphics.jar",
+            "/Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib/javafx.media.jar",
+            "/Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib/javafx.swing.jar",
+            "/Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib/javafx.web.jar"
+        ],
+        "exclude": [
+            "lib/apache-log4j-2.14.1-bin/log4j-slf4j18-impl-2.14.1.jar",
+            "lib/apache-log4j-2.14.1-bin/log4j-slf4j18-impl-2.14.1-javadoc.jar",
+            "lib/apache-log4j-2.14.1-bin/log4j-slf4j-impl-2.14.1.jar",
+            "lib/apache-log4j-2.14.1-bin/log4j-slf4j-impl-2.14.1-javadoc.jar"
+        ]
+    }
+}

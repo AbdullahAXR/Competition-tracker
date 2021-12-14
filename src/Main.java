@@ -21,8 +21,8 @@ public class Main extends Application {
         //StatusBar statusBar = new StatusBar(Globals.SPACING);
         //bp.setBottom(statusBar);
 
-        ObservableList<Competition<?>> ol = FXCollections.observableArrayList(Globals.MANAGER.readCompetitions());
-        CompetitionList cl = new CompetitionList(ol);
+        // ObservableList<Competition<?>> ol = FXCollections.observableArrayList(Globals.MANAGER.readCompetitions());
+        CompetitionList cl = new CompetitionList(Globals.competitions);
         BorderPane leftSide = new BorderPane();
         leftSide.setBottom(cl.buttonHBox());
         leftSide.setCenter(cl);
