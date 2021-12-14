@@ -35,6 +35,7 @@ public class CompetitionView extends VBox {
     private EditableLabel linkLbl = new EditableLabel("Link:","www.google.com");
     private EditableLabel dateLbl = new EditableLabel("Date:","5/10/2019");
     private EditableLabel typeLbl = new EditableLabel("Type:","Team");
+    private EditableRadioButton radioButton = new EditableRadioButton("Type","Indiv","Team");
     private Button addParticipantBtn;
 	private Button browseBtn;
 	private Button emailBtn = new Button("Email");
@@ -69,7 +70,7 @@ public class CompetitionView extends VBox {
     private void infoPane() {
 		infoPane.getChildren().add(linkLbl);
 		infoPane.getChildren().add(dateLbl);
-		infoPane.getChildren().add(typeLbl);
+		infoPane.getChildren().add(radioButton);
 		infoPane.setStyle("-fx-border-color: black");
 		infoPane.setPadding(new Insets(5,5,5,5));
 		VBox.setMargin(infoPane,new Insets(0,50,10,50));

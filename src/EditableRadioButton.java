@@ -27,8 +27,8 @@ public class EditableRadioButton extends HBox {
         this.getChildren().add(leftRadioButton);
         this.getChildren().add(rightRadioButton);
         HBox.setMargin(label, new Insets(5, 2, 8, 5));
-        HBox.setMargin(leftRadioButton, new Insets(0, 5, 0, 5));
-        HBox.setMargin(rightRadioButton, new Insets(0, 5, 0, 5));
+        HBox.setMargin(leftRadioButton, new Insets(5, 5, 0, 5));
+        HBox.setMargin(rightRadioButton, new Insets(5, 5, 0, 5));
        leftRadioButton.setToggleGroup(toggleGroup);
        rightRadioButton.setToggleGroup(toggleGroup);
        value = Choise1;
