@@ -15,6 +15,7 @@ public class CompetitionList extends ListView<Competition<?>> {
      public Button deleteButton = new Button("Delete");
     // public Pane competitionView;
     // public Competition<?> currentCompetition;
+    
 
     CompetitionList(){
         this(null);
@@ -27,7 +28,8 @@ public class CompetitionList extends ListView<Competition<?>> {
                     Globals.currentCompetition = newv;
                     System.out.println(Globals.currentCompetition);
                 });
-
+                
+        deleteButton.setOnAction(e -> deleteButtonClicked());
         // Should we select the first one automatically? What if the list is
         // empty
         // this.getSelectionModel().select(0);
@@ -38,12 +40,26 @@ public class CompetitionList extends ListView<Competition<?>> {
     }
 
     public void deleteButtonClicked() {
-
+        // get selected competition
+        Competition<?> selectedCompetition = this.getSelectionModel().getSelectedItem();
+        // remove it from the list
+        Globals.competitions.remove(selectedCompetition);
+        
+        // print out the list
+        System.out.println("Competitions: ");
+        for (Competition<?> c : Globals.competitions) {
+            System.out.println(c);
+        }
+        
+        // remove it from the view
+        this.getItems().remove(selectedCompetition);
+        
     }
 
     public void competitionCellClicked() {
-
+        
     }
+    
     public void layoutUI() {
 
     }
