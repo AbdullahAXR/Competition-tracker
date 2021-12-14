@@ -96,6 +96,7 @@ public class CompetitionView extends VBox {
 				} catch (ParseException e1) {
 					System.out.println("Parse Exception");
 				}
+				
     			editBtn.setText("Edit");
     		}
     		CompetitionName.buttonClicked();

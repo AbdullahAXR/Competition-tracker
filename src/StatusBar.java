@@ -45,12 +45,8 @@ public class StatusBar extends HBox {
                             //permutate
                         }
                     } else if (c.wasUpdated()) {
-                        for (Competition<?> competition : c.getList()) {
-                            System.out.println("updated");
-                            //update
-                        }
                         System.out.println("updated!"); //update item
-                    } else {
+                    } else { 
                         for (Competition<?> remitem : c.getRemoved()) {
                             System.out.println("removed");
                             setupLabels();
@@ -65,8 +61,8 @@ public class StatusBar extends HBox {
             }
         });
     }
-
-    private void setupLabels(){
+        
+    public void setupLabels(){
         
         numberOfTeamCompetitions = 0;
         numberOfStudentCompetitions = 0;
