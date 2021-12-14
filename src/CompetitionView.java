@@ -67,9 +67,9 @@ public class CompetitionView extends VBox {
     }
 
     private void infoPane() {
-		infoPane.getChildren().add(linkLbl.getHBox());
-		infoPane.getChildren().add(dateLbl.getHBox());
-		infoPane.getChildren().add(typeLbl.getHBox());
+		infoPane.getChildren().add(linkLbl);
+		infoPane.getChildren().add(dateLbl);
+		infoPane.getChildren().add(typeLbl);
 		infoPane.setStyle("-fx-border-color: black");
 		infoPane.setPadding(new Insets(5,5,5,5));
 		VBox.setMargin(infoPane,new Insets(0,50,10,50));

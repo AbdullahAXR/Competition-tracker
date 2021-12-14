@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 public class EditableLabel extends HBox{
     private Label label = new Label();
     private TextField textField = new TextField();
-    private HBox hBox = new HBox(label,textField);
     
     EditableLabel(String title,String contacts) {
         label.setText(title);
@@ -25,6 +24,8 @@ public class EditableLabel extends HBox{
         textField.setDisable(true);
         textField.setPrefWidth(500);
         setDisableStyle();
+        this.getChildren().add(label);
+        this.getChildren().add(textField);
         HBox.setMargin(label, new Insets(5, 2, 8, 5));
         HBox.setMargin(textField, new Insets(0, 5, 0, 5));
 
@@ -60,11 +61,6 @@ public class EditableLabel extends HBox{
     public void setDisableStyle() {
     	textField.setStyle("-fx-opacity: 1.0;"+"-fx-background-color: #F4F4F4;"+"-fx-border: gone;");
     	
-    }
-    public HBox getHBox() {
-    	if(label.getText().equals(""))
-    		return null;
-    	return hBox;
     }
     public TextField getTextField() {
     	return textField;
