@@ -51,8 +51,10 @@ public class CompetitionList extends ListView<Competition<?>> {
             System.out.println(c);
         }
         
-        // remove it from the view
-        this.getItems().remove(selectedCompetition);
+        // No need to remove it from the list view. The observable list and the
+        // compeititonlist are connected
+
+        // this.getItems().remove(selectedCompetition);
         
     }
 
