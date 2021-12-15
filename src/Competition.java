@@ -5,7 +5,9 @@ public abstract class Competition<T extends Participant> implements Comparable<C
     protected String name;
     protected String link;
     protected Date date;
-
+    
+    ArrayList<CompetitionListener> listeners = new ArrayList<CompetitionListener>();
+    
     // The results of the competition. We use <Student, String> instead of
     // <Student, Integer> because the competition might use Strings like "gold"
     // or "silver".
@@ -25,13 +27,29 @@ public abstract class Competition<T extends Participant> implements Comparable<C
     public String getName() {
         return name;
     }
+    
+    
+    public void addListener(CompetitionListener listener) {
+        listeners.add(listener);
+    }
+    
+    public void noitfyListeners() {
+        for (CompetitionListener listener : listeners) {
+            listener.onChange(this);
+        }
+    }
+    
     // a Setters so we can edit the name and link
     public void setName(String name) {
-	 this.name = name;
+	    this.name = name;
+        
+        noitfyListeners() ;
     }
 
     public void setLink(String link) {
 	 this.link = link;
+     
+     noitfyListeners() ;
     }
 
     public String getLink() {
@@ -51,6 +69,8 @@ public abstract class Competition<T extends Participant> implements Comparable<C
 
     public void setDate(Date newdate) {
         this.date = newdate;
+        
+        noitfyListeners() ;
     }
 
     @Override

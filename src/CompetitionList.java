@@ -1,3 +1,4 @@
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,6 +24,17 @@ public class CompetitionList extends ListView<Competition<?>> {
 
     CompetitionList(ObservableList<Competition<?>> comps){
         super(comps);
+        
+        for (Competition<?> c : comps) {
+            c.addListener(new CompetitionListener() {
+                @Override
+                public void onChange(Competition<?> c) {
+                    updateCompeitionList();
+                }
+            });
+        }
+        
+        this.setCellFactory(cell -> new CompetitionCell());
         this.getSelectionModel().selectedItemProperty().addListener( (observable, oldv, newv) ->
                 {
                     Globals.currentCompetition = newv;
@@ -86,6 +98,15 @@ public class CompetitionList extends ListView<Competition<?>> {
     }
 
     public void updateCompeitionList() {
-
+        // update the list view by removing all the items and adding them all
+        // again
+        
+        // ObservableList<Competition<?>> oldList = this.getItems();
+        // this.getItems().clear();
+        // Globals.competitions = oldList ;
+        // this.setItems(Globals.competitions);
+        
+        this.setItems(null) ;
+        this.setItems(Globals.competitions);
     }
 }

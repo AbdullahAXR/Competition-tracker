@@ -23,7 +23,7 @@
             "request": "launch",
             "mainClass": "Main",
             "projectName": "swe-pro_77b04430",
-            "vmArgs" : "--module-path /Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib --add-modules=javafx.controls"
+            "vmArgs" : "--module-path /Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib --add-modules javafx.controls --add-modules javafx.web"
         },
         {
             "type": "java",

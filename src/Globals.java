@@ -7,6 +7,15 @@ public class Globals {
     public static ObservableList<Competition<?>> competitions = FXCollections.observableArrayList(MANAGER.readCompetitions());
     public static Competition<?> currentCompetition = competitions.get(0); // CompetitionList will update this
     public final static int SPACING = 5; // used by [HV]Box
-    public final static Date NOW = new Date();
+    public final static Date NOW = new Date();   
+    
+    
+    // public static void updateCompetitionsList() {
+    //     // create new competitin
+    //     Competition<?> newCompetition = new StudentCompetition("new competition", "www.new.com", new Date());
+    //     competitions.add(newCompetition) ;
+    //     competitions.remove(newCompetition);
+    // }
+    
 }
 
