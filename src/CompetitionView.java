@@ -17,6 +17,7 @@ import javafx.util.StringConverter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -38,7 +39,6 @@ public class CompetitionView extends VBox {
     private EditableRadioButton typeRadioButton = new EditableRadioButton("Type:","Indiv");
     private Button addParticipantBtn;
 	private Button browseBtn;
-	private Button emailBtn = new Button("Email");
     private Button editBtn = new Button("Edit");
 	private Button exitBtn;
 	private Button submitBtn;
@@ -50,6 +50,7 @@ public class CompetitionView extends VBox {
 	private TableColumn<Map, String> teams = new TableColumn<>("Team");
 	private TableColumn<Map, String> teamsNames = new TableColumn<>("Team Name");
 	private TableColumn<Map, String> ranks = new TableColumn<>("Rank");
+	private TableColumn<Map, Void> emailColumn = new TableColumn<>("Email");
 	
 	// We need to create a class of InfoViewLabeled & editableLabel
 
@@ -58,7 +59,6 @@ public class CompetitionView extends VBox {
         setup();
         update();
 
-        emailBtn.setOnAction(e -> sendEmail());
 
         lv.getSelectionModel().selectedItemProperty().addListener( (observable, oldv, newv) ->
                 {
@@ -103,7 +103,7 @@ public class CompetitionView extends VBox {
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
         	participantTableView.setEditable(!participantTableView.isEditable());
-
+        	participantTableView.refresh();
     	});
     }
 	
@@ -152,26 +152,6 @@ public class CompetitionView extends VBox {
 		
 	}
 
-    public void sendEmail(){
-        new Thread(() -> {
-            try {
-
-                // example 1
-                Team t = new Team("swe-group 5");
-                t.add(new Student("2010101", "saher", "cs"));
-                t.add(new Student("2020202", "mod", "cs"));
-                t.add(new Student("2030303", "abdullah", "swe"));
-                t.add(new Student("2030303", "mohammad", "swe"));
-                Emailer.email((TeamCompetition) Globals.currentCompetition, t);
-
-                // example 2
-                // Emailer.email((StudentCompetition) Globals.currentCompetition, new Student("201914330", "saher", "cs"));
-            }
-            catch(Exception e){
-                System.out.println(e);
-            }
-        }).start();
-    }
     // private URI getURI(){
     //     currentCompetition.getStudents().stream().filter(
     // }
@@ -184,6 +164,68 @@ public class CompetitionView extends VBox {
 	private boolean displaySuccess() {
 		return false;
 	}
+	private void emailColumn() {
+        
+
+        Callback<TableColumn<Map, Void>, TableCell<Map, Void>> cellFactory = new Callback<TableColumn<Map, Void>, TableCell<Map, Void>>() {
+            @Override
+            public TableCell<Map, Void> call(final TableColumn<Map, Void> param) {
+                final TableCell<Map, Void> cell = new TableCell<Map, Void>() {
+                	byte[] emojiByteCode = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x93, (byte)0xA7};
+                	private final Button emailBtn = new Button(new String(emojiByteCode, Charset.forName("UTF-8")));
+
+                    {
+                    	setAlignment(Pos.CENTER);
+                    	// sendEmail() trasnfered to here 
+                    	emailBtn.setOnAction(a -> {
+                    		new Thread(() -> {
+                              try {
+                            	  
+                            	  HashMap row = (HashMap) participantTableView.getItems().get(getIndex());
+                            	  
+                                  // example 1
+                            	  if (Globals.currentCompetition instanceof TeamCompetition) {
+	                            	  int teamNumber = Integer.parseInt((String) row.get(teams.getText())) - 1;
+	                            	  TeamCompetition competition = (TeamCompetition) Globals.currentCompetition;
+	                            	  Team t = (Team) competition.getTeams().toArray()[teamNumber];
+	                                  Emailer.email((TeamCompetition) Globals.currentCompetition, t);
+                            	  }
+                            	  // example 2
+                            	  else {
+                            		  String studentID = (String) row.get(ids.getText());
+                            		  System.out.println(studentID);
+                            		  Student s = new Student();
+                            		  Iterator<Student> students = Globals.currentCompetition.getStudents().iterator();
+                            		  while (students.hasNext()) {
+                            			  Student sTmp = students.next();
+                            			  if (sTmp.getId().equals(studentID))       
+                            				  s = sTmp;
+                            		  }
+	                                  Emailer.email((StudentCompetition) Globals.currentCompetition, s);
+                            	  }
+                              }
+                              catch(Exception e){
+                                  System.out.println(e);
+                              }
+                          }).start();
+                    	});
+                    }
+                	
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(emailBtn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        emailColumn.setCellFactory(cellFactory);
+	}
 	private void particpantPane() {
 		VBox.setMargin(participantTableView, new Insets(10,50,10,50));
 		int cellWidth = 80;
@@ -193,6 +235,7 @@ public class CompetitionView extends VBox {
     	teams.setMinWidth(cellWidth);
     	teamsNames.setMinWidth(cellWidth*2);
     	ranks.setMinWidth(cellWidth);
+    	emailColumn.setMinWidth(cellWidth);
     	
     	ids.setCellValueFactory(new MapValueFactory<>(ids.getText()));
     	names.setCellValueFactory(new MapValueFactory<>(names.getText()));
@@ -200,8 +243,8 @@ public class CompetitionView extends VBox {
     	teams.setCellValueFactory(new MapValueFactory<>(teams.getText()));
     	teamsNames.setCellValueFactory(new MapValueFactory<>(teamsNames.getText()));
     	ranks.setCellValueFactory(new MapValueFactory<>(ranks.getText()));
-    	
-    	participantTableView.getColumns().addAll(ids, names, majors, teams, teamsNames,ranks);
+    	emailColumn();
+    	participantTableView.getColumns().addAll(ids, names, majors, teams, teamsNames,ranks,emailColumn);
     	particpantPane.getChildren().add(participantTableView);
     	particpantPane.setAlignment(Pos.CENTER);
 	}
@@ -220,7 +263,6 @@ public class CompetitionView extends VBox {
     	this.getChildren().add(infoPane);
     	particpantPane();
     	this.getChildren().add(particpantPane);  
-        this.getChildren().add(emailBtn);
         browseBtn();
         editBtn();
     }
@@ -254,12 +296,12 @@ public class CompetitionView extends VBox {
         	if (Globals.currentCompetition instanceof TeamCompetition) {
         		teams.setVisible(true);
             	teamsNames.setVisible(true);
-            	participantTableView.setMaxWidth(80 * 8);
+            	participantTableView.setMaxWidth(80 * 9);
             	typeLbl.setTextFieldText("Team base Competition");
         	} else {
         		teams.setVisible(false);
             	teamsNames.setVisible(false);
-            	participantTableView.setMaxWidth(80 * 5);
+            	participantTableView.setMaxWidth(80 * 6);
             	typeLbl.setTextFieldText("Individual base Competition");
         	}
         }
