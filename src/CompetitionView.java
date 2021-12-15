@@ -92,13 +92,8 @@ public class CompetitionView extends VBox {
 	    		editBtn.setText("Save");
     		}
     		else if (editBtn.getText().equals("Save")) {
-				try {
-					saveModifications() ;
-				} catch (ParseException e1) {
-					System.out.println("Parse Exception");
-				}
-				
-    			editBtn.setText("Edit");
+                saveModifications();
+                editBtn.setText("Edit");
     		}
     		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
@@ -108,7 +103,7 @@ public class CompetitionView extends VBox {
     }
 	
 	
-	private void saveModifications() throws ParseException {
+	private void saveModifications() {
 		System.out.println("Saving Modifications");
 		Globals.currentCompetition.setName(CompetitionName.getTextFieldText());
 		Globals.currentCompetition.setLink(linkLbl.getTextFieldText());
