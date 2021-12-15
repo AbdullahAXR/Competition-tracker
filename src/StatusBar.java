@@ -10,15 +10,15 @@ import javafx.collections.*;
 
 
 public class StatusBar extends HBox {
-    
-    Label numberOfstudentsCompetitionsLabel = new Label("Student Competitions: ");
-    Label numberOfTeamComptitonsLabel = new Label("Team Competitions: ");
-    Label numberOfDueComptitionsLabel = new Label("Due Competitions: ");
 
-    int numberOfTeamCompetitions;
-    int numberOfStudentCompetitions;
-    int numberOfDue;
-    int totalCompetition;
+    Label numOfStudentCompLbl = new Label("Student Competitions: ");
+    Label numOfTeamCompLbl = new Label("Team Competitions: ");
+    Label numOfDueLbl = new Label("Due Competitions: ");
+
+    IntegerProperty numOfStudentComp = new SimpleIntegerProperty();
+    IntegerProperty numOfTeamComp = new SimpleIntegerProperty();
+    IntegerProperty numOfDue = new SimpleIntegerProperty();
+    IntegerProperty totalCompetition = new SimpleIntegerProperty();
 
     //StatusBar(int spacing){
     //    super(spacing);
@@ -29,18 +29,17 @@ public class StatusBar extends HBox {
 
     StatusBar(){
         super(Globals.SPACING);
-        this.getChildren().add(numberOfstudentsCompetitionsLabel) ;
-        this.getChildren().add(numberOfTeamComptitonsLabel) ;
-        this.getChildren().add(numberOfDueComptitionsLabel) ;
         this.setAlignment(Pos.CENTER); // should we really hardcode this?
 
         setupLabels();
+
         // untested. I can't test this until we can edit and add competitions
         Globals.competitions.addListener(new ListChangeListener<Competition<?>>() {
             public void onChanged(Change<? extends Competition<?>> c) {
                 while (c.next()) {
                     if (c.wasPermutated()) {
                         for (int i = c.getFrom(); i < c.getTo(); ++i) {
+
                             System.out.println("premutated");
                             //permutate
                         }
@@ -48,41 +47,93 @@ public class StatusBar extends HBox {
                         System.out.println("updated!"); //update item
                     } else { 
                         for (Competition<?> remitem : c.getRemoved()) {
-                            System.out.println("removed");
-                            setupLabels();
+
+                            if(remitem.isDue())
+                                numOfDue.set(numOfDue.intValue()-1);
+                            if(remitem instanceof TeamCompetition)
+                                numOfTeamComp.set(numOfTeamComp.intValue()-1);
+                            else
+                                numOfStudentComp.set(numOfStudentComp.intValue()-1);
+
+                            // System.out.println("removed");
+                            // setupLabels();
                         }
+
                         for (Competition<?> additem : c.getAddedSubList()) {
                             System.out.println("added");
-                            setupLabels();
+
+                            if(additem.isDue())
+                                numOfDue.set(numOfDue.intValue()+1);
+                            if(additem instanceof TeamCompetition)
+                                numOfTeamComp.set(numOfTeamComp.intValue()+1);
+                            else
+                                numOfStudentComp.set(numOfStudentComp.intValue()+1);
+
+                            // setupLabels();
                             // additem.add(Outer.this);
                         }
+
                     }
                 }
             }
         });
     }
-        
+
     public void setupLabels(){
-        
-        numberOfTeamCompetitions = 0;
-        numberOfStudentCompetitions = 0;
-        numberOfDue = 0;
+
         for(Competition<?> c : Globals.competitions){
             if(c instanceof TeamCompetition)
-                numberOfTeamCompetitions++;
+                numOfTeamComp.set(numOfTeamComp.intValue()+1);
             else
-                numberOfStudentCompetitions++;
+                numOfStudentComp.set(numOfStudentComp.intValue()+1);
 
             if(c.isDue())
-                numberOfDue++;
+                numOfDue.set(numOfDue.intValue()+1);
         }
 
-        numberOfstudentsCompetitionsLabel.setText("Student Competitions: "+numberOfStudentCompetitions) ;
-        numberOfTeamComptitonsLabel.setText("Team Competitions: "+numberOfTeamCompetitions);
-        numberOfDueComptitionsLabel.setText("Due Competitions: "+numberOfDue);
+        numOfTeamComp.addListener( (ob, oldv, newv) -> {
+            numOfTeamCompLbl.setText("Team Competitions "+newv);
+        });
+        numOfTeamCompLbl.setText("Team Competitions "+numOfTeamComp.intValue());
+
+        numOfStudentComp.addListener( (ob, oldv, newv) -> {
+            numOfStudentCompLbl.setText("Student Competitions "+newv.intValue());
+        });
+        numOfStudentCompLbl.setText("Student Competitions "+numOfStudentComp.intValue());
+
+        numOfDue.addListener( (ob, old, newv) -> {
+            numOfDueLbl.setText("Due "+newv);
+        });
+        numOfDueLbl.setText("Student Competitions "+numOfDue.intValue());
+
+        this.getChildren().add(numOfStudentCompLbl) ;
+        this.getChildren().add(numOfTeamCompLbl) ;
+        this.getChildren().add(numOfDueLbl) ;
     }
 
 }
+
+    // public void setupLabels(){
+
+    //     numberOfTeamCompetitions = 0;
+    //     numberOfStudentCompetitions = 0;
+    //     numOfDue = 0;
+    //     for(Competition<?> c : Globals.competitions){
+    //         if(c instanceof TeamCompetition)
+    //             numberOfTeamCompetitions++;
+    //         else
+    //             numberOfStudentCompetitions++;
+
+    //         if(c.isDue())
+    //             numOfDue++;
+    //     }
+
+        // numOfStudentCompLbl.setText("Student Competitions: "+numberOfStudentCompetitions) ;
+        // numOfTeamCompLbl.setText("Team Competitions: "+numberOfTeamCompetitions);
+        // numOfDueLbl.setText("Due Competitions: "+numberOfDue);
+    // }
+
+// }
 
 // This method sucks, find a way to listen to changes
 // Start from here https://docs.oracle.com/javase/8/javafx/api/javafx/collections/ListChangeListener.Change.html
