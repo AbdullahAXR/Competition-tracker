@@ -6,8 +6,11 @@ CompetitionList.class: CompetitionList.java
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionList.java 
 
 
-CompetitionView.class : CompetitionView.java Emailer.class CompetitionBrowser.class
+CompetitionView.class : CompetitionView.java Emailer.class CompetitionBrowser.class EditableRadioButton.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionView.java 
+
+EditableRadioButton.class: EditableRadioButton.java
+	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" EditableRadioButton.java
 
 CompetitionBrowser.class : CompetitionBrowser.java
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.web --add-modules javafx.controls CompetitionBrowser.java
