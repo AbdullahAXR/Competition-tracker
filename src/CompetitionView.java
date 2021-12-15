@@ -35,7 +35,7 @@ public class CompetitionView extends VBox {
     private EditableLabel linkLbl = new EditableLabel("Link:","www.google.com");
     private EditableLabel dateLbl = new EditableLabel("Date:","5/10/2019");
     private EditableLabel typeLbl = new EditableLabel("Type:","Team");
-    private EditableRadioButton radioButton = new EditableRadioButton("Type","Indiv","Team");
+    private EditableRadioButton typeRadioButton = new EditableRadioButton("Type:","Indiv");
     private Button addParticipantBtn;
 	private Button browseBtn;
 	private Button emailBtn = new Button("Email");
@@ -70,7 +70,7 @@ public class CompetitionView extends VBox {
     private void infoPane() {
 		infoPane.getChildren().add(linkLbl);
 		infoPane.getChildren().add(dateLbl);
-		infoPane.getChildren().add(radioButton);
+		infoPane.getChildren().add(typeRadioButton);
 		infoPane.setStyle("-fx-border-color: black");
 		infoPane.setPadding(new Insets(5,5,5,5));
 		VBox.setMargin(infoPane,new Insets(0,50,10,50));
@@ -90,10 +90,12 @@ public class CompetitionView extends VBox {
     	editBtn.setOnAction((e) -> {
     		if (editBtn.getText().equals("Edit")) {
 	    		editBtn.setText("Save");
+	    		typeRadioButton.editButtonClicked("Indiv","Team");
+	    		
     		}
     		else if (editBtn.getText().equals("Save")) {
                 saveModifications();
-                editBtn.setText("Edit");
+    			typeRadioButton.saveButtonClicked();
     		}
     		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
@@ -261,6 +263,7 @@ public class CompetitionView extends VBox {
     }
     private ObservableList<Map> generateDataInMap() {
     	ObservableList<Map> alldata = FXCollections.observableArrayList();
+    	//TODO Solve the null value Exception
     	Iterator<?> particpants = Globals.currentCompetition.getParticipants().iterator();
     	int teamNum = 1;
     	while (particpants.hasNext()) {
