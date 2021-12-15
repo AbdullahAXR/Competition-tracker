@@ -116,12 +116,18 @@ public class CompetitionView extends VBox {
 		Globals.currentCompetition.setName(CompetitionName.getTextFieldText());
 		Globals.currentCompetition.setLink(linkLbl.getTextFieldText());
 		
-		// TODO: check date format
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Globals.currentCompetition.setDate(sdf.parse(dateLbl.getTextFieldText()));
-		
-			
+        dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
+        }
+        catch(ParseException e){
+            // ignore user's input
+        }
+        finally {
+            // set the dataLbl value to the value of the (possibly new) date string of the competitoin.
+            dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
+        }
 	}
 	
 	

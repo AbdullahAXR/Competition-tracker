@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.*;
 import javafx.scene.web.WebView;
-
+import java.text.SimpleDateFormat;  
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import java.util.*;
 import org.apache.poi.ss.usermodel.BuiltinFormats;
@@ -37,7 +37,8 @@ public class Test extends Application {
     // }
 
 	public static void main(String[] args) {
-        launch(args);
+        testDateFormat();
+        // launch(args);
         // testDue();
         // testFormatter();
         // testObservableList();
@@ -206,5 +207,11 @@ public class Test extends Application {
         cs.stream()
             .map(Competition::isDue)
             .forEach(System.out::println);
+    }
+
+    public static void testDateFormat(){
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = sdf.parse("asdf");
+        System.out.println(date);
     }
 }
