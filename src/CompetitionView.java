@@ -122,7 +122,7 @@ public class CompetitionView extends VBox {
             // ignore user's input
         }
         finally {
-            // set the dataLbl value to the value of the date string we got.
+            // set the dataLbl value to the value of the (possibly new) date string of the competitoin.
             dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
         }
 	}
