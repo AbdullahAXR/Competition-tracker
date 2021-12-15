@@ -2,7 +2,7 @@
 
 - [x] Entities: 100% complete
 
-- [ ] Managers: pretty much complete... just some minor issues
+- [x] Managers: pretty much complete... just some minor issues
 
     - [ ] fix bug where you cant write two competitions that share the same
       name. Right now, I made it so that the manager will ignore a
@@ -15,20 +15,13 @@
       efficient way to do it that way
 
 
-- [ ] Viewers: pretty much 0% complete... Just a quick status bar is completed
-    - status bar: partically completed
-    - email
-    - browse
-    - view
-    - list
-        - this should be implemented as subclass of listView. The listView takes
-          an observableList as argument. This means that the competition manager
-          should be modified such that it does not store the arraylist as a
-          datafield, but rather returns it as an arguement.
-    - edit
-        - title
-        - date
-        - students
+- [x] Viewers:
+    - [ ] Status bar
+    - [ ] Add 
+    - [ ] Edit
+    - [ ] Delete
+    - [ ] save
+    - [ ] email a specific participant
 
 # Project Summary
 
