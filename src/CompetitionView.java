@@ -98,10 +98,12 @@ public class CompetitionView extends VBox {
                 editBtn.setText("Edit");
     			typeRadioButton.saveButtonClicked();
     		}
+
     		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
         	participantTableView.setEditable(!participantTableView.isEditable());
+
     	});
     }
 	
