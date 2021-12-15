@@ -95,6 +95,7 @@ public class CompetitionView extends VBox {
     		}
     		else if (editBtn.getText().equals("Save")) {
                 saveModifications();
+                editBtn.setText("Edit");
     			typeRadioButton.saveButtonClicked();
     		}
     		CompetitionName.buttonClicked();
