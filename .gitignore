@@ -12,3 +12,4 @@ StudentBasedCompetition.java
 *.sh
 *xlsx
 .vscode/
+launch.json
