@@ -30,7 +30,7 @@ public abstract class Competition<T extends Participant> implements Comparable<C
     
     
     public void addListener(CompetitionListener listener) {
-        listeners.add(listener);
+        listeners.add(listener) ;
     }
     
     public void noitfyListeners() {
@@ -68,9 +68,13 @@ public abstract class Competition<T extends Participant> implements Comparable<C
     }
 
     public void setDate(Date newdate) {
+        Competition<?> oldc = this;
         this.date = newdate;
         
         noitfyListeners() ;
+        for (CompetitionListener listener : listeners) {
+            listener.dateChanged(oldc, this);
+        }
     }
 
     @Override

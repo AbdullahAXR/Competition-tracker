@@ -114,7 +114,7 @@ public class CompetitionView extends VBox {
 		Globals.currentCompetition.setLink(linkLbl.getTextFieldText());
 		
         try {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Globals.currentCompetition.setDate(sdf.parse(dateLbl.getTextFieldText()));
         	dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
         }
@@ -227,25 +227,27 @@ public class CompetitionView extends VBox {
 
 
     private void update(){
-    	participantTableView.setItems(generateDataInMap());
-    	Callback<TableColumn<Map, String>, TableCell<Map, String>>
-    	cellFactoryForMap = (TableColumn<Map, String> p) ->
-    	new TextFieldTableCell<>(new StringConverter() {
-    		@Override
-    		public String toString(Object t) {
-    			return t.toString();
-    		}
-    		@Override 
-    		public Object fromString(String string) {
-    			return string;
-    		}
-    	});
-    	ids.setCellFactory(cellFactoryForMap);
-    	names.setCellFactory(cellFactoryForMap);
-    	majors.setCellFactory(cellFactoryForMap);
-    	teams.setCellFactory(cellFactoryForMap);
-    	teamsNames.setCellFactory(cellFactoryForMap);
-    	ranks.setCellFactory(cellFactoryForMap);
+		if (Globals.currentCompetition != null) {
+			participantTableView.setItems(generateDataInMap());
+			Callback<TableColumn<Map, String>, TableCell<Map, String>>
+			cellFactoryForMap = (TableColumn<Map, String> p) ->
+			new TextFieldTableCell<>(new StringConverter() {
+				@Override
+				public String toString(Object t) {
+					return t.toString();
+				}
+				@Override 
+				public Object fromString(String string) {
+					return string;
+				}
+			});
+			ids.setCellFactory(cellFactoryForMap);
+			names.setCellFactory(cellFactoryForMap);
+			majors.setCellFactory(cellFactoryForMap);
+			teams.setCellFactory(cellFactoryForMap);
+			teamsNames.setCellFactory(cellFactoryForMap);
+			ranks.setCellFactory(cellFactoryForMap);
+		}
 
         if(Globals.currentCompetition != null){
         	CompetitionName.setTextFieldText(Globals.currentCompetition.getName());

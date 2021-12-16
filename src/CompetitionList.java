@@ -26,12 +26,7 @@ public class CompetitionList extends ListView<Competition<?>> {
         super(comps);
         
         for (Competition<?> c : comps) {
-            c.addListener(new CompetitionListener() {
-                @Override
-                public void onChange(Competition<?> c) {
-                    updateCompeitionList();
-                }
-            });
+            c.addListener( competition -> { updateCompeitionList(); });
         }
         
         this.setCellFactory(cell -> new CompetitionCell());
@@ -106,7 +101,9 @@ public class CompetitionList extends ListView<Competition<?>> {
         // Globals.competitions = oldList ;
         // this.setItems(Globals.competitions);
         
+        Competition<?> c = Globals.currentCompetition; 
         this.setItems(null) ;
         this.setItems(Globals.competitions);
+        Globals.currentCompetition = c ;
     }
 }
