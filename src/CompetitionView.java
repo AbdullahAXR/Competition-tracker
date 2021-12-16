@@ -36,7 +36,7 @@ public class CompetitionView extends VBox {
     private EditableLabel linkLbl = new EditableLabel("Link:","www.google.com");
     private EditableLabel dateLbl = new EditableLabel("Date:","5/10/2019");
     private EditableLabel typeLbl = new EditableLabel("Type:","Team");
-    private EditableRadioButton typeRadioButton = new EditableRadioButton("Type:","Indiv");
+    private EditableRadioButton typeRadioButton = new EditableRadioButton("Type:","Team base Competition");
     private Button addParticipantBtn;
 	private Button browseBtn;
     private Button editBtn = new Button("Edit");
@@ -90,7 +90,7 @@ public class CompetitionView extends VBox {
     	editBtn.setOnAction((e) -> {
     		if (editBtn.getText().equals("Edit")) {
 	    		editBtn.setText("Save");
-	    		typeRadioButton.editButtonClicked("Indiv","Team");
+	    		typeRadioButton.editButtonClicked("Individual base Competition","Team base Competition");
 	    		
     		}
     		else if (editBtn.getText().equals("Save")) {
@@ -297,13 +297,17 @@ public class CompetitionView extends VBox {
         		teams.setVisible(true);
             	teamsNames.setVisible(true);
             	participantTableView.setMaxWidth(80 * 9);
-            	typeLbl.setTextFieldText("Team base Competition");
+            	typeRadioButton.setValue("Team base Competition");
+            	typeRadioButton.updateValueInTypelabel();
         	} else {
         		teams.setVisible(false);
             	teamsNames.setVisible(false);
             	participantTableView.setMaxWidth(80 * 6);
-            	typeLbl.setTextFieldText("Individual base Competition");
+            	typeRadioButton.setValue("Individual base Competition");
+            	typeRadioButton.updateValueInTypelabel();
+
         	}
+        	
         }
     }
     private ObservableList<Map> generateDataInMap() {

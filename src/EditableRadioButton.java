@@ -57,6 +57,9 @@ public class EditableRadioButton extends HBox {
        public String getValue() {
     	   return value;
        }
+       public void setValue(String value) {
+    	   this.value = value;
+       }
        public void disableButtons() {
     	   leftRadioButton.setDisable(true);
     	   rightRadioButton.setDisable(true);
@@ -99,6 +102,9 @@ public class EditableRadioButton extends HBox {
     	   this.getChildren().add(type);
     	   type.setText(value);
     	   HBox.setMargin(type, new Insets(5, 5, 0, 5));
+       }
+       public void updateValueInTypelabel() {
+    	   type.setText(value);
        }
 	
 	
