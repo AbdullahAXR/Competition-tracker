@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Set;
 
 import org.apache.poi.hwpf.model.types.LVLFAbstractType;
 
@@ -128,6 +129,7 @@ public class CompetitionView extends VBox {
     	this.getChildren().add(infoPane);
     	this.getChildren().add(particpantPane);  
         editBtn();
+        addButtonClicked();
     }
 
     private void update(){
@@ -148,23 +150,39 @@ public class CompetitionView extends VBox {
     private void addButtonClicked() {
     	addComptitionButton.setOnAction((e) -> {
     		CompetitionName.setTextFieldText("Name");
-    		dateLbl.setTextFieldText("DD/MM/YYYY");
+    		dateLbl.setTextFieldText("dd/MM/yyyy");
     		linkLbl.setTextFieldText("Compeition link");
     		editBtn.setText("Save");
+    		typeRadioButton.editButtonClicked("Individual base Competition","Team base Competition");
+    		typeRadioButton.enableButtons();
+    		CompetitionName.buttonClicked();
+    		linkLbl.buttonClicked();
+    		dateLbl.buttonClicked();
+    		editBtn();
+    		typeRadioButton.enableButtons();
+    		if (typeRadioButton.getValue().equals("Individual base Competition")) {
+    			Competition<Student> newCompetition = new StudentCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null);
+        		Globals.competitions.add(newCompetition);
+				Globals.currentCompetition = newCompetition;
+				newCompetition.setDate(null);
+        	}else {
+        		Competition<Team> newCompetition = new TeamCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null);
+        		Globals.competitions.add(newCompetition);
+				Globals.currentCompetition = newCompetition;
+				newCompetition.setDate(null);
+        	}
+			
+				
+        	
+    		
     	});
-    		editBtn.setOnAction((e) -> {
-    		if(editBtn.getText().equals("Save")) {
-                saveModifications();
-                editBtn.setText("Edit");
-    			typeRadioButton.saveButtonClicked();
-    		}
-    		});
-//    	if (typeRadioButton.getValue().equals("Individual base Competition")) {
-//    		System.out.println("Indiv");//Compeition<StudentCompetition> newCompetition = new Competition<StudentCompetition>();
-//    	}else {
-//    		System.out.println("Team Boy");
-//    	}
-//    	
+    		
+    	if (typeRadioButton.getValue().equals("Individual base Competition")) {
+    		System.out.println("Indiv");//Compeition<StudentCompetition> newCompetition = new Competition<StudentCompetition>();
+    	}else {
+    		System.out.println("Team Boy");
+    	}
+    	
     	
     }
     public Button getAddButton() {
