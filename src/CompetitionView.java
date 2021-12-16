@@ -29,7 +29,7 @@ import javafx.scene.control.TableColumn;
 
 public class CompetitionView extends VBox {
     // Competition<?> currentCompetition;
-	private EditableLabel CompetitionName = new EditableLabel(" ","Name"); // will be editableLabel  
+	private EditableLabel CompetitionName = new EditableLabel("","Name"); // will be editableLabel  
 	private Label infoLbl = new Label("Info: ");
     private Pane infoPane = new VBox();
     private BorderPane topPane = new BorderPane();
@@ -68,6 +68,8 @@ public class CompetitionView extends VBox {
     }
 
     private void infoPane() {
+    	browseBtn();
+    	linkLbl.getChildren().add(browseBtn);
 		infoPane.getChildren().add(linkLbl);
 		infoPane.getChildren().add(dateLbl);
 		infoPane.getChildren().add(typeRadioButton);
@@ -83,7 +85,7 @@ public class CompetitionView extends VBox {
     	
 		browseBtn = new Button("Browse");
         browseBtn.setOnAction((e) -> browseButtonClicked());
-        this.getChildren().add(browseBtn);
+        
     }
     
     public void editBtn() {
@@ -263,7 +265,6 @@ public class CompetitionView extends VBox {
     	this.getChildren().add(infoPane);
     	particpantPane();
     	this.getChildren().add(particpantPane);  
-        browseBtn();
         editBtn();
     }
 
