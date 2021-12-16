@@ -51,6 +51,9 @@ public class ParticipantTablePane extends VBox {
 	}
 
 	public void fill() {
+		if (Globals.currentCompetition == null) {
+			return;
+		}
 		participantTableView.setItems(generateDataInMap());
 		Callback<TableColumn<Map, String>, TableCell<Map, String>> cellFactoryForMap = (
 				TableColumn<Map, String> p) -> new TextFieldTableCell<>(new StringConverter() {

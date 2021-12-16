@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Test2",
+            "request": "launch",
+            "mainClass": "Test2",
+            "projectName": "swe-pro_77b04430"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -23,7 +30,7 @@
             "request": "launch",
             "mainClass": "Main",
             "projectName": "swe-pro_77b04430",
-            "vmArgs" : "--module-path /Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib --add-modules javafx.controls --add-modules javafx.web"
+            "vmArgs": "--module-path /Users/mohammedalessi/Documents/javafx-sdk-17.0.1/lib --add-modules javafx.controls --add-modules javafx.web"
         },
         {
             "type": "java",
