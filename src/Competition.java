@@ -67,13 +67,13 @@ public abstract class Competition<T extends Participant> implements Comparable<C
         return sdf.format(date);
     }
 
-    public void setDate(Date newdate) {
-        Competition<?> oldc = this;
-        this.date = newdate;
+    public void setDate(Date newd) {
+        Date oldd = (Date) this.getDate().clone(); // don't forget to clone
+        this.date = newd;
         
         noitfyListeners() ;
         for (CompetitionListener listener : listeners) {
-            listener.dateChanged(oldc, this);
+            listener.dateChanged(oldd, newd);
         }
     }
 
@@ -142,9 +142,10 @@ public abstract class Competition<T extends Participant> implements Comparable<C
     }
 
     public boolean isDue(){
-        if(date.compareTo(Globals.NOW) < 0){ // should we use Globals.NOW here?
-            return true;
-        } else
-            return false;
+        return Competition.isDue(this.getDate());
+    }
+
+    public static boolean isDue(Date date){
+        return date.compareTo(Globals.NOW) < 0; // should we use Globals.NOW here?
     }
 }
