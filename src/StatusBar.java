@@ -7,13 +7,14 @@ import javafx.geometry.Pos;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.*;
+import java.util.Date;
 
 
 public class StatusBar extends HBox {
 
     Label numOfStudentCompLbl = new Label("Student Competitions: ");
     Label numOfTeamCompLbl = new Label("Team Competitions: ");
-    Label numOfDueLbl = new Label("Due Competitions: ");
+    Label numOfDueLbl = new Label("Due: ");
 
     IntegerProperty numOfStudentComp = new SimpleIntegerProperty();
     IntegerProperty numOfTeamComp = new SimpleIntegerProperty();
@@ -102,9 +103,9 @@ public class StatusBar extends HBox {
         numOfStudentCompLbl.setText("Student Competitions "+numOfStudentComp.intValue());
 
         numOfDue.addListener( (ob, old, newv) -> {
-            numOfDueLbl.setText("Due "+newv);
+            numOfDueLbl.setText("Due: "+newv);
         });
-        numOfDueLbl.setText("Student Competitions "+numOfDue.intValue());
+        numOfDueLbl.setText("Due: "+numOfDue.intValue());
 
         this.getChildren().add(numOfStudentCompLbl) ;
         this.getChildren().add(numOfTeamCompLbl) ;
