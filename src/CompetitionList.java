@@ -51,6 +51,7 @@ public class CompetitionList extends ListView<Competition<?>> {
     }
 
     public void addButtonClicked() {
+    	Competition<?> newCompetition;
     	
     }
 
@@ -94,6 +95,9 @@ public class CompetitionList extends ListView<Competition<?>> {
         buttonsBox.setMaxHeight(100);
         buttonsBox.setSpacing(80);
         return buttonsBox;
+    }
+    public Button getDeleteButton() {
+    	return deleteButton;
     }
 
     public void selectCompetition(Competition<Participant> competition) {

@@ -24,11 +24,11 @@ public class Main extends Application {
         // ObservableList<Competition<?>> ol = FXCollections.observableArrayList(Globals.MANAGER.readCompetitions());
         CompetitionList cl = new CompetitionList(Globals.competitions);
         BorderPane leftSide = new BorderPane();
-        leftSide.setBottom(cl.buttonHBox());
+        CompetitionView view = new CompetitionView(cl);
+        leftSide.setBottom(view.getHBoxButtons());
         leftSide.setCenter(cl);
         bp.setLeft(leftSide);
         
-        CompetitionView view = new CompetitionView(cl);
         bp.setCenter(view);
 
         StatusBar sb = new StatusBar();

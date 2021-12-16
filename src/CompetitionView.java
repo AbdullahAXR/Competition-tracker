@@ -3,20 +3,26 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;  
+import java.text.SimpleDateFormat;
+
+import org.apache.poi.hwpf.model.types.LVLFAbstractType;
+
 import javafx.scene.control.ListView;
 
 public class CompetitionView extends VBox {
     // Competition<?> currentCompetition;
+	private CompetitionList lv;
+	private Button addComptitionButton = new Button("Add");
 	private BorderPane topPane = new BorderPane();
-	private EditableLabel CompetitionName = new EditableLabel("","Name"); // will be editableLabel  
+	private EditableLabel CompetitionName = new EditableLabel(""," "); // will be editableLabel  
 	private Label infoLbl = new Label("Info: ");
     private Pane infoPane = new VBox();
-    private EditableLabel linkLbl = new EditableLabel("Link:","www.google.com");
-    private EditableLabel dateLbl = new EditableLabel("Date:","5/10/2019");
+    private EditableLabel linkLbl = new EditableLabel("Link:"," ");
+    private EditableLabel dateLbl = new EditableLabel("Date:"," ");
     private EditableRadioButton typeRadioButton = new EditableRadioButton("Type:","Team base Competition");
 	private Button browseBtn = new Button("Browse");
     private Button editBtn = new Button("Edit");
@@ -26,7 +32,7 @@ public class CompetitionView extends VBox {
         super();
         setup();
         update();
-
+        this.lv = (CompetitionList) lv;
         lv.getSelectionModel().selectedItemProperty().addListener( (observable, oldv, newv) ->
                 {
                     update();
@@ -139,5 +145,43 @@ public class CompetitionView extends VBox {
         	}
         }
     }
+    private void addButtonClicked() {
+    	addComptitionButton.setOnAction((e) -> {
+    		CompetitionName.setTextFieldText("Name");
+    		dateLbl.setTextFieldText("DD/MM/YYYY");
+    		linkLbl.setTextFieldText("Compeition link");
+    		editBtn.setText("Save");
+    	});
+    		editBtn.setOnAction((e) -> {
+    		if(editBtn.getText().equals("Save")) {
+                saveModifications();
+                editBtn.setText("Edit");
+    			typeRadioButton.saveButtonClicked();
+    		}
+    		});
+//    	if (typeRadioButton.getValue().equals("Individual base Competition")) {
+//    		System.out.println("Indiv");//Compeition<StudentCompetition> newCompetition = new Competition<StudentCompetition>();
+//    	}else {
+//    		System.out.println("Team Boy");
+//    	}
+//    	
+    	
+    }
+    public Button getAddButton() {
+    	return addComptitionButton;
+    }
+    
+    public HBox getHBoxButtons() {
+    	HBox buttonsBox = new HBox();
+    	Button deleteButton = lv.getDeleteButton();
+    	buttonsBox.getChildren().addAll(addComptitionButton,deleteButton);
+    	HBox.setMargin(addComptitionButton, new Insets(5, 2, 8, 5));
+        HBox.setMargin(deleteButton, new Insets(0, 5, 0, 5));
+        buttonsBox.setAlignment(Pos.BASELINE_CENTER);
+        buttonsBox.setMaxHeight(100);
+        buttonsBox.setSpacing(80);
+        return buttonsBox;
+    }
+
     
 }
