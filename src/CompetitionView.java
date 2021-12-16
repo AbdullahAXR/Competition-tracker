@@ -70,6 +70,7 @@ public class CompetitionView extends VBox {
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
     		particpantPane.participantTableView.setEditable(!particpantPane.participantTableView.isEditable());
+    		particpantPane.fill();
     		particpantPane.participantTableView.refresh();
     	});
     }

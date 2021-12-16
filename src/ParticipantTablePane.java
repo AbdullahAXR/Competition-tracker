@@ -1,7 +1,10 @@
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections4.IteratorUtils;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -19,6 +23,7 @@ import javafx.util.StringConverter;
 
 public class ParticipantTablePane extends VBox {
 	public TableView participantTableView = new TableView(); // temporary public 
+	private TableColumn<Map, String> studNumCol = new TableColumn<>("Num");
 	private TableColumn<Map, String> ids = new TableColumn<>("Student ID");
 	private TableColumn<Map, String> names = new TableColumn<>("Student Name");
 	private TableColumn<Map, String> majors = new TableColumn<>("Major");
@@ -30,6 +35,7 @@ public class ParticipantTablePane extends VBox {
 
 	public ParticipantTablePane() {
 		VBox.setMargin(participantTableView, new Insets(10, 50, 10, 50));
+		studNumCol.setPrefWidth(cellWidth*0.5);
 		ids.setMinWidth(cellWidth);
 		names.setMinWidth(cellWidth * 2);
 		majors.setMinWidth(cellWidth);
@@ -37,7 +43,8 @@ public class ParticipantTablePane extends VBox {
 		teamsNames.setMinWidth(cellWidth * 2);
 		ranks.setMinWidth(cellWidth);
 		emailColumn.setMinWidth(cellWidth);
-
+		
+		studNumCol.setCellValueFactory(new MapValueFactory<>(studNumCol.getText()));
 		ids.setCellValueFactory(new MapValueFactory<>(ids.getText()));
 		names.setCellValueFactory(new MapValueFactory<>(names.getText()));
 		majors.setCellValueFactory(new MapValueFactory<>(majors.getText()));
@@ -45,7 +52,11 @@ public class ParticipantTablePane extends VBox {
 		teamsNames.setCellValueFactory(new MapValueFactory<>(teamsNames.getText()));
 		ranks.setCellValueFactory(new MapValueFactory<>(ranks.getText()));
 		emailColumn();
-		participantTableView.getColumns().addAll(ids, names, majors, teams, teamsNames, ranks, emailColumn);
+		
+		studNumCol.setEditable(false);
+		teams.setEditable(false);
+		saveCellsEdited();
+		participantTableView.getColumns().addAll(studNumCol, ids, names, majors, teams, teamsNames, ranks, emailColumn);
 		getChildren().add(participantTableView);
 		setAlignment(Pos.CENTER);
 	}
@@ -53,6 +64,7 @@ public class ParticipantTablePane extends VBox {
 	public void fill() {
 		if (Globals.currentCompetition == null) {
 			return;
+			
 		}
 		participantTableView.setItems(generateDataInMap());
 		Callback<TableColumn<Map, String>, TableCell<Map, String>> cellFactoryForMap = (
@@ -67,6 +79,8 @@ public class ParticipantTablePane extends VBox {
 						return string;
 					}
 				});
+
+		studNumCol.setCellFactory(cellFactoryForMap);
 		ids.setCellFactory(cellFactoryForMap);
 		names.setCellFactory(cellFactoryForMap);
 		majors.setCellFactory(cellFactoryForMap);
@@ -78,11 +92,11 @@ public class ParticipantTablePane extends VBox {
 			if (Globals.currentCompetition instanceof TeamCompetition) {
 				teams.setVisible(true);
 				teamsNames.setVisible(true);
-				participantTableView.setMaxWidth(cellWidth * 9);
+				participantTableView.setMaxWidth(cellWidth * 9.5);
 			} else {
 				teams.setVisible(false);
 				teamsNames.setVisible(false);
-				participantTableView.setMaxWidth(cellWidth * 6);
+				participantTableView.setMaxWidth(cellWidth * 6.5);
 			}
 		}
 	}
@@ -92,6 +106,7 @@ public class ParticipantTablePane extends VBox {
 		// TODO Solve the null value Exception
 		Iterator<?> particpants = Globals.currentCompetition.getParticipants().iterator();
 		int teamNum = 1;
+		int studentNum = 1;
 		while (particpants.hasNext()) {
 			Map<String, String> dataRow = new HashMap<>();
 			Student currentStudent;
@@ -102,6 +117,7 @@ public class ParticipantTablePane extends VBox {
 				while (students.hasNext()) {
 					dataRow = new HashMap<>();
 					currentStudent = students.next();
+					dataRow.put(studNumCol.getText(), Integer.toString(studentNum));
 					dataRow.put(ids.getText(), currentStudent.getId());
 					dataRow.put(names.getText(), currentStudent.getName());
 					dataRow.put(majors.getText(), currentStudent.getMajor());
@@ -110,10 +126,11 @@ public class ParticipantTablePane extends VBox {
 					dataRow.put(ranks.getText(),
 							((Competition<Participant>) Globals.currentCompetition).getResult(currentTeam));
 					alldata.add(dataRow);
+					studentNum++;
 				}
-
 			} else {
 				currentStudent = ((Student) particpants.next());
+				dataRow.put(studNumCol.getText(), Integer.toString(studentNum));
 				dataRow.put(ids.getText(), currentStudent.getId());
 				dataRow.put(names.getText(), currentStudent.getName());
 				dataRow.put(majors.getText(), currentStudent.getMajor());
@@ -122,6 +139,7 @@ public class ParticipantTablePane extends VBox {
 				dataRow.put(ranks.getText(),
 						((Competition<Participant>) Globals.currentCompetition).getResult(currentStudent));
 				alldata.add(dataRow);
+				studentNum++;
 			}
 			teamNum++;
 		}
@@ -189,5 +207,44 @@ public class ParticipantTablePane extends VBox {
 			}
 		};
 		emailColumn.setCellFactory(cellFactory);
+	}
+	
+	private void saveCellsEdited( ) {
+		ids.setOnEditCommit((CellEditEvent<Map, String> t) -> {
+			List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
+			int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
+			students.get(stdNum).setId(t.getNewValue());
+		});
+		
+		names.setOnEditCommit((CellEditEvent<Map, String> t) -> {
+			List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
+			int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
+			students.get(stdNum).setName(t.getNewValue());
+		});
+		
+		majors.setOnEditCommit((CellEditEvent<Map, String> t) -> {
+			List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
+			int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
+			students.get(stdNum).setMajor(t.getNewValue());
+		});
+		
+		teamsNames.setOnEditCommit((CellEditEvent<Map, String> t) -> {
+			List<Team> teams = IteratorUtils.toList(((TeamCompetition)Globals.currentCompetition).getParticipants().iterator());
+			int teamNum = Integer.parseInt(this.teams.getCellData(t.getTablePosition().getRow())) - 1;
+			teams.get(teamNum).setName(t.getNewValue());
+		});
+		
+		ranks.setOnEditCommit((CellEditEvent<Map, String> t) -> {
+			if (Globals.currentCompetition instanceof TeamCompetition) {
+				List<Team> teams = IteratorUtils.toList(((TeamCompetition)Globals.currentCompetition).getParticipants().iterator());
+				int teamNum = Integer.parseInt(this.teams.getCellData(t.getTablePosition().getRow())) - 1;
+				((TeamCompetition)Globals.currentCompetition).results.replace(teams.get(teamNum), t.getNewValue());
+			} else {
+				List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
+				int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
+				((StudentCompetition)Globals.currentCompetition).results.replace(students.get(stdNum), t.getNewValue());
+			}
+		});
+
 	}
 }
