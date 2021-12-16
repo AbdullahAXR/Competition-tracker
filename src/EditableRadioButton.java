@@ -1,3 +1,4 @@
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.geometry.Insets;
 import javafx.scene.control.RadioButton;
@@ -106,6 +107,12 @@ public class EditableRadioButton extends HBox {
        public void updateValueInTypelabel() {
     	   type.setText(value);
        }
+       public RadioButton getLeftButton() {
+    	   return leftRadioButton;
+       }
+       public RadioButton getRightButton() {
+    	   return rightRadioButton;
+       } 
 	
 	
 	
