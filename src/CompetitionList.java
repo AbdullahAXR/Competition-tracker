@@ -31,6 +31,9 @@ public class CompetitionList extends ListView<Competition<?>> {
                 public void onChange(Competition<?> c) {
                     updateCompeitionList();
                 }
+                
+                @Override
+                public void dateChanged(Competition<?> oldc ,Competition<?> newc) {}
             });
         }
         
