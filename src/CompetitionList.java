@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import java.util.Date;
 
 public class CompetitionList extends ListView<Competition<?>> {
      public Button addButton = new Button("Add");
@@ -33,7 +34,7 @@ public class CompetitionList extends ListView<Competition<?>> {
                 }
                 
                 @Override
-                public void dateChanged(Competition<?> oldc ,Competition<?> newc) {}
+                public void dateChanged(Date oldd, Date newd) {}
             });
         }
         

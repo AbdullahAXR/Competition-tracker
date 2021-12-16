@@ -1,4 +1,6 @@
+import java.util.Date;
+
 public interface CompetitionListener {
     void onChange(Competition<?> c);
-    void dateChanged(Competition<?> oldc ,Competition<?> newc);
+    void dateChanged(Date oldd, Date newd);
 }
