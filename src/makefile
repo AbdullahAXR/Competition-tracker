@@ -8,7 +8,6 @@ CompetitionList.class: CompetitionList.java ParticipantTablePane.class
 ParticipantTablePane.class: ParticipantTablePane.java
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" ParticipantTablePane.java 
 
-
 CompetitionView.class : CompetitionView.java Emailer.class CompetitionBrowser.class EditableRadioButton.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionView.java 
 
@@ -56,11 +55,11 @@ CompetitionCell.class: CompetitionCell.java
 Team.class: Team.java Student.class Participant.class
 	javac Team.java
 
-CompetitionListener.class: CompetitionListener.java Competition.class
-	javac CompetitionListener.java
-
-Competition.class: Competition.java
+Competition.class: Competition.java CompetitionListener.class 
 	javac Competition.java
+
+CompetitionListener.class: CompetitionListener.java
+	javac CompetitionListener.java
 
 clean:
 	rm *.class
