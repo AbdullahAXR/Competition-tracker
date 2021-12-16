@@ -16,10 +16,18 @@ public class Student extends Participant {
     public String getId() {
         return id;
     }
+    
+    public void setId(String id) {
+    	this.id = id;
+        }
 
     public String getMajor() {
         return major;
     }
+    
+    public void setMajor(String major) {
+    	this.major = major;
+        }
 
     @Override
     public String toString(){
