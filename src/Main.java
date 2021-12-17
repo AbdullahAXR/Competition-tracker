@@ -24,9 +24,8 @@ public class Main extends Application {
         // ObservableList<Competition<?>> ol = FXCollections.observableArrayList(Globals.MANAGER.readCompetitions());
         CompetitionList cl = new CompetitionList(Globals.competitions);
 
-        // save and close the stage when clicked
+        // close the stage when clicked
         cl.getExitButton().setOnAction(e -> {
-            save();
             stage.close();
         });
 
@@ -47,9 +46,14 @@ public class Main extends Application {
     }
 
     public void save() {
-        System.out.println("saving!");
         ArrayList<Competition<?>> arrlist = new ArrayList<Competition<?>>(Globals.competitions);
         Globals.MANAGER.writeCompetitions(arrlist);
+    }
+
+    // save changes on exit
+    @Override
+    public void stop() {
+        save();
     }
 
     public static void main(String[] args) {
