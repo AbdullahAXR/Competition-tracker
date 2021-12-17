@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -37,8 +38,8 @@ public class ParticipantTablePane extends VBox {
 	private Button addBtn = new Button("+");
 	private Button removeBtn = new Button("-");
 	private HBox addnRemovePane = new HBox(Globals.SPACING,addBtn,removeBtn);
-	private RadioButton teamRb = new RadioButton();
-	private RadioButton studentRb = new RadioButton();
+	private RadioButton TeamRb = new RadioButton();
+	private ComboBox<Team> teamsCbo = new ComboBox<>();
 
 	public ParticipantTablePane() {
 		VBox.setMargin(addnRemovePane, new Insets(10, 50, 0, 50));
@@ -103,16 +104,23 @@ public class ParticipantTablePane extends VBox {
 		if (Globals.currentCompetition != null) {
 			if (Globals.currentCompetition instanceof TeamCompetition) {
 				addnRemovePane.setMaxWidth(cellWidth * 9.5);
+				if (!addnRemovePane.getChildren().contains(teamsCbo))
+					addnRemovePane.getChildren().add(0, teamsCbo);
+				ObservableList<Team> teamsObsLst= FXCollections.observableArrayList(((TeamCompetition)Globals.currentCompetition).getParticipants());
+				teamsCbo.setItems(teamsObsLst);
+				teamsCbo.getItems().add(0,new Team("New team"));
 				teams.setVisible(true);
 				teamsNames.setVisible(true);
 				participantTableView.setMaxWidth(cellWidth * 9.5);
 			} else {
 				addnRemovePane.setMaxWidth(cellWidth * 6.5);
+				addnRemovePane.getChildren().remove(teamsCbo);
 				teams.setVisible(false);
 				teamsNames.setVisible(false);
 				participantTableView.setMaxWidth(cellWidth * 6.5);
 			}
 		}
+		teamsCbo.setPromptText("Select team");
 	}
 
 	private ObservableList<Map> generateDataInMap() {
@@ -289,17 +297,18 @@ public class ParticipantTablePane extends VBox {
 	}
 	
 	private void addBtnClicked() {
-//		Map<String, String> dataRow = new HashMap<>();
-//		dataRow.put(studNumCol.getText(), Integer.toString(0));
-//		dataRow.put(ids.getText(), "-");
-//		dataRow.put(names.getText(), "-");
-//		dataRow.put(majors.getText(), "-");
-//		dataRow.put(teams.getText(), "-");
-//		dataRow.put(teamsNames.getText(), "-");
-//		dataRow.put(ranks.getText(),"-");
-//		participantTableView.getItems().add(dataRow);
 		if (Globals.currentCompetition instanceof TeamCompetition) {
-			
+			if (teamsCbo.getSelectionModel().isEmpty()) return;
+			Student teamMember = new Student("ID","Name","Major");
+			Team selectedTeam = teamsCbo.getSelectionModel().getSelectedItem();
+			selectedTeam.add(teamMember);
+			if (selectedTeam.getName().equals(("New team"))) {
+				((TeamCompetition)Globals.currentCompetition).put(selectedTeam, "-");
+				selectedTeam.setName("Team name");
+			}
+			int stdIndex = ((TeamCompetition)Globals.currentCompetition).getParticipants().iterator().next().indexOf(teamMember);
+			fill();
+			participantTableView.getSelectionModel().select(stdIndex);
 		}
 		else {
 			((StudentCompetition)Globals.currentCompetition).put(new Student("ID","Name","Major"), "-");
