@@ -21,6 +21,7 @@ public class EditableRadioButton extends HBox {
 	private RadioButton rightRadioButton = new RadioButton();
 	private ToggleGroup toggleGroup = new ToggleGroup();
 	private String value;
+	private boolean isEdit;
     
     public EditableRadioButtonDelegate delegate;
     
@@ -40,6 +41,7 @@ public class EditableRadioButton extends HBox {
         rightRadioButton.setToggleGroup(toggleGroup);
         leftRadioButton.setSelected(true);// i selected the first choice by default to check if the disable work or not
         value = Choise1;
+        isEdit = false;
 
         toggleGroup.selectedToggleProperty().addListener( (ov, t1, t2) -> changed(ov, t1, t2));
 	}
@@ -84,6 +86,9 @@ public class EditableRadioButton extends HBox {
        	
        }
        public void editButtonClicked(String Choise1, String Choise2) {
+    	   if(isEdit == true) {
+    		   return;
+    	   }
     	   this.getChildren().remove(type);
     	   this.getChildren().add(leftRadioButton);
            this.getChildren().add(rightRadioButton);
@@ -103,6 +108,9 @@ public class EditableRadioButton extends HBox {
        }
        
        public void saveButtonClicked() {
+    	   if(isEdit == true) {
+    		   return;
+    	   }
     	   this.getChildren().remove(leftRadioButton);
     	   this.getChildren().remove(rightRadioButton);
     	   this.getChildren().add(type);
