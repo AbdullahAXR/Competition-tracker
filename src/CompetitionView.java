@@ -1,5 +1,6 @@
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -13,6 +14,7 @@ import java.util.Set;
 import org.apache.poi.hwpf.model.types.LVLFAbstractType;
 
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 
 public class CompetitionView extends VBox {
     // Competition<?> currentCompetition;
@@ -29,6 +31,11 @@ public class CompetitionView extends VBox {
     private Button editBtn = new Button("Edit");
 	private ParticipantTablePane particpantPane = new ParticipantTablePane();
 	
+	private Alert warningAlert = new Alert(AlertType.WARNING) ;
+
+	
+	private Competition<?> createdCompetition ;
+	
     CompetitionView(ListView<Competition<?>> lv){
         super();
         setup();
@@ -38,7 +45,20 @@ public class CompetitionView extends VBox {
                 {
                     update();
                 });
+				
+				
+		typeRadioButton.delegate = new EditableRadioButtonDelegate() {
 
+			@Override
+			public void radioButtonChanged(EditableRadioButton erb) {
+				// TODO Auto-generated method stub
+				if (erb.getValue().equals("Individual base Competition")) {
+					createdCompetition = new StudentCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null);
+				} else {
+					createdCompetition = new TeamCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null);
+				}
+			}
+		} ;
     }
 
     private void infoPane() {
@@ -66,7 +86,10 @@ public class CompetitionView extends VBox {
                 saveModifications();
                 editBtn.setText("Edit");
     			typeRadioButton.saveButtonClicked();
-    		}
+    		} else if (editBtn.getText().equals("Create")) {
+				createNewCompetition();
+				typeRadioButton.saveButtonClicked();
+			}
     		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
@@ -77,23 +100,49 @@ public class CompetitionView extends VBox {
     }
 	
 	private void saveModifications() {
+		
 		System.out.println("Saving Modifications");
 		Globals.currentCompetition.setName(CompetitionName.getTextFieldText());
 		Globals.currentCompetition.setLink(linkLbl.getTextFieldText());
 		
-        try {
+		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Globals.currentCompetition.setDate(sdf.parse(dateLbl.getTextFieldText()));
-        	dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
-        }
-        catch(ParseException e){
-            // ignore user's input
-        }
-        finally {
-            // set the dataLbl value to the value of the (possibly new) date string of the competitoin.
-            dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
-        }
+			dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
+		}
+		catch(ParseException e){
+			// ignore user's input
+		}
+		finally {
+			// set the dataLbl value to the value of the (possibly new) date string of the competitoin.
+			dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
+		}
+		
 	}
+	
+	
+	private void createNewCompetition() {
+		createdCompetition.setName(CompetitionName.getTextFieldText());
+		createdCompetition.setLink(linkLbl.getTextFieldText());
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			createdCompetition.setDate(sdf.parse(dateLbl.getTextFieldText()));
+			dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
+		}
+		catch(ParseException e){
+			
+			warningAlert.setTitle("Wrong date");
+			warningAlert.setHeaderText("Wrong date format, please eneter a valid date in the format dd/MM/yyyy");
+			warningAlert.showAndWait();
+			System.out.println("ParseException");
+			return;
+		}
+		dateLbl.setTextFieldText(createdCompetition.getDateString());
+		Globals.competitions.add(createdCompetition);
+		Globals.currentCompetition = createdCompetition;
+		editBtn.setText("Edit");
+	}
+	
 
     public void browseButtonClicked() {
         CompetitionBrowser.browse(Globals.currentCompetition);
@@ -150,40 +199,23 @@ public class CompetitionView extends VBox {
     }
     private void addButtonClicked() {
     	addComptitionButton.setOnAction((e) -> {
-    		CompetitionName.setTextFieldText("Name");
+    					
+			CompetitionName.setTextFieldText("Name");
     		dateLbl.setTextFieldText("dd/MM/yyyy");
     		linkLbl.setTextFieldText("Compeition link");
-    		editBtn.setText("Save");
+    		editBtn.setText("Create");
     		typeRadioButton.editButtonClicked("Individual base Competition","Team base Competition");
     		typeRadioButton.enableButtons();
+			createdCompetition = typeRadioButton.getValue().equals("Team base Competition") ? new TeamCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null) : new StudentCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null) ;
+			
     		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
     		editBtn();
     		typeRadioButton.enableButtons();
-    		if (typeRadioButton.getValue().equals("Individual base Competition")) {
-    			Competition<Student> newCompetition = new StudentCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null);
-        		Globals.competitions.add(newCompetition);
-				Globals.currentCompetition = newCompetition;
-				newCompetition.setDate(null);
-        	}else {
-        		Competition<Team> newCompetition = new TeamCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null);
-        		Globals.competitions.add(newCompetition);
-				Globals.currentCompetition = newCompetition;
-				newCompetition.setDate(null);
-        	}
 			
-				
-        	
-    		
+			particpantPane.participantTableView.getItems().clear();
     	});
-    		
-    	if (typeRadioButton.getValue().equals("Individual base Competition")) {
-    		System.out.println("Indiv");//Compeition<StudentCompetition> newCompetition = new Competition<StudentCompetition>();
-    	}else {
-    		System.out.println("Team Boy");
-    	}
-    	
     	
     }
     public Button getAddButton() {
