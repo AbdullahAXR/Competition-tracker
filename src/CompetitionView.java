@@ -229,7 +229,7 @@ public class CompetitionView extends VBox {
 			particpantPane.participantTableView.getItems().clear();
 			
 			particpantPane.participantTableView.setEditable(true);			
-    		particpantPane.btnsSetDisabled(true);
+    		particpantPane.btnsSetDisabled(false);
     	});
     	
     }
