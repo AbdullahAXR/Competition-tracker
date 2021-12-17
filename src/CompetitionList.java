@@ -1,4 +1,5 @@
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,7 +27,31 @@ public class CompetitionList extends ListView<Competition<?>> {
 
     CompetitionList(ObservableList<Competition<?>> comps){
         super(comps);
-        
+        Globals.competitions.addListener(new ListChangeListener<Competition<?>>() {
+
+            @Override
+            public void onChanged(Change<? extends Competition<?>> c) {
+                // TODO Auto-generated method stub
+                while (c.next()) {
+                    if (c.wasAdded()) {
+                        for (Competition<?> additem : c.getAddedSubList()) {
+                            additem.addListener(new CompetitionListener() {
+                                @Override
+                                public void onChange(Competition<?> c) {
+                                    updateCompeitionList();
+                                }
+                                
+                                @Override
+                                public void dateChanged(Date oldd, Date newd) {}
+                            });
+                            // setupLabels();
+                            // additem.add(Outer.this);
+                        }
+                    }
+                }
+            }
+            
+        });
         for (Competition<?> c : comps) {
             c.addListener(new CompetitionListener() {
                 @Override
