@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -36,10 +37,10 @@ public class ParticipantTablePane extends VBox {
 	private Button addBtn = new Button("+");
 	private Button removeBtn = new Button("-");
 	private HBox addnRemovePane = new HBox(Globals.SPACING,addBtn,removeBtn);
+	private RadioButton teamRb = new RadioButton();
+	private RadioButton studentRb = new RadioButton();
 
 	public ParticipantTablePane() {
-		// setMinHeight(490);
-		// participantTableView.setMinHeight(400);
 		VBox.setMargin(addnRemovePane, new Insets(10, 50, 0, 50));
 		addBtn.setOnAction((e) -> addBtnClicked());
 		removeBtn.setOnAction((e) -> removeBtnClicked());
