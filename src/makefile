@@ -1,10 +1,12 @@
 Main.class : Main.java StudentCompetition.class TeamCompetition.class CompetitionManager.class StatusBar.class Globals.class CompetitionView.class CompetitionList.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main.java
-	java  -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
+	java -Dsun.java2d.dpiaware=false -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
 
-CompetitionList.class: CompetitionList.java
+CompetitionList.class: CompetitionList.java ParticipantTablePane.class 	CompetitionCell.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionList.java 
 
+ParticipantTablePane.class: ParticipantTablePane.java
+	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" ParticipantTablePane.java 
 
 CompetitionView.class : CompetitionView.java Emailer.class CompetitionBrowser.class EditableRadioButton.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionView.java 
@@ -12,13 +14,13 @@ CompetitionView.class : CompetitionView.java Emailer.class CompetitionBrowser.cl
 EditableRadioButton.class: EditableRadioButton.java
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" EditableRadioButton.java
 
-CompetitionBrowser.class : CompetitionBrowser.java
+CompetitionBrowser.class : CompetitionBrowser.java Competition.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.web --add-modules javafx.controls CompetitionBrowser.java
 
-StatusBar.class : StatusBar.java
+StatusBar.class : StatusBar.java Competition.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" StatusBar.java 
 
-Emailer.class : Emailer.java
+Emailer.class : Emailer.java Competition.class
 	javac Emailer.java
 
 Globals.class: Globals.java
@@ -35,22 +37,29 @@ CompetitionSheetBuilder.class: CompetitionSheetBuilder.java CompetitionSheetPars
 CompetitionSheetParser.class: CompetitionSheetParser.java TeamCompetition.java StudentCompetition.java;
 	javac  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionSheetParser.java 
 
-TeamCompetition.class: TeamCompetition.java Competition.java Team.java 
+TeamCompetition.class: TeamCompetition.java Competition.class Team.class 
 	javac TeamCompetition.java
 
-StudentCompetition.class: StudentCompetition.java Competition.java Student.java
+StudentCompetition.class: StudentCompetition.java Competition.class Student.class
 	javac StudentCompetition.java
 
-Student.class: Student.java Participant.java
+Student.class: Student.java Participant.class
 	javac Student.java
 
 Participant.class: Participant.java
+	javac Participant.java
 
-Team.class: Team.java Student.java Participant.java
+CompetitionCell.class: CompetitionCell.java
+	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls CompetitionCell.java
+
+Team.class: Team.java Student.class Participant.class
 	javac Team.java
 
-Competition.class: Competition.java
+Competition.class: Competition.java CompetitionListener.class 
 	javac Competition.java
+
+CompetitionListener.class: CompetitionListener.java
+	javac CompetitionListener.java
 
 clean:
 	rm *.class
@@ -60,4 +69,4 @@ test:
 	java --module-path /usr/lib/jvm/openjfx17/lib   --add-modules  javafx.web --add-modules  javafx.controls -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test
 
 run:
-	java  -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
+	java -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main

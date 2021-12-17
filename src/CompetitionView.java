@@ -53,9 +53,9 @@ public class CompetitionView extends VBox {
 			public void radioButtonChanged(EditableRadioButton erb) {
 				// TODO Auto-generated method stub
 				if (erb.getValue().equals("Individual base Competition")) {
-					createdCompetition = new StudentCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null);
+					createdCompetition = new StudentCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), Globals.NOW);
 				} else {
-					createdCompetition = new TeamCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null);
+					createdCompetition = new TeamCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), Globals.NOW);
 				}
 			}
 		} ;
@@ -218,7 +218,7 @@ public class CompetitionView extends VBox {
     		editBtn.setText("Create");
     		typeRadioButton.editButtonClicked("Individual base Competition","Team base Competition");
     		typeRadioButton.enableButtons();
-			createdCompetition = typeRadioButton.getValue().equals("Team base Competition") ? new TeamCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null) : new StudentCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), null) ;
+			createdCompetition = typeRadioButton.getValue().equals("Team base Competition") ? new TeamCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), Globals.NOW) : new StudentCompetition(CompetitionName.getTextFieldText(),linkLbl.getTextFieldText(), Globals.NOW) ;
 			
     		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
@@ -229,7 +229,7 @@ public class CompetitionView extends VBox {
 			particpantPane.participantTableView.getItems().clear();
 			
 			particpantPane.participantTableView.setEditable(true);			
-    		particpantPane.btnsSetDisabled(true);
+    		particpantPane.btnsSetDisabled(false);
     	});
     	
     }
@@ -240,7 +240,8 @@ public class CompetitionView extends VBox {
     public HBox getHBoxButtons() {
     	HBox buttonsBox = new HBox();
     	Button deleteButton = lv.getDeleteButton();
-    	buttonsBox.getChildren().addAll(addComptitionButton,deleteButton);
+        Button exitButton = lv.getExitButton();
+    	buttonsBox.getChildren().addAll(addComptitionButton,deleteButton, exitButton);
     	HBox.setMargin(addComptitionButton, new Insets(5, 2, 8, 5));
         HBox.setMargin(deleteButton, new Insets(0, 5, 0, 5));
         buttonsBox.setAlignment(Pos.BASELINE_CENTER);

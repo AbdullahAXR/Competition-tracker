@@ -1,4 +1,5 @@
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,10 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import java.util.Date;
 
 public class CompetitionList extends ListView<Competition<?>> {
      public Button addButton = new Button("Add");
      public Button deleteButton = new Button("Delete");
+     public Button exitButton = new Button("Exit");
     // public Pane competitionView;
     // public Competition<?> currentCompetition;
     
@@ -24,7 +27,31 @@ public class CompetitionList extends ListView<Competition<?>> {
 
     CompetitionList(ObservableList<Competition<?>> comps){
         super(comps);
-        
+        Globals.competitions.addListener(new ListChangeListener<Competition<?>>() {
+
+            @Override
+            public void onChanged(Change<? extends Competition<?>> c) {
+                // TODO Auto-generated method stub
+                while (c.next()) {
+                    if (c.wasAdded()) {
+                        for (Competition<?> additem : c.getAddedSubList()) {
+                            additem.addListener(new CompetitionListener() {
+                                @Override
+                                public void onChange(Competition<?> c) {
+                                    updateCompeitionList();
+                                }
+                                
+                                @Override
+                                public void dateChanged(Date oldd, Date newd) {}
+                            });
+                            // setupLabels();
+                            // additem.add(Outer.this);
+                        }
+                    }
+                }
+            }
+            
+        });
         for (Competition<?> c : comps) {
             c.addListener(new CompetitionListener() {
                 @Override
@@ -33,7 +60,7 @@ public class CompetitionList extends ListView<Competition<?>> {
                 }
                 
                 @Override
-                public void dateChanged(Competition<?> oldc ,Competition<?> newc) {}
+                public void dateChanged(Date oldd, Date newd) {}
             });
         }
         
@@ -68,6 +95,10 @@ public class CompetitionList extends ListView<Competition<?>> {
         
     }
 
+    public void exitButtonClicked() {
+        
+    }
+
     public void competitionCellClicked() {
         
     }
@@ -82,7 +113,7 @@ public class CompetitionList extends ListView<Competition<?>> {
     
     public HBox buttonHBox() {
     	HBox buttonsBox = new HBox();
-    	buttonsBox.getChildren().addAll(addButton,deleteButton);
+    	buttonsBox.getChildren().addAll(addButton, deleteButton, exitButton);
     	HBox.setMargin(addButton, new Insets(5, 2, 8, 5));
         HBox.setMargin(deleteButton, new Insets(0, 5, 0, 5));
         buttonsBox.setAlignment(Pos.BASELINE_CENTER);
@@ -90,9 +121,15 @@ public class CompetitionList extends ListView<Competition<?>> {
         buttonsBox.setSpacing(80);
         return buttonsBox;
     }
+
     public Button getDeleteButton() {
     	return deleteButton;
     }
+
+    public Button getExitButton() {
+    	return exitButton;
+    }
+
 
     public void selectCompetition(Competition<Participant> competition) {
 

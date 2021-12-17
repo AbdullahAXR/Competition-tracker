@@ -7,13 +7,14 @@ import javafx.geometry.Pos;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.*;
+import java.util.Date;
 
 
 public class StatusBar extends HBox {
 
     Label numOfStudentCompLbl = new Label("Student Competitions: ");
     Label numOfTeamCompLbl = new Label("Team Competitions: ");
-    Label numOfDueLbl = new Label("Due Competitions: ");
+    Label numOfDueLbl = new Label("Due: ");
 
     IntegerProperty numOfStudentComp = new SimpleIntegerProperty();
     IntegerProperty numOfTeamComp = new SimpleIntegerProperty();
@@ -32,6 +33,10 @@ public class StatusBar extends HBox {
         this.setAlignment(Pos.CENTER); // should we really hardcode this?
 
         setupLabels();
+
+        for(Competition<?> c : Globals.competitions){
+            attachDateListner(c);
+        }
 
         // untested. I can't test this until we can edit and add competitions
         Globals.competitions.addListener(new ListChangeListener<Competition<?>>() {
@@ -68,6 +73,7 @@ public class StatusBar extends HBox {
                                 numOfTeamComp.set(numOfTeamComp.intValue()+1);
                             else
                                 numOfStudentComp.set(numOfStudentComp.intValue()+1);
+                            attachDateListner(additem);
 
                             // setupLabels();
                             // additem.add(Outer.this);
@@ -78,6 +84,36 @@ public class StatusBar extends HBox {
             }
         });
     }
+
+    private void attachDateListner(Competition<?> c){
+        c.addListener(new CompetitionListener() {
+            @Override
+            public void dateChanged(Date oldd, Date newd) {
+                boolean wasdue = Competition.isDue(oldd);
+                boolean isdue = Competition.isDue(newd);
+                if(isdue != wasdue) {
+                    System.out.println("should change...");
+                    numOfDue.set(numOfDue.get() + (isdue ? +1 : -1));
+                }
+            }
+
+            @Override
+            public void onChange(Competition<?> c){
+                // ignore
+            }
+        });
+    }
+
+    // public void competitionUpdated(Competition<?> c){
+    //     c.addListener( (competition) -> {
+    //         if (competition.isDue()) {
+    //             this.numOfDue += 1 ;
+    //         } else {
+    //             this.numOfDue -= 1 ;
+    //         }
+
+    //     }
+    // }
 
     public void setupLabels(){
 
@@ -102,9 +138,9 @@ public class StatusBar extends HBox {
         numOfStudentCompLbl.setText("Student Competitions "+numOfStudentComp.intValue());
 
         numOfDue.addListener( (ob, old, newv) -> {
-            numOfDueLbl.setText("Due "+newv);
+            numOfDueLbl.setText("Due: "+newv);
         });
-        numOfDueLbl.setText("Student Competitions "+numOfDue.intValue());
+        numOfDueLbl.setText("Due: "+numOfDue.intValue());
 
         this.getChildren().add(numOfStudentCompLbl) ;
         this.getChildren().add(numOfTeamCompLbl) ;

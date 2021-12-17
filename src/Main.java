@@ -16,27 +16,46 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage){
-        BorderPane bp = new BorderPane();
+        BorderPane root = new BorderPane();
 
         //StatusBar statusBar = new StatusBar(Globals.SPACING);
-        //bp.setBottom(statusBar);
+        //root.setBottom(statusBar);
 
         // ObservableList<Competition<?>> ol = FXCollections.observableArrayList(Globals.MANAGER.readCompetitions());
         CompetitionList cl = new CompetitionList(Globals.competitions);
+
+        // close the stage when clicked
+        cl.getExitButton().setOnAction(e -> {
+            stage.close();
+        });
+
         BorderPane leftSide = new BorderPane();
         CompetitionView view = new CompetitionView(cl);
         leftSide.setBottom(view.getHBoxButtons());
         leftSide.setCenter(cl);
-        bp.setLeft(leftSide);
+        root.setLeft(leftSide);
         
-        bp.setCenter(view);
+        root.setCenter(view);
 
         StatusBar sb = new StatusBar();
-        bp.setBottom(sb);
+        root.setBottom(sb);
 
-        Scene scene = new Scene(bp);
+        Scene scene = new Scene(root);
+
+        stage.setTitle("Competition Manager");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void save() {
+        ArrayList<Competition<?>> arrlist = new ArrayList<Competition<?>>(Globals.competitions);
+        Globals.MANAGER.writeCompetitions(arrlist);
+    }
+
+    // save changes on exit
+    @Override
+    public void stop() {
+        save();
     }
 
     public static void main(String[] args) {
