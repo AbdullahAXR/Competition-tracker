@@ -227,7 +227,8 @@ public class CompetitionView extends VBox {
     		typeRadioButton.enableButtons();
 			
 			particpantPane.participantTableView.getItems().clear();
-			
+			if (createdCompetition instanceof TeamCompetition)
+				particpantPane.teamCboUpdate((TeamCompetition)createdCompetition);
 			particpantPane.participantTableView.setEditable(true);			
     		particpantPane.btnsSetDisabled(false);
     	});
