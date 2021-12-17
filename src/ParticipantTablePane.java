@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -32,9 +33,18 @@ public class ParticipantTablePane extends VBox {
 	private TableColumn<Map, String> ranks = new TableColumn<>("Rank");
 	private TableColumn<Map, Void> emailColumn = new TableColumn<>("Email");
 	int cellWidth = 80;
+	private Button addBtn = new Button("+");
+	private Button removeBtn = new Button("-");
+	private HBox addnRemovePane = new HBox(Globals.SPACING,addBtn,removeBtn);
 
 	public ParticipantTablePane() {
-		VBox.setMargin(participantTableView, new Insets(10, 50, 10, 50));
+		setMinHeight(490);
+		participantTableView.setMinHeight(400);
+		VBox.setMargin(addnRemovePane, new Insets(10, 50, 0, 50));
+		addBtn.setOnAction((e) -> addBtnClicked());
+		removeBtn.setOnAction((e) -> removeBtnClicked());
+		
+		VBox.setMargin(participantTableView, new Insets(10, 50, 40, 50));
 		studNumCol.setPrefWidth(cellWidth*0.5);
 		ids.setMinWidth(cellWidth);
 		names.setMinWidth(cellWidth * 2);
@@ -57,6 +67,7 @@ public class ParticipantTablePane extends VBox {
 		teams.setEditable(false);
 		saveCellsEdited();
 		participantTableView.getColumns().addAll(studNumCol, ids, names, majors, teams, teamsNames, ranks, emailColumn);
+
 		getChildren().add(participantTableView);
 		setAlignment(Pos.CENTER);
 	}
@@ -90,10 +101,12 @@ public class ParticipantTablePane extends VBox {
 
 		if (Globals.currentCompetition != null) {
 			if (Globals.currentCompetition instanceof TeamCompetition) {
+				addnRemovePane.setMaxWidth(cellWidth * 9.5);
 				teams.setVisible(true);
 				teamsNames.setVisible(true);
 				participantTableView.setMaxWidth(cellWidth * 9.5);
 			} else {
+				addnRemovePane.setMaxWidth(cellWidth * 6.5);
 				teams.setVisible(false);
 				teamsNames.setVisible(false);
 				participantTableView.setMaxWidth(cellWidth * 6.5);
@@ -261,5 +274,56 @@ public class ParticipantTablePane extends VBox {
 			fill();
 		});
 
+	}
+
+	public boolean btnsIsDisabled() {
+		return this.getChildren().contains(addnRemovePane);
+	}
+	
+	public void btnsSetDisabled(boolean value) {
+		if (value == true)
+			getChildren().add(0, addnRemovePane);
+		else
+			getChildren().remove(addnRemovePane);
+	}
+	
+	private void addBtnClicked() {
+//		Map<String, String> dataRow = new HashMap<>();
+//		dataRow.put(studNumCol.getText(), Integer.toString(0));
+//		dataRow.put(ids.getText(), "-");
+//		dataRow.put(names.getText(), "-");
+//		dataRow.put(majors.getText(), "-");
+//		dataRow.put(teams.getText(), "-");
+//		dataRow.put(teamsNames.getText(), "-");
+//		dataRow.put(ranks.getText(),"-");
+//		participantTableView.getItems().add(dataRow);
+		if (Globals.currentCompetition instanceof TeamCompetition) {
+			
+		}
+		else {
+			((StudentCompetition)Globals.currentCompetition).put(new Student("","",""), "-");
+			fill();
+			participantTableView.getSelectionModel().select(participantTableView.getItems().size()-1);
+			System.out.println(participantTableView.getSelectionModel().getSelectedCells());
+			participantTableView.getSelectionModel().getSelectedItem();
+		}
+	}
+	
+	private void removeBtnClicked() {
+		if (participantTableView.getSelectionModel().isEmpty()) return;
+		if (Globals.currentCompetition instanceof TeamCompetition) {
+			List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
+			List<Team> teams = IteratorUtils.toList(((TeamCompetition)Globals.currentCompetition).getParticipants().iterator());
+			int stdIndex = Integer.parseInt(studNumCol.getCellData(participantTableView.getSelectionModel().getSelectedIndex())) - 1;
+			int teamIndex = Integer.parseInt(this.teams.getCellData(participantTableView.getSelectionModel().getSelectedIndex())) - 1;
+			teams.get(teamIndex).remove(students.get(stdIndex));
+			if (teams.get(teamIndex).isEmpty()) ((TeamCompetition) Globals.currentCompetition).remove(teams.get(teamIndex));
+		}
+		else {
+			List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
+			int stdIndex = Integer.parseInt(studNumCol.getCellData(participantTableView.getSelectionModel().getSelectedIndex())) - 1;
+			((StudentCompetition) Globals.currentCompetition).remove(students.get(stdIndex));
+		}
+		fill();
 	}
 }
