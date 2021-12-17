@@ -42,6 +42,8 @@ public class ParticipantTablePane extends VBox {
 	private ComboBox<Team> teamsCbo = new ComboBox<>();
 
 	public ParticipantTablePane() {
+		setMinHeight(490);
+		participantTableView.setMinHeight(400);
 		VBox.setMargin(addnRemovePane, new Insets(10, 50, 0, 50));
 		addBtn.setOnAction((e) -> addBtnClicked());
 		removeBtn.setOnAction((e) -> removeBtnClicked());
@@ -107,9 +109,7 @@ public class ParticipantTablePane extends VBox {
 				addnRemovePane.setMaxWidth(cellWidth * 9.5);
 				if (!addnRemovePane.getChildren().contains(teamsCbo))
 					addnRemovePane.getChildren().add(0, teamsCbo);
-				ObservableList<Team> teamsObsLst= FXCollections.observableArrayList(((TeamCompetition)Globals.currentCompetition).getParticipants());
-				teamsCbo.setItems(teamsObsLst);
-				teamsCbo.getItems().add(0,new Team("New team"));
+				teamCboUpdate((TeamCompetition)Globals.currentCompetition);
 				teams.setVisible(true);
 				teamsNames.setVisible(true);
 				participantTableView.setMaxWidth(cellWidth * 9.5);
@@ -339,5 +339,11 @@ public class ParticipantTablePane extends VBox {
 		fill();
 		if (selectedIndex >= participantTableView.getItems().size()) selectedIndex = participantTableView.getItems().size()-1;
 		participantTableView.getSelectionModel().select(selectedIndex);
+	}
+	
+	public void teamCboUpdate(TeamCompetition competition) {
+		ObservableList<Team> teamsObsLst= FXCollections.observableArrayList(competition.getParticipants());
+		teamsCbo.setItems(teamsObsLst);
+		teamsCbo.getItems().add(0,new Team("New team"));
 	}
 }
