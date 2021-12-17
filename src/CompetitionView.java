@@ -78,26 +78,30 @@ public class CompetitionView extends VBox {
     
     public void editBtn() {
     	editBtn.setOnAction((e) -> {
-    		if (editBtn.getText().equals("Edit")) {
-	    		editBtn.setText("Save");
-	    		typeRadioButton.editButtonClicked("Individual base Competition","Team base Competition");
-    		}
-    		else if (editBtn.getText().equals("Save")) {
-                saveModifications();
-                editBtn.setText("Edit");
-    			typeRadioButton.saveButtonClicked();
-    		} else if (editBtn.getText().equals("Create")) {
+    		if (editBtn.getText().equals("Create")) {
 				try {
 					createNewCompetition();
+					getChildren().add(particpantPane);
 				} catch (IllegalArgumentException ex) {
 					return;
 				} 
-			}
+			} 
+    		else {
+	    		if (editBtn.getText().equals("Edit")) {
+		    		editBtn.setText("Save");
+		    		typeRadioButton.editButtonClicked("Individual base Competition","Team base Competition");
+	    		}
+	    		else if (editBtn.getText().equals("Save")) {
+	                saveModifications();
+	                editBtn.setText("Edit");
+	    			typeRadioButton.saveButtonClicked();
+	    		} 
+	    		particpantPane.participantTableView.setEditable(!particpantPane.participantTableView.isEditable());			
+	    		particpantPane.btnsSetDisabled(!particpantPane.btnsIsDisabled());
+    		}
     		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
-    		particpantPane.participantTableView.setEditable(!particpantPane.participantTableView.isEditable());			
-    		particpantPane.btnsSetDisabled(!particpantPane.btnsIsDisabled());
     		particpantPane.fill();
     		particpantPane.participantTableView.refresh();
     	});
@@ -227,11 +231,7 @@ public class CompetitionView extends VBox {
     		editBtn();
     		typeRadioButton.enableButtons();
 			
-			particpantPane.participantTableView.getItems().clear();
-			if (createdCompetition instanceof TeamCompetition)
-				particpantPane.teamCboUpdate((TeamCompetition)createdCompetition);
-			particpantPane.participantTableView.setEditable(true);			
-    		particpantPane.btnsSetDisabled(false);
+			getChildren().remove(particpantPane);
 			
 			// Globals.currentCompetition = createdCompetition;
     	});
