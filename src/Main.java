@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -41,9 +42,10 @@ public class Main extends Application {
         root.setBottom(sb);
 
         Scene scene = new Scene(root);
-
+        Image icon = new Image("icon.png");
         stage.setTitle("Competition Manager");
         stage.setScene(scene);
+        stage.getIcons().add(icon);
         stage.show();
     }
 
