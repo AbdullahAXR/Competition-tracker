@@ -311,19 +311,22 @@ public class ParticipantTablePane extends VBox {
 	
 	private void removeBtnClicked() {
 		if (participantTableView.getSelectionModel().isEmpty()) return;
+		int selectedIndex = participantTableView.getSelectionModel().getSelectedIndex();
 		if (Globals.currentCompetition instanceof TeamCompetition) {
 			List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
 			List<Team> teams = IteratorUtils.toList(((TeamCompetition)Globals.currentCompetition).getParticipants().iterator());
-			int stdIndex = Integer.parseInt(studNumCol.getCellData(participantTableView.getSelectionModel().getSelectedIndex())) - 1;
-			int teamIndex = Integer.parseInt(this.teams.getCellData(participantTableView.getSelectionModel().getSelectedIndex())) - 1;
+			int stdIndex = Integer.parseInt(studNumCol.getCellData(selectedIndex)) - 1;
+			int teamIndex = Integer.parseInt(this.teams.getCellData(selectedIndex)) - 1;
 			teams.get(teamIndex).remove(students.get(stdIndex));
 			if (teams.get(teamIndex).isEmpty()) ((TeamCompetition) Globals.currentCompetition).remove(teams.get(teamIndex));
 		}
 		else {
 			List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
-			int stdIndex = Integer.parseInt(studNumCol.getCellData(participantTableView.getSelectionModel().getSelectedIndex())) - 1;
+			int stdIndex = Integer.parseInt(studNumCol.getCellData(selectedIndex)) - 1;
 			((StudentCompetition) Globals.currentCompetition).remove(students.get(stdIndex));
 		}
 		fill();
+		if (selectedIndex >= participantTableView.getItems().size()) selectedIndex = participantTableView.getItems().size()-1;
+		participantTableView.getSelectionModel().select(selectedIndex);
 	}
 }
