@@ -48,8 +48,7 @@ public class Team extends Participant implements Iterable<Student> {
 		return students.indexOf(s);
 	}
 
-    @Override
-    public String toString(){
+    public String toStringFull(){
         String string;
         string = "Team: "+this.getName()+"\n";
 
