@@ -16,10 +16,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage){
-        BorderPane bp = new BorderPane();
+        BorderPane root = new BorderPane();
 
         //StatusBar statusBar = new StatusBar(Globals.SPACING);
-        //bp.setBottom(statusBar);
+        //root.setBottom(statusBar);
 
         // ObservableList<Competition<?>> ol = FXCollections.observableArrayList(Globals.MANAGER.readCompetitions());
         CompetitionList cl = new CompetitionList(Globals.competitions);
@@ -33,14 +33,14 @@ public class Main extends Application {
         CompetitionView view = new CompetitionView(cl);
         leftSide.setBottom(view.getHBoxButtons());
         leftSide.setCenter(cl);
-        bp.setLeft(leftSide);
+        root.setLeft(leftSide);
         
-        bp.setCenter(view);
+        root.setCenter(view);
 
         StatusBar sb = new StatusBar();
-        bp.setBottom(sb);
+        root.setBottom(sb);
 
-        Scene scene = new Scene(bp);
+        Scene scene = new Scene(root);
 
         stage.setTitle("Competition Manager");
         stage.setScene(scene);
