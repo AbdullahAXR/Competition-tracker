@@ -315,7 +315,6 @@ public class ParticipantTablePane extends VBox {
 			((StudentCompetition)Globals.currentCompetition).put(new Student("ID","Name","Major"), "-");
 			fill();
 			participantTableView.getSelectionModel().select(participantTableView.getItems().size()-1);
-			System.out.println(participantTableView.getSelectionModel().getSelectedCells());
 			participantTableView.getSelectionModel().getSelectedItem();
 		}
 	}

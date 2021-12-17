@@ -89,6 +89,7 @@ public class CompetitionView extends VBox {
     		} else if (editBtn.getText().equals("Create")) {
 				try {
 					createNewCompetition();
+					getChildren().add(particpantPane);
 				} catch (IllegalArgumentException ex) {
 					return;
 				} 
@@ -227,11 +228,7 @@ public class CompetitionView extends VBox {
     		editBtn();
     		typeRadioButton.enableButtons();
 			
-			particpantPane.participantTableView.getItems().clear();
-			if (createdCompetition instanceof TeamCompetition)
-				particpantPane.teamCboUpdate((TeamCompetition)createdCompetition);
-			particpantPane.participantTableView.setEditable(true);			
-    		particpantPane.btnsSetDisabled(false);
+			getChildren().remove(particpantPane);
 			
 			// Globals.currentCompetition = createdCompetition;
     	});
