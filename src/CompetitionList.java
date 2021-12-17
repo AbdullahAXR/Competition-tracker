@@ -53,7 +53,6 @@ public class CompetitionList extends ListView<Competition<?>> {
 
     public void addButtonClicked() {
     	Competition<?> newCompetition;
-    	
     }
 
     public void deleteButtonClicked() {
@@ -67,11 +66,6 @@ public class CompetitionList extends ListView<Competition<?>> {
         for (Competition<?> c : Globals.competitions) {
             System.out.println(c);
         }
-        
-        // No need to remove it from the list view. The observable list and the
-        // compeititonlist are connected
-
-        // this.getItems().remove(selectedCompetition);
         
     }
 

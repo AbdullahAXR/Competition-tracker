@@ -21,6 +21,9 @@ public class EditableRadioButton extends HBox {
 	private RadioButton rightRadioButton = new RadioButton();
 	private ToggleGroup toggleGroup = new ToggleGroup();
 	private String value;
+    
+    public EditableRadioButtonDelegate delegate;
+    
 	public EditableRadioButton(String Title, String Choise1, String Choise2) {
 		label.setText(Title);
 		leftRadioButton.setText(Choise1);
@@ -51,8 +54,9 @@ public class EditableRadioButton extends HBox {
 	}
        
        public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
-			RadioButton rb = (RadioButton)toggleGroup.getSelectedToggle();
+			RadioButton rb = (RadioButton) toggleGroup.getSelectedToggle();
 			value = rb.getText();
+            delegate.radioButtonChanged(this);
 		}
        
        public String getValue() {
@@ -89,6 +93,7 @@ public class EditableRadioButton extends HBox {
            HBox.setMargin(rightRadioButton, new Insets(5, 5, 0, 5));
            leftRadioButton.setToggleGroup(toggleGroup);
            rightRadioButton.setToggleGroup(toggleGroup);
+           toggleGroup.selectedToggleProperty().addListener( (ov, t1, t2) -> changed(ov, t1, t2));
            if(value.equals(leftRadioButton.getText())) {
         	   toggleGroup.selectToggle(leftRadioButton);
            }else {
