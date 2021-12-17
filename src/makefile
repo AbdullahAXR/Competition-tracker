@@ -1,8 +1,8 @@
 Main.class : Main.java StudentCompetition.class TeamCompetition.class CompetitionManager.class StatusBar.class Globals.class CompetitionView.class CompetitionList.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main.java
-	java  -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
+	java -Dsun.java2d.dpiaware=false -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
 
-CompetitionList.class: CompetitionList.java ParticipantTablePane.class
+CompetitionList.class: CompetitionList.java ParticipantTablePane.class 	CompetitionCell.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionList.java 
 
 ParticipantTablePane.class: ParticipantTablePane.java
@@ -69,4 +69,4 @@ test:
 	java --module-path /usr/lib/jvm/openjfx17/lib   --add-modules  javafx.web --add-modules  javafx.controls -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test
 
 run:
-	java  -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
+	java -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
