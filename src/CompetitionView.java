@@ -87,13 +87,16 @@ public class CompetitionView extends VBox {
                 editBtn.setText("Edit");
     			typeRadioButton.saveButtonClicked();
     		} else if (editBtn.getText().equals("Create")) {
-				createNewCompetition();
-				typeRadioButton.saveButtonClicked();
+				try {
+					createNewCompetition();
+				} catch (IllegalArgumentException ex) {
+					return;
+				} 
 			}
     		CompetitionName.buttonClicked();
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
-    		particpantPane.participantTableView.setEditable(!particpantPane.participantTableView.isEditable());
+    		particpantPane.participantTableView.setEditable(!particpantPane.participantTableView.isEditable());			
     		particpantPane.btnsSetDisabled(!particpantPane.btnsIsDisabled());
     		particpantPane.fill();
     		particpantPane.participantTableView.refresh();
@@ -122,26 +125,34 @@ public class CompetitionView extends VBox {
 	}
 	
 	
-	private void createNewCompetition() {
-		createdCompetition.setName(CompetitionName.getTextFieldText());
-		createdCompetition.setLink(linkLbl.getTextFieldText());
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			createdCompetition.setDate(sdf.parse(dateLbl.getTextFieldText()));
-			dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
-		}
-		catch(ParseException e){
-			
+	private void createNewCompetition() throws IllegalArgumentException {
+		if (isValidDate(dateLbl.getTextFieldText())) {
+			createdCompetition.setName(CompetitionName.getTextFieldText());
+			createdCompetition.setLink(linkLbl.getTextFieldText());
+			try {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				createdCompetition.setDate(sdf.parse(dateLbl.getTextFieldText()));
+				dateLbl.setTextFieldText(Globals.currentCompetition.getDateString());
+			}
+			catch(ParseException e){
+				
+				warningAlert.setTitle("Wrong date");
+				warningAlert.setHeaderText("Wrong date format, please eneter a valid date in the format dd/MM/yyyy");
+				warningAlert.showAndWait();
+				System.out.println("ParseException");
+				return;
+			}
+			dateLbl.setTextFieldText(createdCompetition.getDateString());
+			Globals.competitions.add(createdCompetition);
+			Globals.currentCompetition = createdCompetition;
+			typeRadioButton.saveButtonClicked();
+			editBtn.setText("Edit");
+		} else {
 			warningAlert.setTitle("Wrong date");
 			warningAlert.setHeaderText("Wrong date format, please eneter a valid date in the format dd/MM/yyyy");
 			warningAlert.showAndWait();
-			System.out.println("ParseException");
-			return;
+			throw new IllegalArgumentException("Wrong date format, please eneter a valid date in the format dd/MM/yyyy");
 		}
-		dateLbl.setTextFieldText(createdCompetition.getDateString());
-		Globals.competitions.add(createdCompetition);
-		Globals.currentCompetition = createdCompetition;
-		editBtn.setText("Edit");
 	}
 	
 
@@ -153,17 +164,17 @@ public class CompetitionView extends VBox {
 		
 	}
 
-	private boolean isValid() {
-		return true;
+	
+	private boolean isValidDate(String date) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");	
+			sdf.parse(date) ;
+		} catch (ParseException e) {
+			return false;
+		}
+		return true ;
 	}
 	
-	private boolean displayError() {
-		return true;
-	}
-	
-	private boolean displaySuccess() {
-		return false;
-	}
 
     // maybe you should fill this instead
     private void setup(){
@@ -216,6 +227,9 @@ public class CompetitionView extends VBox {
     		typeRadioButton.enableButtons();
 			
 			particpantPane.participantTableView.getItems().clear();
+			
+			particpantPane.participantTableView.setEditable(true);			
+    		particpantPane.btnsSetDisabled(true);
     	});
     	
     }
