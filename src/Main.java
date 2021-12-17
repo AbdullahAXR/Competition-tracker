@@ -23,6 +23,13 @@ public class Main extends Application {
 
         // ObservableList<Competition<?>> ol = FXCollections.observableArrayList(Globals.MANAGER.readCompetitions());
         CompetitionList cl = new CompetitionList(Globals.competitions);
+
+        // save and close the stage when clicked
+        cl.getExitButton().setOnAction(e -> {
+            save();
+            stage.close();
+        });
+
         BorderPane leftSide = new BorderPane();
         CompetitionView view = new CompetitionView(cl);
         leftSide.setBottom(view.getHBoxButtons());
@@ -37,6 +44,12 @@ public class Main extends Application {
         Scene scene = new Scene(bp);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void save() {
+        System.out.println("saving!");
+        ArrayList<Competition<?>> arrlist = new ArrayList<Competition<?>>(Globals.competitions);
+        Globals.MANAGER.writeCompetitions(arrlist);
     }
 
     public static void main(String[] args) {

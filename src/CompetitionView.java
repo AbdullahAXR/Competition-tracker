@@ -240,7 +240,8 @@ public class CompetitionView extends VBox {
     public HBox getHBoxButtons() {
     	HBox buttonsBox = new HBox();
     	Button deleteButton = lv.getDeleteButton();
-    	buttonsBox.getChildren().addAll(addComptitionButton,deleteButton);
+        Button exitButton = lv.getExitButton();
+    	buttonsBox.getChildren().addAll(addComptitionButton,deleteButton, exitButton);
     	HBox.setMargin(addComptitionButton, new Insets(5, 2, 8, 5));
         HBox.setMargin(deleteButton, new Insets(0, 5, 0, 5));
         buttonsBox.setAlignment(Pos.BASELINE_CENTER);

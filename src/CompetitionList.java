@@ -15,6 +15,7 @@ import java.util.Date;
 public class CompetitionList extends ListView<Competition<?>> {
      public Button addButton = new Button("Add");
      public Button deleteButton = new Button("Delete");
+     public Button exitButton = new Button("Exit");
     // public Pane competitionView;
     // public Competition<?> currentCompetition;
     
@@ -69,6 +70,10 @@ public class CompetitionList extends ListView<Competition<?>> {
         
     }
 
+    public void exitButtonClicked() {
+        
+    }
+
     public void competitionCellClicked() {
         
     }
@@ -83,7 +88,7 @@ public class CompetitionList extends ListView<Competition<?>> {
     
     public HBox buttonHBox() {
     	HBox buttonsBox = new HBox();
-    	buttonsBox.getChildren().addAll(addButton,deleteButton);
+    	buttonsBox.getChildren().addAll(addButton, deleteButton, exitButton);
     	HBox.setMargin(addButton, new Insets(5, 2, 8, 5));
         HBox.setMargin(deleteButton, new Insets(0, 5, 0, 5));
         buttonsBox.setAlignment(Pos.BASELINE_CENTER);
@@ -91,9 +96,15 @@ public class CompetitionList extends ListView<Competition<?>> {
         buttonsBox.setSpacing(80);
         return buttonsBox;
     }
+
     public Button getDeleteButton() {
     	return deleteButton;
     }
+
+    public Button getExitButton() {
+    	return exitButton;
+    }
+
 
     public void selectCompetition(Competition<Participant> competition) {
 
