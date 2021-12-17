@@ -81,9 +81,9 @@ public class CompetitionManager {
 
         XSSFCellStyle sampleStyle;
         try {
-            sampleStyle = dataWorkbook.getSheetAt(0).getRow(Specs.FIRST_PARTICIPANT_ROW).getCell(Specs.ID_CELL).getCellStyle();
+            sampleStyle = dataWorkbook.getSheetAt(0).getRow(Specs.FIRST_PARTICIPANT_ROW-1).getCell(Specs.ID_CELL).getCellStyle();
         }
-        catch(IllegalArgumentException e){
+        catch(Exception e){
             sampleStyle = dataWorkbook.createCellStyle(); // empty style!
         }
 
