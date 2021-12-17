@@ -41,6 +41,8 @@ public class Main extends Application {
         bp.setBottom(sb);
 
         Scene scene = new Scene(bp);
+
+        stage.setTitle("Competition Manager");
         stage.setScene(scene);
         stage.show();
     }
