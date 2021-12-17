@@ -69,7 +69,7 @@ public class CompetitionView extends VBox {
 		infoPane.getChildren().add(typeRadioButton);
 		infoPane.setStyle("-fx-border-color: black");
 		infoPane.setPadding(new Insets(5,5,5,5));
-		VBox.setMargin(infoPane,new Insets(0,50,10,50));
+		VBox.setMargin(infoPane,new Insets(0,50,0,50));
 	}
 	
     public void browseBtn() {
@@ -94,6 +94,7 @@ public class CompetitionView extends VBox {
     		linkLbl.buttonClicked();
     		dateLbl.buttonClicked();
     		particpantPane.participantTableView.setEditable(!particpantPane.participantTableView.isEditable());
+    		particpantPane.btnsSetDisabled(!particpantPane.btnsIsDisabled());
     		particpantPane.fill();
     		particpantPane.participantTableView.refresh();
     	});
