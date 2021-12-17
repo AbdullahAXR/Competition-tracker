@@ -17,6 +17,7 @@ import java.util.*;
 import org.apache.poi.ss.usermodel.BuiltinFormats;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.io.FileOutputStream;
 
 
 public class Test extends Application {
@@ -37,7 +38,7 @@ public class Test extends Application {
     // }
 
 	public static void main(String[] args) {
-        testDateFormat();
+        emptyworkbook();
         // launch(args);
         // testDue();
         // testFormatter();
@@ -70,6 +71,16 @@ public class Test extends Application {
         // System.out.println(cs.getDataFormatString());
         // System.out.println(cell.toString());
         // System.out.println(cell.getCellStyle().getShrinkToFit());
+    }
+
+    public static void emptyworkbook(){
+        try {
+            XSSFWorkbook wb = new XSSFWorkbook();
+            wb.write(new FileOutputStream("data.xlsx"));
+            wb.close();
+        }
+        catch(Exception e){
+        }
     }
 
     public static void showStyle(XSSFCellStyle cs){
@@ -209,9 +220,9 @@ public class Test extends Application {
             .forEach(System.out::println);
     }
 
-    public static void testDateFormat(){
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = sdf.parse("asdf");
-        System.out.println(date);
-    }
+    // public static void testDateFormat(){
+		// SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		// Date date = sdf.parse("asdf");
+    //     System.out.println(date);
+    // }
 }

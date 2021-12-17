@@ -19,15 +19,18 @@ public class CompetitionManager {
     CompetitionManager() {
 
         try {
-            if(!dataFile.exists())
+            if(!dataFile.exists()) {
                 dataFile.createNewFile();
-
-            this.dataWorkbook = new XSSFWorkbook();
+                this.dataWorkbook = new XSSFWorkbook();
+                }
+            else {
+                this.dataWorkbook = new XSSFWorkbook(dataFile);
+            }
         }
-
-        catch(IOException e) {
+        catch(Exception e) {
             System.exit(1);  // if file can not be created, or the workbook closed, then exit.
         }
+
 	}
 
     // public static void main(String[] args) {

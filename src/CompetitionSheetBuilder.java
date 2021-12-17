@@ -7,6 +7,8 @@ import java.util.Set;
 import java.io.IOException;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.CellStyle;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class CompetitionSheetBuilder {
 
@@ -73,13 +75,16 @@ public class CompetitionSheetBuilder {
         sheet.createRow(1).createCell(0).setCellValue("Link");
         sheet.getRow(1).createCell(1).setCellValue(c.getLink());
 
-        sheet.createRow(2).createCell(0).setCellValue("Date");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yy");
 
-        XSSFCell dateCell = sheet.getRow(2).createCell(1);
-        CellStyle style = dateCell.getCellStyle();
-        style.setDataFormat(Specs.DATE_FORMAT); // put this as a constant
-        dateCell.setCellStyle(style);
-        dateCell.setCellValue(c.getDate());
+        sheet.createRow(2).createCell(0).setCellValue("Date");
+        sheet.getRow(2).createCell(1).setCellValue(sdf.format(c.getDate()));
+
+        // XSSFCell dateCell = sheet.getRow(2).createCell(1);
+        // CellStyle style = dateCell.getCellStyle();
+        // style.setDataFormat(Specs.DATE_FORMAT); // put this as a constant
+        // dateCell.setCellStyle(style);
+        // dateCell.setCellValue(c.getDate());
 
     }
 
