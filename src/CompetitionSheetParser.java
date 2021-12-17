@@ -7,6 +7,9 @@ import java.util.Set;
 import java.io.IOException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 public final class CompetitionSheetParser {
 
     enum Type {
@@ -19,9 +22,33 @@ public final class CompetitionSheetParser {
         return sheet.getRow(Specs.NAME_ROW).getCell(Specs.INFO_CELL).toString();
     }
 
-    private static Date getDate(XSSFSheet sheet){
+    private static Date getNumericDate(XSSFSheet sheet) {
         return sheet.getRow(Specs.DATE_ROW).getCell(Specs.INFO_CELL).getDateCellValue();
     }
+
+    private static Date getStringDate(XSSFSheet sheet) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yy");
+        try {
+            Date date = sdf.parse(sheet.getRow(Specs.DATE_ROW).getCell(Specs.INFO_CELL).toString());
+            return date;
+        }
+        catch(ParseException e){
+
+        }
+        return new Date();
+
+    }
+    
+
+    private static Date getDate(XSSFSheet sheet){
+        CellType ctype = sheet.getRow(Specs.DATE_ROW).getCell(Specs.INFO_CELL).getCellType();
+
+        if(ctype == CellType.NUMERIC)
+            return getNumericDate(sheet);
+        else
+            return getStringDate(sheet);
+    }
+
 
     private static String getLink(XSSFSheet sheet){
         return sheet.getRow(Specs.LINK_ROW).getCell(Specs.INFO_CELL).toString();

@@ -1,6 +1,6 @@
 Main.class : Main.java StudentCompetition.class TeamCompetition.class CompetitionManager.class StatusBar.class Globals.class CompetitionView.class CompetitionList.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main.java
-	java -Dglass.gtk.uiScale=144dpi -Dsun.java2d.dpiaware=false -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
+	java -Dglass.gtk.uiScale=96dpi -Dsun.java2d.dpiaware=false -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
 
 CompetitionList.class: CompetitionList.java ParticipantTablePane.class 	CompetitionCell.class
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionList.java 
@@ -26,7 +26,7 @@ Emailer.class : Emailer.java Competition.class
 Globals.class: Globals.java
 	javac --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Globals.java
 
-CompetitionManager.class: CompetitionManager.java CompetitionSheetParser.java CompetitionSheetBuilder.java
+CompetitionManager.class: CompetitionManager.java CompetitionSheetParser.class CompetitionSheetBuilder.class
 	javac  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionManager.java 
 	# java  -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" CompetitionManager
 
@@ -69,4 +69,4 @@ test:
 	java --module-path /usr/lib/jvm/openjfx17/lib   --add-modules  javafx.web --add-modules  javafx.controls -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Test
 
 run:
-	java -Dglass.gtk.uiScale=144dpi -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
+	java -Dglass.gtk.uiScale=96dpi -Dcom.sun.webkit.useHTTP2Loader=false --module-path /usr/lib/jvm/openjfx17/lib --add-modules javafx.controls --add-modules javafx.web -cp ".:../lib/*:../lib/ooxml-lib/*:../lib/apache-log4j-2.14.1-bin/log4j-core-2.14.1.jar" Main
