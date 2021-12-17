@@ -277,14 +277,14 @@ public class ParticipantTablePane extends VBox {
 	}
 
 	public boolean btnsIsDisabled() {
-		return this.getChildren().contains(addnRemovePane);
+		return !this.getChildren().contains(addnRemovePane);
 	}
 	
 	public void btnsSetDisabled(boolean value) {
 		if (value == true)
-			getChildren().add(0, addnRemovePane);
-		else
 			getChildren().remove(addnRemovePane);
+		else
+			getChildren().add(0, addnRemovePane);
 	}
 	
 	private void addBtnClicked() {
@@ -301,7 +301,7 @@ public class ParticipantTablePane extends VBox {
 			
 		}
 		else {
-			((StudentCompetition)Globals.currentCompetition).put(new Student("","",""), "-");
+			((StudentCompetition)Globals.currentCompetition).put(new Student("ID","Name","Major"), "-");
 			fill();
 			participantTableView.getSelectionModel().select(participantTableView.getItems().size()-1);
 			System.out.println(participantTableView.getSelectionModel().getSelectedCells());
