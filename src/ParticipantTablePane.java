@@ -84,6 +84,7 @@ public class ParticipantTablePane extends VBox {
 				TableColumn<Map, String> p) -> new TextFieldTableCell<>(new StringConverter() {
 					@Override
 					public String toString(Object t) {
+						if (t == null) { return ""; }
 						return t.toString();
 					}
 

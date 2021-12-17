@@ -126,6 +126,7 @@ public class CompetitionView extends VBox {
 	
 	
 	private void createNewCompetition() throws IllegalArgumentException {
+		if (Globals.currentCompetition == null) { Globals.currentCompetition = this.createdCompetition ; }
 		if (isValidDate(dateLbl.getTextFieldText())) {
 			createdCompetition.setName(CompetitionName.getTextFieldText());
 			createdCompetition.setLink(linkLbl.getTextFieldText());
@@ -230,6 +231,8 @@ public class CompetitionView extends VBox {
 			
 			particpantPane.participantTableView.setEditable(true);			
     		particpantPane.btnsSetDisabled(false);
+			
+			// Globals.currentCompetition = createdCompetition;
     	});
     	
     }
