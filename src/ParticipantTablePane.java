@@ -41,6 +41,8 @@ public class ParticipantTablePane extends VBox {
 	private RadioButton studentRb = new RadioButton();
 
 	public ParticipantTablePane() {
+		setMinHeight(490);
+		participantTableView.setMinHeight(400);
 		VBox.setMargin(addnRemovePane, new Insets(10, 50, 0, 50));
 		addBtn.setOnAction((e) -> addBtnClicked());
 		removeBtn.setOnAction((e) -> removeBtnClicked());
