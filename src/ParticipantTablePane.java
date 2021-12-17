@@ -211,39 +211,54 @@ public class ParticipantTablePane extends VBox {
 	
 	private void saveCellsEdited( ) {
 		ids.setOnEditCommit((CellEditEvent<Map, String> t) -> {
-			List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
-			int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
-			students.get(stdNum).setId(t.getNewValue());
+			if (!t.getNewValue().equals("")) {
+				List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
+				int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
+				students.get(stdNum).setId(t.getNewValue());
+			}
+			fill();
 		});
 		
 		names.setOnEditCommit((CellEditEvent<Map, String> t) -> {
-			List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
-			int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
-			students.get(stdNum).setName(t.getNewValue());
+			if (!t.getNewValue().equals("")) {
+				List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
+				int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
+				students.get(stdNum).setName(t.getNewValue());
+			}
+			fill();
 		});
 		
 		majors.setOnEditCommit((CellEditEvent<Map, String> t) -> {
-			List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
-			int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
-			students.get(stdNum).setMajor(t.getNewValue());
+			if (!t.getNewValue().equals("")) {
+				List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
+				int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
+				students.get(stdNum).setMajor(t.getNewValue());
+			}
+			fill();
 		});
 		
 		teamsNames.setOnEditCommit((CellEditEvent<Map, String> t) -> {
-			List<Team> teams = IteratorUtils.toList(((TeamCompetition)Globals.currentCompetition).getParticipants().iterator());
-			int teamNum = Integer.parseInt(this.teams.getCellData(t.getTablePosition().getRow())) - 1;
-			teams.get(teamNum).setName(t.getNewValue());
+			if (!t.getNewValue().equals("")) { 
+				List<Team> teams = IteratorUtils.toList(((TeamCompetition)Globals.currentCompetition).getParticipants().iterator());
+				int teamNum = Integer.parseInt(this.teams.getCellData(t.getTablePosition().getRow())) - 1;
+				teams.get(teamNum).setName(t.getNewValue());
+			}
+			fill();
 		});
 		
 		ranks.setOnEditCommit((CellEditEvent<Map, String> t) -> {
-			if (Globals.currentCompetition instanceof TeamCompetition) {
-				List<Team> teams = IteratorUtils.toList(((TeamCompetition)Globals.currentCompetition).getParticipants().iterator());
-				int teamNum = Integer.parseInt(this.teams.getCellData(t.getTablePosition().getRow())) - 1;
-				((TeamCompetition)Globals.currentCompetition).results.replace(teams.get(teamNum), t.getNewValue());
-			} else {
-				List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
-				int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
-				((StudentCompetition)Globals.currentCompetition).results.replace(students.get(stdNum), t.getNewValue());
+			if (!t.getNewValue().equals(""))  {
+				if (Globals.currentCompetition instanceof TeamCompetition) {
+					List<Team> teams = IteratorUtils.toList(((TeamCompetition)Globals.currentCompetition).getParticipants().iterator());
+					int teamNum = Integer.parseInt(this.teams.getCellData(t.getTablePosition().getRow())) - 1;
+					((TeamCompetition)Globals.currentCompetition).results.replace(teams.get(teamNum), t.getNewValue());
+				} else {
+					List<Student> students = IteratorUtils.toList(Globals.currentCompetition.getStudents().iterator());
+					int stdNum = Integer.parseInt(studNumCol.getCellData(t.getTablePosition().getRow())) - 1;
+					((StudentCompetition)Globals.currentCompetition).results.replace(students.get(stdNum), t.getNewValue());
+				}
 			}
+			fill();
 		});
 
 	}
