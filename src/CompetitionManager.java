@@ -22,16 +22,12 @@ public class CompetitionManager {
             if(!dataFile.exists())
                 dataFile.createNewFile();
 
-            this.dataWorkbook = new XSSFWorkbook(dataFile);
+            this.dataWorkbook = new XSSFWorkbook();
         }
 
         catch(IOException e) {
             System.exit(1);  // if file can not be created, or the workbook closed, then exit.
         }
-        catch(InvalidFormatException e) {
-            this.dataWorkbook = new XSSFWorkbook(); // if the format is invalid, then create a new sheet
-        }
-
 	}
 
     // public static void main(String[] args) {
